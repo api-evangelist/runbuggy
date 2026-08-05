@@ -1,0 +1,85 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the RunBuggy Orders API
+  version: 1.0.0
+extends: ../openapi/runbuggy-orders.json
+x-generated: '2026-08-05'
+x-method: generated
+x-source: openapi/runbuggy-orders.json + https://docs.runbuggy.com/ guides
+x-note: Captures API Evangelist's derived findings about this contract without mutating
+  RunBuggy's published Swagger 2.0 document. Every value here is traceable to the
+  provider's own docs or to the specification itself.
+actions:
+- target: $.info
+  description: Record the environment the declared host actually points at, and the
+    provider's own portal.
+  update:
+    x-environment: staging
+    x-environment-note: 'The declared host ng-staging.runbuggy.com with basePath
+      /staging/api is RunBuggy''s STAGING environment. No specification is published for
+      the production host. Callers integrating for production must ask RunBuggy for the
+      production base URL.'
+    x-developer-portal: https://docs.runbuggy.com/
+    x-source-repository: https://github.com/runbuggyinc/api-docs-src
+    x-spec-version: Swagger 2.0 — no OpenAPI 3.x document is published
+- target: $.info
+  description: Record the cross-cutting runtime semantics documented in the Stoplight
+    guides but absent from the specification.
+  update:
+    x-pagination:
+      style: page-number
+      params: [page, size, sort]
+      envelope_items_field: content
+      docs: https://docs.runbuggy.com/docs/shipping/05ccf93502e54-pagination
+    x-async-accepted:
+      status: 202
+      pattern: poll the `location` response header until status is "created" or "error"
+      docs: https://docs.runbuggy.com/docs/shipping/ea2a0d46dfc8d-handling-202-s
+    x-idempotency:
+      supported: false
+      note: No idempotency key exists on any operation, including POST /orders.
+    x-rate-limits:
+      signaled: false
+      note: Platform-level per-user rate limits exist (April 2026 Hitch release notes)
+        but no 429 response or rate-limit header is declared.
+- target: $.securityDefinitions.Authorization
+  description: Clarify that the apiKey value must carry the literal "Bearer " prefix.
+  update:
+    x-value-format: Bearer {token}
+    x-acquisition: Issued by a RunBuggy representative, or obtained programmatically via
+      POST /login on the Authentication API.
+    x-self-service: false
+    x-scopes: none — the token is all-or-nothing across every operation
+- target: $.paths['/orders'].post
+  description: Flag the highest-consequence operation.
+  update:
+    x-consequence: high
+    x-agentic-note: 'Creates a real vehicle transport commitment. It is asynchronous
+      (202) and has NO idempotency key, so a retried request can create duplicate
+      orders. An agent should quote first via POST /orders/quote, then create once, then
+      poll the location header rather than retry.'
+- target: $.paths['/orders/{id}/cancel'].post
+  description: Flag the destructive operation.
+  update:
+    x-consequence: high
+    x-agentic-note: Cancels a transport that may already be in motion. Asynchronous
+      (202); confirm by polling rather than retrying.
+- target: $.paths['/orders/quote'].post
+  description: Mark the safe read-shaped precursor to order creation.
+  update:
+    x-consequence: low
+    x-agentic-note: Safe to call before committing. Returns an OrderQuoteResponse
+      without creating anything.
+- target: $.definitions.Error
+  description: Note the scope of the published error vocabulary.
+  update:
+    x-coverage-note: 'Only three codes are enumerated, and they cover order validation
+      only. 401, 403 and 404 responses declare no schema, and no 429 or 5xx response is
+      declared anywhere in the document.'
+    x-rfc9457: false
+- target: $.definitions.VehicleTransferOrder
+  description: Cross-reference the status vocabulary that governs webhook events.
+  update:
+    x-status-vocabulary-docs: https://docs.runbuggy.com/docs/shipping/991cb1cc6950c-vehicle-transfer-order-statuses
+    x-status-count: 18
+    x-emits-webhook: vehicleTransferOrder.updated

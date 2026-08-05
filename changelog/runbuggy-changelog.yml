@@ -1,0 +1,79 @@
+generated: '2026-08-05'
+method: searched
+source: https://runbuggy.stoplight.io/docs/hitch-releases/
+summary: 'RunBuggy publishes "Hitch Releases" — a dated, monthly release-note series
+  covering the Hitch TMS and RunBuggy Marketplace product surfaces. It is a second
+  Stoplight project in the same workspace as the developer docs. Scope caveat: these
+  are PRODUCT release notes, not an API contract changelog. No entry describes an
+  addition, change or removal to the published Shippers API operations.'
+scope: product
+scheme: monthly-dated-articles
+current_version: null
+current_version_note: The changelog does not carry version numbers; entries are dated
+  release days grouped by month.
+cadence: monthly, irregular — a 17-month gap sits between November 2024 and April 2026
+index_url: https://runbuggy.stoplight.io/docs/hitch-releases/
+first_entry: April 2023
+latest_entry: April 2026
+entry_count: 20
+entries:
+- title: April 2026 Hitch Releases
+  date: '2026-04-30'
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/bk2m8pvx9qrn4-april-2026-hitch-releases
+  breaking: false
+  highlights:
+  - Payer company search now filters by the owner's actual company type instead of
+    always returning Auction-type companies
+  - Full cancellation of a multi-vehicle order grouped by transporter now works in one
+    step for TMS Admins
+  - Email notification templates now apply Hitch TMS account identifiers correctly for
+    tenanted workflows
+  - Per-user request rate limits are now enforced on the task processing service
+- title: November 2024 Hitch Releases
+  date: '2024-11-07'
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/og0dtgyi6wxs3-november-2024-hitch-releases
+  breaking: false
+  highlights:
+  - New "T-Status Last Updated" column added to all grid views in both Marketplace and
+    Hitch
+- title: October 2024 Hitch Releases
+  date: '2024-10-31'
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/pbhliprjhc0i2-october-2024-hitch-releases
+  breaking: false
+  highlights:
+  - Broker feature — new subcontractor roles restore admin capability while blocking
+    access to the broker's finances and payout information
+  - Multi-VIN search added to the Orders view (previously Transportations view only)
+- title: September 2024 Hitch Releases
+  date: '2024-09-20'
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/obxpz6fn2utii-september-2024-hitch-releases
+  breaking: false
+  highlights:
+  - Additional pickup and dropoff contacts can be added to an order and receive
+    notifications
+- title: August 2024 Hitch Releases
+  date: '2024-08'
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/c71jdwvpe7av3-august-2024-hitch-releases
+  breaking: false
+- title: July 2024 Hitch Releases
+  date: '2024-07'
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/23j0ea88qsroy-july-2024-hitch-releases
+  breaking: false
+gaps:
+- No API changelog. Changes to the 28 published Shippers API operations are not
+  announced anywhere.
+- The Hitch Releases index page (https://runbuggy.stoplight.io/docs/hitch-releases/)
+  returns 404; only the individual dated article URLs resolve. There is no browsable
+  entry point and no link to it from runbuggy.com or docs.runbuggy.com.
+- No RSS or Atom feed for release notes.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://runbuggy.stoplight.io/docs/hitch-releases/bk2m8pvx9qrn4-april-2026-hitch-releases
+    http_status: 200
+  - url: https://runbuggy.stoplight.io/docs/hitch-releases/
+    http_status: 404
+    note: index page does not resolve
+  - url: https://stoplight.io/api/v1/projects/cHJqOjE5NDU1Mw/table-of-contents?branch=main
+    http_status: 200
+    note: public Stoplight table of contents used to enumerate the 20 dated entries

@@ -1,0 +1,93 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.runbuggy.com/docs/shipping/5cc9374300b99-webhooks, openapi/runbuggy-orders.json
+type: Webhooks
+asyncapi_published: false
+asyncapi_note: RunBuggy publishes no AsyncAPI document. The event surface below is the
+  webhook catalog as documented and as declared in the Swagger 2.0 Orders definition.
+  Nothing here is generated — no AsyncAPI was fabricated from it.
+summary: RunBuggy pushes order-lifecycle events to a URL you register. One event type is
+  published today. Webhook registration is a first-class part of the Orders API, with
+  six management operations including a test-fire.
+delivery:
+  style: HTTP POST to a subscriber-registered URL
+  authentication: 'Optional. You may supply a value at registration time that RunBuggy
+    will send back in the `Authorization` HTTP header of every delivery. There is no
+    HMAC signature, no timestamp, and no replay protection documented.'
+  retries: not documented
+  signing: none documented
+  ordering: not documented
+event_model:
+  type: string — the event type
+  created: timestamp
+  object: 'the full changed object. For vehicleTransferOrder.updated this is the same
+    shape as the expanded vehicle transfer order returned by getExpandedUsingGET.'
+events:
+- name: vehicleTransferOrder.updated
+  description: Fires when a Vehicle Transfer Order changes state. The status values it
+    can carry are the 18 published VehicleTransferOrder statuses.
+  payload_schema: openapi/runbuggy-orders.json#/definitions/VehicleTransferOrderExpanded
+  status_values:
+  - DRAFT
+  - READY
+  - AVAILABLE
+  - CLAIMED
+  - UNCLAIMED
+  - APPROVED
+  - ASSIGNED
+  - REJECTED
+  - ACCEPTED
+  - DRIVER_ARRIVED
+  - PICKED_UP
+  - SIGNATURE_ON_PICKUP
+  - PROVIDED_ETA_DROPOFF
+  - UNLOADED
+  - DELIVERED
+  - CANCELED
+  - COMPLETE
+  - ERROR
+  status_docs: https://docs.runbuggy.com/docs/shipping/991cb1cc6950c-vehicle-transfer-order-statuses
+management_operations:
+- operationId: createWebhook
+  method: POST
+  path: /webhooks
+  summary: Create a webhook
+- operationId: getWebhooksPaginated
+  method: GET
+  path: /webhooks
+  summary: Find webhooks
+- operationId: getWebhook
+  method: GET
+  path: /webhooks/{id}
+  summary: Retrieve a webhook
+- operationId: patchWebhook
+  method: PATCH
+  path: /webhooks/{id}
+  summary: Update a webhook
+- operationId: deleteWebhook
+  method: DELETE
+  path: /webhooks/{id}
+  summary: Delete a webhook
+- operationId: testWebhook
+  method: POST
+  path: /webhooks/{id}/test
+  summary: Test a webhook — fires a delivery so you can verify your endpoint before
+    going live
+getting_started:
+- Create a webhook with the URL RunBuggy should POST to, optionally with an Authorization
+  header value.
+- Test the webhook to confirm RunBuggy can reach your endpoint.
+gaps:
+- Only one event type is published. Order-level, quote-level and gate-pass events are
+  not exposed.
+- No payload signing (no HMAC, no signature header), so a receiver cannot verify a
+  delivery came from RunBuggy beyond a shared bearer value.
+- No retry, backoff or delivery-guarantee documentation.
+- No AsyncAPI document, no event catalog page, and no CloudEvents conformance.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://docs.runbuggy.com/docs/shipping/5cc9374300b99-webhooks
+    http_status: 200
+  - url: https://docs.runbuggy.com/docs/shipping/991cb1cc6950c-vehicle-transfer-order-statuses
+    http_status: 200

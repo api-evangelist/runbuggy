@@ -1,0 +1,42 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the RunBuggy Authentication API
+  version: 1.0.0
+extends: ../openapi/runbuggy-authentication.json
+x-generated: '2026-08-05'
+x-method: generated
+x-source: openapi/runbuggy-authentication.json + https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+x-note: 'Non-mutating record of API Evangelist findings. Provenance caveat: this
+  definition is no longer reachable through the docs.runbuggy.com table of contents —
+  the Client Generation guide still links to it, but that node returns 404. It was
+  recovered verbatim from RunBuggy''s own public repository,
+  github.com/runbuggyinc/api-doc-src (shippers/schemas/Auth.json).'
+actions:
+- target: $.info
+  description: Record provenance and environment.
+  update:
+    x-environment: staging
+    x-environment-note: Declared host ng-staging.runbuggy.com with basePath
+      /staging/api/auth is a staging environment.
+    x-recovered-from: https://github.com/runbuggyinc/api-doc-src/blob/master/shippers/schemas/Auth.json
+    x-docs-node-status: 'The Stoplight node docs.runbuggy.com/docs/shipping/fe79c06697037-authentication-api,
+      which the Client Generation guide links to, returned 404 on 2026-08-05. The
+      Authentication service is missing from the published project table of contents.'
+- target: $.paths['/login'].post
+  description: Clarify what the token is for and how it is used.
+  update:
+    x-consequence: medium
+    x-agentic-note: 'Returns the Bearer token every other RunBuggy operation requires.
+      Send it as `Authorization: Bearer {token}` — the Orders and Companies definitions
+      declare that header as an apiKey, so the "Bearer " prefix is the caller''s
+      responsibility.'
+    x-token-lifetime: not documented
+    x-rotation: not documented
+- target: $.info
+  description: Note the auth surfaces this definition does NOT cover.
+  update:
+    x-uncovered-auth-surfaces:
+    - 'order-status iframe: POST {host}/api/oauth2/token with body {"scope":"openid"},
+      returns a 60-second JWT. Documented in prose only.'
+    - 'mcp-datascience: full OAuth 2.1 with dynamic client registration and PKCE at
+      https://apps.runbuggy.com/runbuggy/mcp-datascience — undocumented entirely.'

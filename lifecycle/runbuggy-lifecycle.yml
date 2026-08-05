@@ -1,0 +1,67 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.runbuggy.com/, https://status.runbuggy.com/, openapi/runbuggy-orders.json
+summary: RunBuggy runs a public status page and a dated product changelog, but publishes
+  no API versioning policy, no deprecation policy, no Sunset/Deprecation header support
+  and no SLA.
+versioning:
+  policy_published: false
+  scheme: none-in-path
+  current_version: '1.0'
+  version_source: info.version on all three Swagger 2.0 definitions
+  detail: 'No version segment appears in the URL, in a request header, or in a media
+    type. What varies in the path is the environment (/staging/api, /staging-v2/api,
+    /testng/api, /runbuggy/), not the version. There is no documented rule for how a
+    breaking change would be introduced.'
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  detail: No operation in any of the three specifications carries a deprecated flag,
+    and no deprecation or sunset policy is published anywhere on runbuggy.com or
+    docs.runbuggy.com.
+status_page:
+  url: https://status.runbuggy.com/
+  provider: Uptime.com
+  http_status: 200
+  history_api: false
+  subscribe: unknown
+  note: Linked from runbuggy.com/security/ alongside the claim of 99.97% uptime since
+    2018.
+sla:
+  published: false
+  uptime_claim: 99.97% since launch in 2018 (marketing claim on runbuggy.com/security/,
+    not a contractual SLA)
+support:
+  help_center: https://support.runbuggy.com/hc/en-us
+  api_contact: support@runbuggy.com
+  source: info.contact on openapi/runbuggy-orders.json
+changelog:
+  artifact: changelog/runbuggy-changelog.yml
+  url: https://runbuggy.stoplight.io/docs/hitch-releases/bk2m8pvx9qrn4-april-2026-hitch-releases
+  scope: product (Hitch TMS and Marketplace), not the API contract
+terms:
+  terms_of_service: https://runbuggy.com/terms/
+  privacy_policy: https://runbuggy.com/privacy/
+  license_on_spec: Copyright © RunBuggy 2023 — https://runbuggy.com/terms/
+gaps:
+- No API-level changelog. The only dated changelog covers the Hitch TMS product UI.
+- No deprecation or sunset policy; a consumer has no notice contract.
+- No SLA document.
+- The published specifications point at STAGING hosts, so there is no
+  machine-readable description of the production API surface at all.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://status.runbuggy.com/
+    http_status: 200
+  - url: https://support.runbuggy.com/hc/en-us
+    http_status: 403
+    note: Zendesk help center rejects the probe user-agent; the link is real and is
+      linked from runbuggy.com
+  - url: https://runbuggy.com/terms/
+    http_status: 200
+  - url: https://runbuggy.com/privacy/
+    http_status: 200

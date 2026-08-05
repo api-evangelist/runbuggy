@@ -1,0 +1,86 @@
+generated: '2026-08-05'
+method: searched
+source: public package registry searches, https://github.com/runbuggyinc, https://docs.runbuggy.com/docs/shipping/fca44024c28d5-client-generation
+summary: RunBuggy publishes NO first-party client library in any public package registry.
+  Its documented integration path is to generate your own client from the Swagger 2.0
+  files with Swagger Codegen or the Swagger Editor. This artifact records the negative
+  search so a later round does not repeat it.
+packages: []
+official_sdk_count: 0
+provider_position:
+  documented_approach: generate-your-own
+  quote: You may use the API's Swagger files to generate client code. — RunBuggy Client
+    Generation guide
+  docs: https://docs.runbuggy.com/docs/shipping/fca44024c28d5-client-generation
+  tools_recommended:
+  - https://swagger.io/tools/swagger-codegen/
+  - https://editor.swagger.io
+registries_searched:
+- registry: npm
+  query: runbuggy
+  results: 0
+  url: https://registry.npmjs.org/-/v1/search?text=runbuggy
+- registry: PyPI
+  query: runbuggy
+  results: 0
+  http_status: 404
+- registry: Maven Central
+  query: runbuggy
+  results: 0
+- registry: Maven Central
+  query: g:com.runbuggy
+  results: 0
+- registry: Maven Central
+  query: runbuggyinc
+  results: 1
+  note: com.github.runbuggyinc:stripe-java7 — a RunBuggy-published FORK of the Stripe
+    Java SDK backported to Java 7. Not a RunBuggy API client; not counted as an SDK.
+- registry: RubyGems
+  query: runbuggy
+  results: 0
+- registry: NuGet
+  query: runbuggy
+  results: 0
+- registry: crates.io
+  query: runbuggy
+  results: 0
+- registry: Packagist
+  query: runbuggy
+  results: 0
+github_org:
+  url: https://github.com/runbuggyinc
+  public_repos: 11
+  api_related:
+  - name: api-docs-src
+    description: Source files for API documentation — carries the Orders and Companies
+      Swagger 2.0 definitions and the guides.
+    url: https://github.com/runbuggyinc/api-docs-src
+    last_push: '2023-10-18'
+  - name: api-doc-src
+    description: The earlier documentation source repo. Still the ONLY public location
+      of the Authentication API Swagger definition (shippers/schemas/Auth.json), which
+      is missing from the current docs site.
+    url: https://github.com/runbuggyinc/api-doc-src
+    last_push: '2021-11-30'
+  - name: stripe-java7
+    description: Stripe Java SDK backported to Java 7. Published to Maven Central as
+      com.github.runbuggyinc:stripe-java7. Not a RunBuggy API client.
+    url: https://github.com/runbuggyinc/stripe-java7
+  note: The remaining repos are forks (okta-auth-js, cfstep-helm, cfstep-helmfile,
+    ec2-elastic-ip-manager, java base images) or unrelated (sample-vue-project,
+    runbuggyinc.github.io).
+gaps:
+- No official SDK in any language.
+- No Postman collection or workspace found.
+- No CLI.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://registry.npmjs.org/-/v1/search?text=runbuggy&size=20
+    http_status: 200
+    result: total 0
+  - url: https://pypi.org/pypi/runbuggy/json
+    http_status: 404
+  - url: https://api.github.com/orgs/runbuggyinc/repos?per_page=100
+    http_status: 200
+    result: 11 repos

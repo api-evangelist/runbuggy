@@ -1,0 +1,78 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.runbuggy.com/docs/shipping/, openapi/runbuggy-orders.json
+summary: 'RunBuggy''s sandbox is an entire staging ENVIRONMENT, not a test-mode key on
+  the production API. The unusual part: the staging environment is the ONLY environment
+  RunBuggy describes machine-readably — all three published Swagger definitions declare
+  staging hosts. There is no self-service signup for it; a bearer token is issued by a
+  RunBuggy representative.'
+model: separate-staging-environment
+self_service: false
+access: 'Contact your RunBuggy representative to be issued a Bearer token. There is no
+  developer signup flow that mints a sandbox key.'
+environments:
+- name: staging
+  host: https://ng-staging.runbuggy.com
+  base_path: /staging/api
+  used_by: [Orders API, Authentication API]
+  declared_in_spec: true
+  note: This is the host in the published Orders and Authentication Swagger definitions.
+- name: staging-v2
+  host: https://apps.runbuggy.com
+  base_path: /staging-v2/api
+  used_by: [Companies API]
+  declared_in_spec: true
+- name: testng
+  host: https://ng.runbuggy.com
+  base_path: /testng/api
+  used_by: [embeddable order-status iframe token exchange]
+  declared_in_spec: false
+  source: https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+- name: production
+  host: https://apps.runbuggy.com
+  base_path: /runbuggy/
+  declared_in_spec: false
+  note: Inferred from the production MCP issuer path and the SPA base path. NO published
+    specification describes the production REST API.
+in_docs_testing:
+  supported: true
+  detail: Stoplight's "Send a Test Request" panel is enabled on every operation page.
+    Paste `Bearer {your token}` into the Authorization variable and fire the request
+    against the staging host.
+  docs: https://docs.runbuggy.com/docs/shipping/fca44024c28d5-client-generation
+mock_server:
+  available: false
+  urls:
+  - https://stoplight.io/mocks/runbuggy/shipping/41835438
+  - https://stoplight.io/mocks/runbuggy/shipping/41835437
+  detail: Stoplight exposes Prism mock URLs for both services in the project node
+    metadata, but both return HTTP 401 with an empty body to an anonymous caller, so
+    they are not usable as a pre-sales sandbox.
+test_data:
+  test_credentials: none published
+  magic_values: none published
+  test_vehicles: 'The Vehicle Requirements guide uses real VINs as illustrative examples
+    (e.g. 1N4BA42E55C836454, KL4CJHSB3EB688122). These are documentation examples, NOT
+    designated test fixtures — RunBuggy does not publish a reserved test-VIN range.'
+  test_addresses: 'Example pickup/dropoff pairs appear in the guides (4884 E Butler Ave,
+    Fresno CA → 10050 N Metro Pkwy E, Phoenix AZ). Again examples, not fixtures.'
+  time_simulation: not supported
+  trigger_tooling: 'Partial — POST /webhooks/{id}/test fires a real webhook delivery on
+    demand, which is the one first-class test trigger in the API.'
+gaps:
+- No self-service sandbox signup — obtaining any credential requires a human at RunBuggy.
+- No documented test-vs-live key prefixes or mode flag.
+- No reserved test VIN, test address, or test company fixtures.
+- The Prism mocks that would make the API testable pre-sales are gated.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://stoplight.io/mocks/runbuggy/shipping/41835438/orders?page=0&size=1
+    http_status: 401
+  - url: https://stoplight.io/mocks/runbuggy/shipping/41835437/companies/authorized/companies
+    http_status: 401
+  - url: https://ng-staging.runbuggy.com/api-docs
+    http_status: 401
+    note: staging host is live and authenticating
+  - url: https://docs.runbuggy.com/docs/shipping/fca44024c28d5-client-generation
+    http_status: 200

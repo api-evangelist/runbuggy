@@ -1,0 +1,132 @@
+{
+  "x-stoplight": {
+    "docs": {
+      "showModels": false
+    }
+  },
+  "swagger": "2.0",
+  "info": {
+    "title": "Authentication API",
+    "version": "1.0",
+    "description": "# [Authentication Guide](https://runbuggy.docs.stoplight.io/guides/authentication-guide)",
+    "contact": {
+      "name": "Runbuggy",
+      "email": "support@runbuggy.com"
+    },
+    "license": {
+      "name": "Copyright © RunBuggy 2020",
+      "url": "https://runbuggy.com/terms/"
+    }
+  },
+  "host": "ng-staging.runbuggy.com",
+  "basePath": "/staging/api/auth",
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/login-response"
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/login-request"
+            },
+            "x-examples": {}
+          }
+        ],
+        "summary": "Retrieve token",
+        "operationId": "login",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve Bearer token."
+      }
+    }
+  },
+  "definitions": {
+    "login-request": {
+      "type": "object",
+      "title": "Login Request",
+      "description": "Login request",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "admin@mycompany.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "supersecret"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "login-response": {
+      "type": "object",
+      "title": "Login Response",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "admin@mycompany.com"
+        },
+        "roles": {
+          "type": "array",
+          "example": [
+            "ROLE_TRANSPORTER"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "token_type": {
+          "type": "string",
+          "default": "Bearer",
+          "example": "Bearer"
+        },
+        "access_token": {
+          "type": "string",
+          "example": "5f410h7qp48naudaonq5toop35rqc391",
+          "description": "Used for signing requests."
+        }
+      },
+      "required": [
+        "username",
+        "roles",
+        "token_type",
+        "access_token"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Token"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

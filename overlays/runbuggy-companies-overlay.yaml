@@ -1,0 +1,42 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the RunBuggy Companies API
+  version: 1.0.0
+extends: ../openapi/runbuggy-companies.json
+x-generated: '2026-08-05'
+x-method: generated
+x-source: openapi/runbuggy-companies.json + https://docs.runbuggy.com/docs/shipping/94fced2e96c5f-placing-an-order-for-another-company
+x-note: Non-mutating record of API Evangelist findings about RunBuggy's published
+  Swagger 2.0 Companies definition.
+actions:
+- target: $.info
+  description: Record the environment and the flow this API exists to serve.
+  update:
+    x-environment: staging-v2
+    x-environment-note: The declared host apps.runbuggy.com with basePath /staging-v2/api
+      is a staging environment. No production specification is published.
+    x-purpose: 'Resolve the companies that have authorized your company to place orders
+      on their behalf. The authorization itself is granted out-of-band by RunBuggy
+      support — this API only reads the result.'
+    x-flow-docs: https://docs.runbuggy.com/docs/shipping/94fced2e96c5f-placing-an-order-for-another-company
+    x-pagination:
+      style: page-number
+      params: [page, size, sort]
+- target: $.securityDefinitions.Authorization
+  description: Same bearer token as the Orders API.
+  update:
+    x-value-format: Bearer {token}
+    x-shared-with: openapi/runbuggy-orders.json
+- target: $.paths['/companies/authorized/companies'].get
+  description: Note how the result is used downstream.
+  update:
+    x-consequence: low
+    x-agentic-note: 'Read-only. The returned company id becomes `payer.id` on EVERY
+      vehicle in a Create Order request — it must be repeated per vehicle, not set once
+      on the order.'
+- target: $.paths['/companies/authorized/companies/findByUserName'].get
+  description: Note the lookup variant.
+  update:
+    x-consequence: low
+    x-agentic-note: Same as the list operation, narrowed by username. Prefer this when
+      the authorized company is already known.

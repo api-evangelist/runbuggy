@@ -1,0 +1,48 @@
+generated: '2026-08-05'
+method: searched
+source: well-known/runbuggy-oauth-authorization-server.json, https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+summary: 'RunBuggy has almost no scope surface. The REST Shippers API is bearer-token
+  authenticated with no scopes at all — permission is a property of the token holder''s
+  company, not of the request. Exactly one scope value is published anywhere in the
+  estate, and the OAuth authorization server that fronts the MCP layer publishes none.'
+model: opaque-bearer-token-no-scopes
+rest_api:
+  scopes_supported: []
+  detail: 'securityDefinitions on all three Swagger 2.0 documents is a single
+    `apiKey in header` named Authorization. No oauth2 flow, no scopes object, and no
+    per-operation security requirement differentiation — every operation carries the
+    same blanket requirement.'
+  authorization_model: 'Authority is company-scoped and relationship-granted. A company
+    can act for another company only after RunBuggy establishes that authorization
+    out-of-band ("Your Runbuggy support contact can work with you to establish this
+    authorization"), and the caller then discovers it via the Companies API.'
+  docs: https://docs.runbuggy.com/docs/shipping/94fced2e96c5f-placing-an-order-for-another-company
+scopes:
+- name: openid
+  used_by: embeddable order-status iframe token exchange
+  description: The only scope value published by RunBuggy. Requested in the body of the
+    platform oauth2/token call to mint the short-lived JWT that authorizes an
+    unauthenticated buyer or seller to view a single order's status in an iframe.
+  grants: read access to one order's status for the token lifetime (documented as 60
+    seconds)
+  source: https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+mcp_authorization_server:
+  issuer: https://apps.runbuggy.com/runbuggy/mcp-datascience
+  metadata: well-known/runbuggy-oauth-authorization-server.json
+  scopes_supported: null
+  detail: The RFC 8414 metadata document omits `scopes_supported` entirely. An MCP
+    client performing dynamic client registration has no published vocabulary to request
+    against, and the protected-resource metadata that would normally carry it is not
+    served.
+gaps:
+- No scope or permission reference page exists on docs.runbuggy.com.
+- The REST API has no scopes, so a bearer token is all-or-nothing across all 28
+  operations — including order creation and cancellation.
+- The MCP authorization server advertises no scopes_supported.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://apps.runbuggy.com/.well-known/oauth-authorization-server
+    http_status: 200
+  - url: https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+    http_status: 200

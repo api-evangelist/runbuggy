@@ -1,0 +1,84 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/runbuggy-orders.json, openapi/runbuggy-companies.json, https://docs.runbuggy.com/docs/shipping/ea2a0d46dfc8d-handling-202-s
+format: proprietary
+rfc9457: false
+media_type: application/json
+summary: RunBuggy does not use RFC 9457 problem+json. It returns a proprietary Error
+  object with an enumerated `code`, a human `message` and the offending `field`. The
+  enum published in the specification has only three members, and the API's 401/403/404
+  responses carry no schema at all.
+envelope:
+  schema: Error
+  properties:
+    code:
+      type: string
+      required: true
+      enum:
+      - INVALID_VEHICLE_TRANSFER_ORDER
+      - INVALID_ADDRESS
+      - INVALID_VEHICLE
+    message:
+      type: string
+      description: The error message.
+      example: A vehicle requested has an invalid VIN.
+    field:
+      type: string
+      example: vin
+  async_delivery: 'For 202-accepted operations the errors surface on the polled
+    resource: when the polled object''s `status` is "error", read its `errors` array of
+    Error objects.'
+problem_types:
+- code: INVALID_VEHICLE_TRANSFER_ORDER
+  http_status: 400
+  title: Invalid vehicle transfer order
+  detail: A vehicle transfer order in the request is not valid.
+  remediation: Check the directions (pickup and dropoff addresses), the vehicle, the
+    payer and the requested window against the Create Order schema before resubmitting.
+  source: openapi/runbuggy-orders.json#/definitions/Error
+- code: INVALID_ADDRESS
+  http_status: 400
+  title: Invalid address
+  detail: A pickup or dropoff address could not be resolved.
+  remediation: Supply a full, geocodable street address. The `field` property names
+    which address failed.
+  source: openapi/runbuggy-orders.json#/definitions/Error
+- code: INVALID_VEHICLE
+  http_status: 400
+  title: Invalid vehicle
+  detail: The requested vehicle is not valid — most commonly an unresolvable VIN.
+  remediation: Send a valid 17-character VIN, or omit the VIN and send year, make and
+    model instead. See the Vehicle Requirements guide.
+  docs: https://docs.runbuggy.com/docs/shipping/ace1edcc412ad-vehicle-request-requirements
+  source: openapi/runbuggy-orders.json#/definitions/Error
+status_codes:
+- status: 400
+  meaning: Bad Request — returns the Error schema
+  operations: 4
+  operation_ids: [createOrderUsingPOST, cancelOrderUsingPOST, quoteOrderUsingPOST,
+    updateVehicleTransferOrderUsingPATCH]
+- status: 401
+  meaning: Unauthorized
+  operations: 25
+  schema: none declared
+- status: 403
+  meaning: Forbidden
+  operations: 25
+  schema: none declared
+- status: 404
+  meaning: Not Found
+  operations: 19
+  schema: none declared
+- status: 429
+  meaning: not declared on any operation despite platform-level per-user rate limits
+  operations: 0
+- status: 5xx
+  meaning: not declared on any operation
+  operations: 0
+gaps:
+- The Error enum has 3 members and covers only order-validation failures. Authentication,
+  authorization, not-found, conflict and rate-limit conditions have no coded error type.
+- 401, 403 and 404 responses declare no response schema, so a client cannot parse them
+  structurally.
+- No 429 or 5xx responses are declared anywhere in the specification.
+- No public error-code reference page exists beyond the three enum values in the spec.

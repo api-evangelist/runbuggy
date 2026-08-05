@@ -1,0 +1,48 @@
+generated: '2026-08-05'
+method: generated
+source: openapi/runbuggy-orders.json, openapi/runbuggy-companies.json, https://docs.runbuggy.com/
+  guides
+provider: RunBuggy
+summary: Four packaged Agent Skills for the RunBuggy Shippers API, one per marquee flow.
+  Every operationId referenced is verified against the published Swagger 2.0 documents;
+  none is invented. RunBuggy publishes no skills or AGENTS.md of its own (searched
+  2026-08-05).
+skills:
+- name: runbuggy-quote-and-place-order
+  file: runbuggy-quote-and-place-order.md
+  api: runbuggy:orders
+  description: Price a transport and commit it, handling the 202 accepted-then-poll
+    pattern correctly.
+  operations: [quoteOrderUsingPOST, createOrderUsingPOST, getOrderUsingGET,
+    getFullOrderWithIdUsingGET]
+- name: runbuggy-track-vehicle-transfer
+  file: runbuggy-track-vehicle-transfer.md
+  api: runbuggy:orders
+  description: Track a vehicle in transit through the 18-status Vehicle Transfer Order
+    lifecycle, by polling or by webhook.
+  operations: [getOrderVehicleTransferOrdersUsingGET, getVehicleTransferOrderUsingGET,
+    getExpandedUsingGET, findVehicleTransferOrdersPaginatedUsingGET,
+    findVehicleTransferOrdersExpandedPaginatedUsingGET, createWebhook, testWebhook]
+- name: runbuggy-attach-gate-passes
+  file: runbuggy-attach-gate-passes.md
+  api: runbuggy:orders
+  description: Attach release paperwork to vehicle transfer orders via either documented
+    flow.
+  operations: [createGatePassUsingPOST, addGatePassUsingPOST, getGatePassesUsingGET,
+    getGatePassUsingGET, createOrderUsingPOST, getFullOrderWithIdUsingGET]
+- name: runbuggy-order-for-another-company
+  file: runbuggy-order-for-another-company.md
+  api: runbuggy:companies
+  description: Place an order billed to a company you have been authorized to act for.
+  operations: [getCompaniesThatAuthorizedCompanyUsingGET,
+    getCompaniesThatAuthorizedCompanyIdByUserIdUsingGET, createOrderUsingPOST]
+shared_rules:
+- Send the Authorization header as "Bearer {token}". The spec declares this as an apiKey header, so
+  the caller supplies the `Bearer ` prefix.
+- 202 means accepted, not created. Poll the `location` header until status is `created`
+  or `error`.
+- There is NO idempotency key on any operation. Never blind-retry a write; re-query
+  first.
+- Pagination is `page`/`size`/`sort` with results in a `content` array.
+- Errors are `{code, message, field}`, not RFC 9457.
+- The published specs describe staging hosts only.

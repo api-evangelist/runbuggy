@@ -1,0 +1,215 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/runbuggy-orders.json, openapi/runbuggy-companies.json
+summary: 'The RunBuggy domain has one spine: an Order is the commercial unit a shipper
+  places, and it fans out into one Vehicle Transfer Order per vehicle. Everything else —
+  fares, directions, gate passes, inspections, driver telemetry, timeline events — hangs
+  off the Vehicle Transfer Order. Company is the polymorphic party entity, reused as
+  owner, payer, transporter and preferred transporter. 69 schema definitions in total.'
+identifiers:
+  format: UUID string
+  example: 7b34ba14-1f7a-4492-9fd7-4bef02ad6256
+  prefixes: none — RunBuggy does not use typed id prefixes
+  note: A Vehicle Transfer Order carries `orderId` as a bare string reference back to
+    its parent Order; the reverse direction is a $ref array.
+entities:
+- name: Order
+  description: The shipper's commercial request to move one or more vehicles. Created,
+    quoted, patched, replaced or canceled.
+  schema: openapi/runbuggy-orders.json#/definitions/Order
+  expanded_variant: OrderFull
+  request_variant: OrderRequest
+  key_fields: [id, type, notes, status, created, owner, payer, fare, canceled, errors,
+    replacement]
+  operations: [createOrderUsingPOST, findOrderPaginatedUsingGET, getOrderUsingGET,
+    patchOrderUsingPATCH, cancelOrderUsingPOST, replaceOrderUsingPOST,
+    getFullOrderWithIdUsingGET, getPaginatedFullOrdersUsingGET, quoteOrderUsingPOST]
+- name: VehicleTransferOrder
+  description: One vehicle's leg of an Order. This is the object transporters claim and
+    drivers execute, and the only object that emits webhook events.
+  schema: openapi/runbuggy-orders.json#/definitions/VehicleTransferOrder
+  expanded_variant: VehicleTransferOrderExpanded
+  patch_variant: VehicleTransferOrderPatch
+  key_fields: [id, orderId, status, vehicle, directions, fare, geolocation, states,
+    timeline, transporter, inspections]
+  status_enum_size: 18
+  operations: [findVehicleTransferOrdersPaginatedUsingGET, getVehicleTransferOrderUsingGET,
+    updateVehicleTransferOrderUsingPATCH, getExpandedUsingGET,
+    findVehicleTransferOrdersExpandedPaginatedUsingGET, getOrderVehicleTransferOrdersUsingGET]
+- name: Company
+  description: The polymorphic party. The same schema fills the owner, payer, transporter,
+    dedicatedTransporter and preferredTransporters roles.
+  schema: openapi/runbuggy-orders.json#/definitions/Company
+  also_in: openapi/runbuggy-companies.json
+  roles: [owner, payer, transporter, dedicatedTransporter, preferredTransporters]
+  types_seen: [DEALER, AUCTION, SHIPPER]
+  operations: [getCompaniesThatAuthorizedCompanyUsingGET,
+    getCompaniesThatAuthorizedCompanyIdByUserIdUsingGET]
+- name: Vehicle
+  description: The asset being moved. Identified by VIN, or by year/make/model when the
+    VIN is unknown (in which case the VIN is ignored).
+  schema: openapi/runbuggy-orders.json#/definitions/Vehicle
+  children: [TruckSpecifications, VehicleMeasurements, VehiclePhoto]
+- name: Webhook
+  description: A subscriber-registered delivery target for vehicleTransferOrder.updated
+    events.
+  schema: openapi/runbuggy-orders.json#/definitions/Webhook
+  operations: [createWebhook, getWebhooksPaginated, getWebhook, patchWebhook,
+    deleteWebhook, testWebhook]
+- name: Attachment
+  description: A file bound to a Vehicle Transfer Order. Gate passes are Attachments.
+  schema: openapi/runbuggy-orders.json#/definitions/Attachment
+  operations: [createGatePassUsingPOST, getGatePassesUsingGET, addGatePassUsingPOST,
+    getGatePassUsingGET]
+- name: Fare
+  description: The money on a Vehicle Transfer Order, itemized.
+  schema: openapi/runbuggy-orders.json#/definitions/Fare
+  children: [Item, FareItem]
+- name: DetailedDirections
+  description: Pickup and dropoff Locations plus distance and routing for one transfer.
+  schema: openapi/runbuggy-orders.json#/definitions/DetailedDirections
+  children: [Location, BasicLocation, Distance, Direction]
+- name: Location
+  description: A pickup or dropoff point — address, geolocation, contact, ETA and
+    scheduling windows.
+  schema: openapi/runbuggy-orders.json#/definitions/Location
+  children: [AddressComponents, Contact, Geolocation, EstimatedTimeToArrival, Window]
+- name: Event
+  description: A timestamped entry on the Vehicle Transfer Order timeline.
+  schema: openapi/runbuggy-orders.json#/definitions/Event
+- name: Quote
+  description: A price estimate returned before an Order is committed.
+  schema: openapi/runbuggy-orders.json#/definitions/Quote
+  request: OrderQuoteRequest
+  response: OrderQuoteResponse
+  operations: [quoteOrderUsingPOST]
+- name: InspectionSummary
+  description: Condition report attached to a Vehicle Transfer Order.
+  schema: openapi/runbuggy-orders.json#/definitions/InspectionSummary
+relationships:
+- from: Order
+  to: VehicleTransferOrder
+  kind: has_many
+  via: vehicleTransferOrders
+  note: Array of VehicleTransferOrderIds on Order; array of full VehicleTransferOrder on
+    OrderFull.
+- from: VehicleTransferOrder
+  to: Order
+  kind: belongs_to
+  via: orderId
+- from: VehicleTransferOrderExpanded
+  to: Order
+  kind: has_one
+  via: order
+- from: Order
+  to: Company
+  kind: has_one
+  via: owner
+- from: Order
+  to: Company
+  kind: has_one
+  via: payer
+- from: Order
+  to: Company
+  kind: has_many
+  via: preferredTransporters
+- from: Order
+  to: Company
+  kind: has_one
+  via: dedicatedTransporter
+- from: Order
+  to: FareItem
+  kind: has_many
+  via: fare
+- from: Order
+  to: Error
+  kind: has_many
+  via: errors
+- from: Order
+  to: Replacement
+  kind: has_one
+  via: replacement
+- from: OrderFull
+  to: TransportationOrder
+  kind: has_many
+  via: transportationOrders
+- from: OrderFull
+  to: LastDriverLocation
+  kind: has_many
+  via: driverLocations
+- from: VehicleTransferOrder
+  to: Vehicle
+  kind: has_one
+  via: vehicle
+- from: VehicleTransferOrder
+  to: DetailedDirections
+  kind: has_one
+  via: directions
+- from: VehicleTransferOrder
+  to: Fare
+  kind: has_one
+  via: fare
+- from: VehicleTransferOrder
+  to: Company
+  kind: has_one
+  via: transporter
+- from: VehicleTransferOrder
+  to: Company
+  kind: has_one
+  via: payer
+- from: VehicleTransferOrder
+  to: Event
+  kind: has_many
+  via: timeline
+- from: VehicleTransferOrder
+  to: InspectionSummary
+  kind: has_many
+  via: inspections
+- from: VehicleTransferOrder
+  to: States
+  kind: has_one
+  via: states
+- from: VehicleTransferOrder
+  to: Geolocation
+  kind: has_one
+  via: geolocation
+- from: DetailedDirections
+  to: Location
+  kind: has_many
+  via: pickup and dropoff
+- from: Location
+  to: Contact
+  kind: has_one
+  via: contact
+- from: Location
+  to: Window
+  kind: has_many
+  via: windows
+- from: Location
+  to: AddressComponents
+  kind: has_one
+  via: addressComponents
+- from: Fare
+  to: Item
+  kind: has_many
+  via: items
+- from: Vehicle
+  to: TruckSpecifications
+  kind: has_one
+  via: truckSpecifications
+- from: Vehicle
+  to: VehicleMeasurements
+  kind: has_one
+  via: vehicleMeasurements
+- from: Webhook
+  to: Company
+  kind: belongs_to
+  via: company
+notes:
+- Three separate Company schemas exist in the docs project (three distinct model nodes
+  named "Company"), which is a modelling smell — the party entity is not defined once.
+- Page envelopes are modelled as first-class schemas (PageOrder, PageOrderFull,
+  PageVehicleTransferOrder, PageVehicleTransferOrderExpanded, PageWebhook) rather than a
+  single generic.
+- Gate passes are not a distinct entity; they are Attachments on a Vehicle Transfer Order.
+schema_count: 69

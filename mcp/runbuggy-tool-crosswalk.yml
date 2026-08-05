@@ -1,0 +1,157 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/runbuggy-orders.json, openapi/runbuggy-companies.json, openapi/runbuggy-authentication.json,
+  mcp/runbuggy-mcp.yml
+summary: 'RunBuggy has both a REST surface (the public Swagger 2.0 Shippers API) and an
+  MCP surface (the mcp-datascience server). They are NOT projections of the same core
+  and cannot be bound to each other today: the MCP tool list is auth-gated (401
+  invalid_token) and RunBuggy publishes no llms.txt, no MCP registry entry and no
+  documentation naming a single tool. This crosswalk therefore records a REST-only
+  inventory and an explicitly empty binding set. No tool is guessed by name.'
+surfaces:
+  openapi:
+    files:
+    - openapi/runbuggy-orders.json
+    - openapi/runbuggy-companies.json
+    - openapi/runbuggy-authentication.json
+    gated: false
+    note: Swagger 2.0, published publicly via Stoplight at docs.runbuggy.com. Declared
+      hosts are the STAGING environment (ng-staging.runbuggy.com/staging/api and
+      apps.runbuggy.com/staging-v2/api); production hosts are not in the spec.
+  graphql:
+    endpoint: null
+    gated: null
+    note: No GraphQL surface found on any RunBuggy host.
+  mcp:
+    url: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
+    gated: true
+    note: OAuth 2.1 protected. tools/list returns 401 invalid_token, so inputSchemas
+      require authenticated introspection.
+crosswalk: []
+crosswalk_note: Empty by design. Binding a tool to an operationId requires knowing the
+  tool exists; nothing public names one. When RunBuggy publishes an llms.txt tool list,
+  an MCP registry entry, or opens anonymous tools/list, re-run this artifact.
+mcp_only: []
+mcp_only_note: Unknown — cannot be enumerated while tools/list is gated.
+rest_only:
+- operationId: createOrderUsingPOST
+  method: POST
+  path: /orders
+  tag: Orders
+- operationId: findOrderPaginatedUsingGET
+  method: GET
+  path: /orders
+  tag: Orders
+- operationId: getOrderUsingGET
+  method: GET
+  path: /orders/{id}
+  tag: Orders
+- operationId: patchOrderUsingPATCH
+  method: PATCH
+  path: /orders/{id}
+  tag: Orders
+- operationId: cancelOrderUsingPOST
+  method: POST
+  path: /orders/{id}/cancel
+  tag: Orders
+- operationId: replaceOrderUsingPOST
+  method: POST
+  path: /orders/{id}/replace
+  tag: Orders
+- operationId: getFullOrderWithIdUsingGET
+  method: GET
+  path: /orders/{id}/full
+  tag: Orders
+- operationId: getPaginatedFullOrdersUsingGET
+  method: GET
+  path: /orders/full
+  tag: Orders
+- operationId: getOrderVehicleTransferOrdersUsingGET
+  method: GET
+  path: /orders/{id}/vehicle-transfer-orders
+  tag: Orders
+- operationId: quoteOrderUsingPOST
+  method: POST
+  path: /orders/quote
+  tag: Orders
+- operationId: findVehicleTransferOrdersPaginatedUsingGET
+  method: GET
+  path: /vehicle-transfer-orders
+  tag: Vehicle Transfer Orders
+- operationId: getVehicleTransferOrderUsingGET
+  method: GET
+  path: /vehicle-transfer-orders/{id}
+  tag: Vehicle Transfer Orders
+- operationId: updateVehicleTransferOrderUsingPATCH
+  method: PATCH
+  path: /vehicle-transfer-orders/{id}
+  tag: Vehicle Transfer Orders
+- operationId: getExpandedUsingGET
+  method: GET
+  path: /vehicle-transfer-orders/{id}/expanded
+  tag: Vehicle Transfer Orders
+- operationId: findVehicleTransferOrdersExpandedPaginatedUsingGET
+  method: GET
+  path: /vehicle-transfer-orders/expanded
+  tag: Vehicle Transfer Orders
+- operationId: createGatePassUsingPOST
+  method: POST
+  path: /vehicle-transfer-orders/gate-passes
+  tag: Vehicle Transfer Orders
+- operationId: getGatePassesUsingGET
+  method: GET
+  path: /vehicle-transfer-orders/{id}/gate-passes
+  tag: Vehicle Transfer Orders
+- operationId: addGatePassUsingPOST
+  method: POST
+  path: /vehicle-transfer-orders/{id}/gate-passes
+  tag: Vehicle Transfer Orders
+- operationId: getGatePassUsingGET
+  method: GET
+  path: /vehicle-transfer-orders/{id}/gate-passes/{passId}
+  tag: Vehicle Transfer Orders
+- operationId: createWebhook
+  method: POST
+  path: /webhooks
+  tag: Webhooks
+- operationId: getWebhooksPaginated
+  method: GET
+  path: /webhooks
+  tag: Webhooks
+- operationId: testWebhook
+  method: POST
+  path: /webhooks/{id}/test
+  tag: Webhooks
+- operationId: getWebhook
+  method: GET
+  path: /webhooks/{id}
+  tag: Webhooks
+- operationId: patchWebhook
+  method: PATCH
+  path: /webhooks/{id}
+  tag: Webhooks
+- operationId: deleteWebhook
+  method: DELETE
+  path: /webhooks/{id}
+  tag: Webhooks
+- operationId: getCompaniesThatAuthorizedCompanyUsingGET
+  method: GET
+  path: /companies/authorized/companies
+  tag: Companies
+- operationId: getCompaniesThatAuthorizedCompanyIdByUserIdUsingGET
+  method: GET
+  path: /companies/authorized/companies/findByUserName
+  tag: Companies
+- operationId: login
+  method: POST
+  path: /login
+  tag: Token
+coverage:
+  rest_operations: 28
+  mcp_tools: null
+  bound: 0
+  mcp_only: null
+  rest_only: 28
+  percent_rest_covered_by_mcp: null
+  note: Denominators involving MCP are null, not zero — the tool count is unknown, not
+    absent.

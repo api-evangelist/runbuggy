@@ -1,0 +1,103 @@
+# RunBuggy
+
+> RunBuggy is an automotive-focused vehicle transportation marketplace and TMS connecting car shippers (dealers, auctions, OEMs, rental and fleet operators) with car haulers. Its public Shippers API lets a shipper quote, place, track and cancel vehicle transport orders programmatically.
+
+Generated: 2026-08-05
+Method: generated (RunBuggy publishes no /llms.txt of its own — probed 2026-08-05 on runbuggy.com, docs.runbuggy.com, apps.runbuggy.com and ng-staging.runbuggy.com; all miss)
+Source: https://docs.runbuggy.com/ and the API Evangelist profile at https://github.com/api-evangelist/runbuggy
+
+## Read this first
+
+- The API is asynchronous. `POST /orders`, `POST /orders/{id}/cancel`, `POST /orders/quote` and `PATCH /vehicle-transfer-orders/{id}` return **202 Accepted**, not 201. Poll the `location` response header until the resource `status` is `created` or `error`. Treating a 202 as success gives you an order id that does not exist yet.
+- **There is no idempotency key.** `POST /orders` commits a real vehicle transport and cannot be safely retried. Quote first, create once, then poll.
+- The token is **all-or-nothing** — no scopes. The same bearer token that reads an order can cancel one.
+- The published specifications describe **staging**, not production. Ask RunBuggy for the production base URL.
+
+## Specifications
+
+- [Orders API (Swagger 2.0)](https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders): 26 operations across Orders, Vehicle Transfer Orders and Webhooks. Base https://ng-staging.runbuggy.com/staging/api
+- [Companies API (Swagger 2.0)](https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies): 2 operations. Base https://apps.runbuggy.com/staging-v2/api
+- [Authentication API (Swagger 2.0)](https://github.com/runbuggyinc/api-doc-src/blob/master/shippers/schemas/Auth.json): 1 operation, `POST /login`. Base https://ng-staging.runbuggy.com/staging/api/auth
+
+## Authentication
+
+- Guide: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+- Send `Authorization: Bearer {token}` on every request. The spec declares this as an apiKey header, so you supply the `Bearer ` prefix yourself.
+- Tokens are issued by a RunBuggy representative, or via `POST /login`. There is no self-service signup for API credentials.
+
+## The domain in one paragraph
+
+A shipper places an **Order**. The Order fans out into one **Vehicle Transfer Order** per vehicle — that is the object a transporter claims, a driver executes, and that emits webhook events through 18 statuses from `DRAFT` to `COMPLETE`. **Company** is the party entity and fills the owner, payer and transporter roles. **Gate passes** are attachments on a Vehicle Transfer Order. **Fares** carry the money.
+
+## Core operations
+
+### Orders
+- `createOrderUsingPOST` — POST /orders — Create an order (202)
+- `quoteOrderUsingPOST` — POST /orders/quote — Quote an order before committing (202)
+- `findOrderPaginatedUsingGET` — GET /orders — Find orders
+- `getOrderUsingGET` — GET /orders/{id} — Retrieve an order
+- `getFullOrderWithIdUsingGET` — GET /orders/{id}/full — Retrieve an expanded order
+- `getPaginatedFullOrdersUsingGET` — GET /orders/full — Search expanded orders
+- `patchOrderUsingPATCH` — PATCH /orders/{id} — Update order
+- `cancelOrderUsingPOST` — POST /orders/{id}/cancel — Cancel an order (202)
+- `replaceOrderUsingPOST` — POST /orders/{id}/replace — Replace an order
+- `getOrderVehicleTransferOrdersUsingGET` — GET /orders/{id}/vehicle-transfer-orders
+
+### Vehicle Transfer Orders
+- `findVehicleTransferOrdersPaginatedUsingGET` — GET /vehicle-transfer-orders
+- `getVehicleTransferOrderUsingGET` — GET /vehicle-transfer-orders/{id}
+- `updateVehicleTransferOrderUsingPATCH` — PATCH /vehicle-transfer-orders/{id} (202)
+- `getExpandedUsingGET` — GET /vehicle-transfer-orders/{id}/expanded
+- `findVehicleTransferOrdersExpandedPaginatedUsingGET` — GET /vehicle-transfer-orders/expanded
+
+### Gate Passes
+- `createGatePassUsingPOST` — POST /vehicle-transfer-orders/gate-passes
+- `addGatePassUsingPOST` — POST /vehicle-transfer-orders/{id}/gate-passes
+- `getGatePassesUsingGET` — GET /vehicle-transfer-orders/{id}/gate-passes
+- `getGatePassUsingGET` — GET /vehicle-transfer-orders/{id}/gate-passes/{passId}
+
+### Webhooks
+- `createWebhook` — POST /webhooks
+- `getWebhooksPaginated` — GET /webhooks
+- `getWebhook` — GET /webhooks/{id}
+- `patchWebhook` — PATCH /webhooks/{id}
+- `deleteWebhook` — DELETE /webhooks/{id}
+- `testWebhook` — POST /webhooks/{id}/test
+
+### Companies
+- `getCompaniesThatAuthorizedCompanyUsingGET` — GET /companies/authorized/companies
+- `getCompaniesThatAuthorizedCompanyIdByUserIdUsingGET` — GET /companies/authorized/companies/findByUserName
+
+## Conventions
+
+- Pagination: `?page=0&size=10&sort=created.date,desc`. Results come back in a Spring Data envelope with `content`, `totalElements`, `totalPages`. https://docs.runbuggy.com/docs/shipping/05ccf93502e54-pagination
+- Errors: proprietary `{code, message, field}` — not RFC 9457. Codes published: `INVALID_VEHICLE_TRANSFER_ORDER`, `INVALID_ADDRESS`, `INVALID_VEHICLE`.
+- Vehicles: send a VIN, or send year/make/model (in which case the VIN is ignored). https://docs.runbuggy.com/docs/shipping/ace1edcc412ad-vehicle-request-requirements
+- Ordering for another company: resolve the authorized company first, then set `payer.id` on **every** vehicle. https://docs.runbuggy.com/docs/shipping/94fced2e96c5f-placing-an-order-for-another-company
+- Rate limits: not signaled. No 429 is declared on any operation.
+
+## Events
+
+- One event type: `vehicleTransferOrder.updated`. Payload `{type, created, object}` where `object` is the expanded Vehicle Transfer Order.
+- Register a URL, optionally with an `Authorization` header value RunBuggy echoes back. There is no payload signature.
+- https://docs.runbuggy.com/docs/shipping/5cc9374300b99-webhooks
+
+## Optional
+
+- [Embeddable order status iframe](https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status) — MAP, STATUS_BAR and TIMELINE sections, authorized by a 60-second JWT.
+- [Hitch product release notes](https://runbuggy.stoplight.io/docs/hitch-releases/bk2m8pvx9qrn4-april-2026-hitch-releases) — product changelog, not an API changelog.
+- [Status page](https://status.runbuggy.com/)
+- [Security posture](https://runbuggy.com/security/) — security@runbuggy.com
+- [GitHub](https://github.com/runbuggyinc) — the doc sources live in `api-docs-src` and `api-doc-src`.
+- MCP: RunBuggy runs an OAuth-protected MCP server at `https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp`. It is undocumented and its tool list is auth-gated, so its capabilities are unknown.
+
+## Not available
+
+- No SDKs or client libraries in any public package registry (npm, PyPI, Maven Central, RubyGems all checked 2026-08-05).
+- No CLI.
+- No Postman collection.
+- No OpenAPI 3.x — Swagger 2.0 only.
+- No AsyncAPI.
+- No A2A Agent Card.
+- No `/.well-known/security.txt`.
+- No self-service sandbox or test fixtures.

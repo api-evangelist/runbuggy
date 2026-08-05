@@ -1,0 +1,42 @@
+generated: '2026-08-05'
+method: searched
+source: https://runbuggy.com/security/
+summary: RunBuggy publishes a security posture page at runbuggy.com/security/ that
+  serves as its trust surface. It states uptime, product-security and data-security
+  practices and a security contact, but it does NOT attest to any completed certification
+  or audit. Compliance framework names appear only as an aspiration.
+trust_page: https://runbuggy.com/security/
+status_page: https://status.runbuggy.com/
+privacy_policy: https://runbuggy.com/privacy/
+certifications: []
+certification_note: 'The page reads "RunBuggy is an industry leader working with standard
+  setters in the automotive retail space while aiming to exceed existing frameworks
+  such SOC 2, NIST and CSF." This is aspirational language — it asserts an intent to
+  exceed those frameworks, not a completed SOC 2 report, ISO 27001 certificate, or any
+  named external assessment. No audit report, attestation letter, or trust-portal
+  request flow is published. Recorded as zero certifications rather than as compliance,
+  and no `Compliance` pointer is wired.'
+published_claims:
+- claim: 99.97% uptime since RunBuggy launched in 2018
+  evidence: https://runbuggy.com/security/
+- claim: Secure SDLC including OWASP Top 10, 24/7 monitoring, vulnerability management
+    and security assessments
+  evidence: https://runbuggy.com/security/
+- claim: Zero-trust architecture; passwords replaced with immutable credentials backed
+    by private keys that never leave the device TPM
+  evidence: https://runbuggy.com/security/
+- claim: Foundry CSO50 award for overall cybersecurity posture
+  evidence: https://runbuggy.com/security/
+security_contact: security@runbuggy.com
+gaps:
+- no named certification (SOC 2 / ISO 27001 / PCI DSS / HIPAA / FedRAMP) attested
+- no dedicated trust portal (trust.runbuggy.com does not resolve)
+- no subprocessor list or data-residency statement found
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://runbuggy.com/security/
+    http_status: 200
+  - url: https://status.runbuggy.com/
+    http_status: 200
+    note: Uptime.com-hosted status page

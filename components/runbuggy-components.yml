@@ -1,0 +1,65 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+summary: RunBuggy publishes one embeddable client-side component — an iframe that renders
+  live order status to a buyer or seller who has no RunBuggy account. It is a hosted
+  surface configured entirely by query string, not a JavaScript element library.
+families:
+- name: Order Status Embed
+  kind: hosted-iframe
+  loader: none — a plain <iframe src=...>
+  url_template: https://apps.runbuggy.com/runbuggy/spa-v2/#/external/order-status?orderId={ORDER_ID}&token={JWT}&sections={SECTIONS}&statusWhitelist={STATUSES}
+  docs: https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+  authentication:
+    style: short-lived JWT passed in the URL
+    acquisition: 'POST to the platform oauth2/token endpoint with an API bearer token
+      and body {"scope":"openid"}; the response carries access_token and expires_in.'
+    documented_expiry_seconds: 60
+    note: The documented token lifetime is 60 seconds, so the embed URL must be minted
+      server-side per view rather than stored.
+  parameters:
+  - name: orderId
+    required: true
+    description: The order whose status is rendered.
+  - name: token
+    required: true
+    description: The JWT from the token exchange.
+  - name: sections
+    required: true
+    description: Comma-separated list of sections to render.
+    options: [MAP, STATUS_BAR, TIMELINE]
+  - name: statusWhitelist
+    required: false
+    description: Comma-separated statuses to show in the status bar and timeline. All
+      statuses render when omitted.
+    options: [AVAILABLE, ORDER_NOTIFICATIONS, CLAIMED, VEHICLES_PICKEDUP, VEHICLES_SIGNATURE_PICKEDUP,
+      UNLOADED, VEHICLES_DELIVERED, VEHICLES_SIGNATURE_DELIVERED, COMPLETED]
+  sections:
+  - id: MAP
+    description: A map with order details.
+  - id: STATUS_BAR
+    description: A progression bar across the whitelisted statuses.
+  - id: TIMELINE
+    description: A timestamped chronological list of order statuses.
+  flow:
+  - Authenticate against the Shippers API.
+  - Create an order (createOrderUsingPOST).
+  - Exchange the API bearer token for a scope=openid JWT.
+  - Build the iframe URL with orderId, token and sections.
+mobile_apps:
+- platform: iOS
+  url: https://apps.apple.com/us/app/runbuggy/id1170457407
+- platform: Android
+  url: https://play.google.com/store/apps/details?id=com.runbuggy.app
+gaps:
+- No web-component or npm element library — the only embed is an iframe.
+- The status whitelist vocabulary in the embed (VEHICLES_PICKEDUP, COMPLETED, …) does
+  NOT match the VehicleTransferOrder status vocabulary in the API (PICKED_UP, COMPLETE,
+  …). Two different status enums are published for the same lifecycle.
+- The token-exchange endpoint used by the embed
+  (/api/oauth2/token) is not present in any published specification.
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://docs.runbuggy.com/docs/shipping/d483faef38c3b-embedding-i-frame-order-status
+    http_status: 200

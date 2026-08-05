@@ -1,0 +1,3560 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Orders",
+    "description": "### [Create Orders](/docs/shipping/6fcc8c040ec03-create-an-order) to transfer vehicles.",
+    "termsOfService": "https://runbuggy.com/terms/",
+    "contact": {
+      "name": "Support",
+      "email": "support@runbuggy.com"
+    },
+    "license": {
+      "name": "Copyright © RunBuggy 2023",
+      "url": "https://runbuggy.com/terms/"
+    },
+    "version": "1.0"
+  },
+  "host": "ng-staging.runbuggy.com",
+  "basePath": "/staging/api",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Create an order",
+        "description": "Create an Order to transfer vehicles.",
+        "operationId": "createOrderUsingPOST",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "orderRequest",
+            "schema": {
+              "$ref": "#/definitions/OrderRequest"
+            },
+            "description": "orderRequest",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OrderResponse"
+            }
+          },
+          "202": {
+            "description": "The request is being processed. See [Handling 202's](/docs/shipping/ea2a0d46dfc8d-handling-202-s)."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Find orders",
+        "description": "Retrieve paginated Orders.",
+        "operationId": "findOrderPaginatedUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOrder"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Retrieve an order",
+        "description": "Retrieve Order.",
+        "operationId": "getOrderUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Update order",
+        "description": "Patch Order",
+        "operationId": "patchOrderUsingPATCH",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "schema": {
+              "$ref": "#/definitions/OrderPatchRequest"
+            },
+            "description": "request",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}/cancel": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Cancel an order",
+        "description": "Cancel specified Order. If vehicles have shipped you may no longer cancel Order. 202 status code indicates the Cancelation request has been accepted and is processing. Check the Order resource for the status to change to \"CANCELED\".",
+        "operationId": "cancelOrderUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "cancellationReason",
+            "schema": {
+              "$ref": "#/definitions/CancellationReason"
+            },
+            "description": "cancellationReason",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "202": {
+            "description": "Request has been accepted and is being processed."
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}/replace": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Replace an order",
+        "description": "Cancels the original and creates a new one. To track the status, see the Order.replacement property of the order being replaced.",
+        "operationId": "replaceOrderUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "replaceRequest",
+            "schema": {
+              "$ref": "#/definitions/OrderRequest"
+            },
+            "description": "replaceRequest",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}/full": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Retrieve an expanded order",
+        "description": "Retrieve an Order expanded with full Vehicle Transfer Orders.",
+        "operationId": "getFullOrderWithIdUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrderFull"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/full": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Search expanded orders",
+        "description": "Search expanded orders using RSQL. For example: orders/full?query=created.date>2020-10-15T00:00:00Z;created.date<2020-10-21T00:00:00Z",
+        "operationId": "getPaginatedFullOrdersUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query Orders using RSQL.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOrderFull"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}/vehicle-transfer-orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "List order's vehicle transfers",
+        "description": "List an Order's the Vehicle Transfer Orders.",
+        "operationId": "getOrderVehicleTransferOrdersUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VehicleTransferOrder"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders": {
+      "get": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Find vehicle transfer orders",
+        "description": "Retrieve a paginated Vehicle Transfer Orders.",
+        "operationId": "findVehicleTransferOrdersPaginatedUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageVehicleTransferOrder"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders/{id}": {
+      "get": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Retrieve a vehicle transfer order",
+        "description": "Retrieve specified Vehicle Transfer Order.",
+        "operationId": "getVehicleTransferOrderUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VehicleTransferOrder"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Update a vehicle transfer order",
+        "description": "Update specified Vehicle Transfer Order.",
+        "operationId": "updateVehicleTransferOrderUsingPATCH",
+        "produces": [
+          "*/*"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "VehicleTransferOrder",
+            "schema": {
+              "$ref": "#/definitions/VehicleTransferOrderPatch"
+            },
+            "description": "VehicleTransferOrder",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/VehicleTransferOrder"
+            }
+          },
+          "400": {
+            "description": "Forbidden"
+          },
+          "401": {
+            "description": ""
+          },
+          "403": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders/{id}/expanded": {
+      "get": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Get expanded vehicle transfer order",
+        "operationId": "getExpandedUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VehicleTransferOrderExpanded"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders/expanded": {
+      "get": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Find vehicle transfer orders expanded",
+        "description": "Retrieve paginated expanded Vehicle Transfer Orders.",
+        "operationId": "findVehicleTransferOrdersExpandedPaginatedUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageVehicleTransferOrderExpanded"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders/gate-passes": {
+      "post": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Create a gate pass",
+        "operationId": "createGatePassUsingPOST",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "description": "file"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TempFile"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders/{id}/gate-passes": {
+      "get": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Get gate passes",
+        "operationId": "getGatePassesUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Attachment"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Add a gate pass",
+        "operationId": "addGatePassUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "file",
+            "description": "file"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/vehicle-transfer-orders/{id}/gate-passes/{passId}": {
+      "get": {
+        "tags": [
+          "Vehicle Transfer Orders"
+        ],
+        "summary": "Retrieve a gate pass",
+        "operationId": "getGatePassUsingGET",
+        "parameters": [
+          {
+            "name": "passId",
+            "in": "path",
+            "description": "passId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/orders/quote": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Quote an order",
+        "description": "Quote an Order.",
+        "operationId": "quoteOrderUsingPOST",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "fareRequest",
+            "schema": {
+              "$ref": "#/definitions/OrderQuoteRequest"
+            },
+            "description": "orderQuoteRequest",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrderQuoteResponse"
+            }
+          },
+          "202": {
+            "description": "The request is being processed. See [Handling 202's](/docs/shipping/ea2a0d46dfc8d-handling-202-s)."
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/webhooks": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Create a webhook",
+        "operationId": "createWebhook",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "webhookRequest",
+            "schema": {
+              "$ref": "#/definitions/WebhookRequest"
+            },
+            "description": "webhookRequest",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Find webhooks",
+        "operationId": "getWebhooksPaginated",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageWebhook"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/webhooks/{id}/test": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Test a webhook",
+        "operationId": "testWebhook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/webhooks/{id}": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Retrieve a webhook",
+        "operationId": "getWebhook",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Update a webhook",
+        "operationId": "patchWebhook",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "webhookRequest",
+            "schema": {
+              "$ref": "#/definitions/WebhookRequest"
+            },
+            "description": "webhookRequest",
+            "required": true
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Delete a webhook",
+        "operationId": "deleteWebhook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "schemes": [
+          "https"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Orders",
+      "description": "The Order operations."
+    },
+    {
+      "name": "Vehicle Transfer Orders",
+      "description": "The Vehicle Transfer Order operations."
+    },
+    {
+      "name": "Webhooks",
+      "description": "Webhook operations."
+    }
+  ],
+  "definitions": {
+    "OrderRequest": {
+      "type": "object",
+      "title": "OrderRequest",
+      "properties": {
+        "notes": {
+          "type": "string",
+          "x-examples": [
+            "Our big May 1st order."
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BASIC"
+          ],
+          "description": "See Order.type enumeration for possible values.",
+          "x-examples": [
+            "BASIC"
+          ]
+        },
+        "vehicleTransferOrders": {
+          "type": "array",
+          "description": "Vehicles transfer orders.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrderRequest"
+          }
+        },
+        "owner": {
+          "$ref": "#/definitions/CompanyRequest"
+        },
+        "payer": {
+          "$ref": "#/definitions/CompanyRequestRequiredName"
+        },
+        "fare": {
+          "$ref": "#/definitions/FareOptionsRequest"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "vehicleTransferOrders",
+        "fare"
+      ]
+    },
+    "VehicleTransferOrderRequest": {
+      "type": "object",
+      "title": "VehicleTransferOrderRequest",
+      "properties": {
+        "directions": {
+          "$ref": "#/definitions/DetailedDirectionsRequest"
+        },
+        "gatePasses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TempFile"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "payer": {
+          "$ref": "#/definitions/Company"
+        },
+        "reconciliationCode": {
+          "type": "string",
+          "x-examples": [
+            "PARKING_LOT"
+          ]
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        }
+      },
+      "required": [
+        "directions",
+        "vehicle"
+      ]
+    },
+    "DetailedDirectionsRequest": {
+      "type": "object",
+      "title": "DetailedDirectionsRequest",
+      "properties": {
+        "dropoff": {
+          "$ref": "#/definitions/VehicleTransferOrderRequestLocation"
+        },
+        "pickup": {
+          "$ref": "#/definitions/VehicleTransferOrderRequestLocation"
+        }
+      },
+      "required": [
+        "dropoff",
+        "pickup"
+      ]
+    },
+    "VehicleTransferOrderRequestLocation": {
+      "type": "object",
+      "title": "VehicleTransferOrderRequestLocation",
+      "properties": {
+        "address": {
+          "type": "string",
+          "minLength": 1
+        },
+        "auctionCode": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/Contact"
+        },
+        "dealerCode": {
+          "type": "string"
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "business",
+            "personal"
+          ]
+        },
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Window"
+          }
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "Contact": {
+      "type": "object",
+      "title": "Contact",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-examples": [
+            "Ed Jones"
+          ]
+        },
+        "phone": {
+          "type": "string",
+          "x-examples": [
+            "4804804480"
+          ]
+        }
+      }
+    },
+    "Geolocation": {
+      "type": "object",
+      "title": "Geolocation",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Window": {
+      "type": "object",
+      "title": "Window",
+      "properties": {
+        "confirmed": {
+          "type": "boolean"
+        },
+        "start": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "end": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TempFile": {
+      "type": "object",
+      "title": "TempFile",
+      "properties": {
+        "resourcePath": {
+          "type": "string"
+        }
+      }
+    },
+    "Company": {
+      "type": "object",
+      "title": "Company",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "c0ef80ce-2579-4682-af4f-c1d29457848a"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "x-examples": [
+            "Auto Land"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "DEALER",
+            "AUCTION"
+          ],
+          "x-examples": [
+            "DEALER"
+          ]
+        }
+      }
+    },
+    "Vehicle": {
+      "type": "object",
+      "title": "Vehicle",
+      "description": "When creating an order, there are 2 options for providing the Vehicle information. [See here](/docs/shipping/ace1edcc412ad-vehicle-request-requirements)",
+      "properties": {
+        "color": {
+          "type": "string",
+          "x-examples": [
+            "Blue"
+          ]
+        },
+        "isOperational": {
+          "type": "boolean",
+          "x-examples": [
+            true
+          ]
+        },
+        "isOverSized": {
+          "type": "boolean",
+          "x-examples": [
+            false
+          ]
+        },
+        "make": {
+          "type": "string",
+          "x-examples": [
+            "BMW"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "x-examples": [
+            "M3"
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "x-examples": [
+            "She's a beauty."
+          ]
+        },
+        "odometer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stockNumber": {
+          "type": "string",
+          "x-examples": [
+            "1234"
+          ]
+        },
+        "truckSpecifications": {
+          "$ref": "#/definitions/TruckSpecifications"
+        },
+        "type": {
+          "type": "string"
+        },
+        "vehicleMarket": {
+          "type": "string",
+          "enum": [
+            "LIGHT",
+            "MEDIUM",
+            "HEAVY"
+          ]
+        },
+        "vehicleMeasurements": {
+          "$ref": "#/definitions/VehicleMeasurements"
+        },
+        "vin": {
+          "type": "string",
+          "x-examples": [
+            "2C3KA53G68H269241"
+          ]
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "vin"
+      ]
+    },
+    "TruckSpecifications": {
+      "type": "object",
+      "title": "TruckSpecifications",
+      "properties": {
+        "rearAxle": {
+          "type": "string"
+        }
+      }
+    },
+    "VehicleMeasurements": {
+      "type": "object",
+      "title": "VehicleMeasurements",
+      "properties": {
+        "curbWeight": {
+          "type": "number",
+          "format": "double"
+        },
+        "grossVehicleWeightRating": {
+          "type": "number",
+          "format": "double"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "length": {
+          "type": "number",
+          "format": "double"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "CompanyRequest": {
+      "type": "object",
+      "title": "Company",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "c0ef80ce-2579-4682-af4f-c1d29457848a"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "x-examples": [
+            "Auto Land"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "DEALER",
+            "AUCTION"
+          ],
+          "x-examples": [
+            "DEALER"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CompanyRequestRequiredName": {
+      "type": "object",
+      "title": "Company",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "c0ef80ce-2579-4682-af4f-c1d29457848a"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "x-examples": [
+            "Auto Land"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "DEALER",
+            "AUCTION"
+          ],
+          "x-examples": [
+            "DEALER"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "FareOptionsRequest": {
+      "type": "object",
+      "title": "FareOptionsRequest",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Fare option. The fare options are returned from the Quote operation.",
+          "x-examples": [
+            "Gold"
+          ]
+        },
+        "options": {
+          "type": "array",
+          "description": "Fare options. We currently support \"Enclosed\" (case sensitive)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "OrderResponse": {
+      "type": "object",
+      "title": "OrderResponse",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "7e837a6c-1746-4da4-89e6-c87fae7df84d"
+          ]
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "referenceNumber": {
+          "type": "string",
+          "x-examples": [
+            "200001"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BASIC",
+            "SWAP"
+          ],
+          "x-examples": [
+            "BASIC"
+          ]
+        },
+        "vehicleTransferOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrderStatus"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "status",
+        "type",
+        "vehicleTransferOrders"
+      ]
+    },
+    "Created": {
+      "type": "object",
+      "title": "Created",
+      "properties": {
+        "byCompany": {
+          "$ref": "#/definitions/Company"
+        },
+        "byUser": {
+          "type": "string",
+          "description": "User ID",
+          "x-examples": [
+            "7ae99113-09fd-4838-917a-a7d9636c2f8c"
+          ]
+        },
+        "byUserFullName": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        }
+      }
+    },
+    "VehicleTransferOrderStatus": {
+      "type": "object",
+      "title": "VehicleTransferOrderStatus",
+      "properties": {
+        "error": {
+          "type": "string",
+          "x-examples": [
+            "Error 123"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "7e837a6c-1746-4da4-89e6-c87fae7df84d"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PageOrder": {
+      "type": "object",
+      "title": "PageOrder",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "content",
+        "empty",
+        "first",
+        "last",
+        "number",
+        "numberOfElements",
+        "pageable",
+        "size",
+        "sort",
+        "totalElements",
+        "totalPages"
+      ]
+    },
+    "Order": {
+      "type": "object",
+      "title": "Order",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "151ff45d-9fcc-4df6-b221-cd7fcb1d7614"
+          ]
+        },
+        "referenceNumber": {
+          "type": "string",
+          "x-examples": [
+            "S-000035994"
+          ]
+        },
+        "vehicleTransferOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrderIds"
+          }
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "owner": {
+          "$ref": "#/definitions/Company"
+        },
+        "payer": {
+          "$ref": "#/definitions/Company"
+        },
+        "canceled": {
+          "$ref": "#/definitions/Canceled"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "x-examples": [
+            "Big May 1st delivery."
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BASIC",
+            "SWAP"
+          ]
+        },
+        "completedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "fare": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FareItem"
+          }
+        },
+        "dedicatedTransporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "preferredStatusExpiration": {
+          "type": "string"
+        },
+        "preferredTransporters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Company"
+          }
+        },
+        "replacement": {
+          "$ref": "#/definitions/Replacement"
+        }
+      },
+      "required": [
+        "id",
+        "referenceNumber",
+        "vehicleTransferOrders",
+        "created",
+        "status",
+        "type"
+      ]
+    },
+    "VehicleTransferOrderIds": {
+      "type": "object",
+      "title": "VehicleTransferOrderIds",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "f7a7a77e-1afb-47b9-8d19-92591590ed33"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Canceled": {
+      "type": "object",
+      "title": "Canceled",
+      "properties": {
+        "byUser": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "title": "Error",
+      "description": "A common Error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "INVALID_VEHICLE_TRANSFER_ORDER",
+            "INVALID_ADDRESS",
+            "INVALID_VEHICLE"
+          ],
+          "x-examples": [
+            "INVALID_VEHICLE_TRANSFER_ORDER"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "x-examples": [
+            "A vehicle requested has an invalid VIN."
+          ]
+        },
+        "field": {
+          "type": "string",
+          "x-examples": [
+            "vin"
+          ]
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "FareItem": {
+      "type": "object",
+      "title": "FareItem",
+      "description": "Order Fare Item",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Replacement": {
+      "type": "object",
+      "title": "Replacement",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "message": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "SUCCESS",
+            "ERROR"
+          ]
+        }
+      }
+    },
+    "Pageable": {
+      "type": "object",
+      "title": "Pageable",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "paged": {
+          "type": "boolean"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "unpaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Sort": {
+      "type": "object",
+      "title": "Sort",
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "sorted": {
+          "type": "boolean"
+        },
+        "unsorted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OrderPatchRequest": {
+      "type": "object",
+      "title": "OrderPatchRequest",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "CancellationReason": {
+      "type": "object",
+      "title": "CancellationReason",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Optional message.",
+          "x-examples": [
+            "Made a mistake placing order."
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "OTHER"
+          ],
+          "description": "Enum string. Set to \"OTHER\" to provide a message."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "OrderFull": {
+      "type": "object",
+      "title": "OrderFull",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "referenceNumber": {
+          "type": "string"
+        },
+        "completedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "owner": {
+          "$ref": "#/definitions/Company"
+        },
+        "payer": {
+          "$ref": "#/definitions/Company"
+        },
+        "canceled": {
+          "$ref": "#/definitions/Canceled"
+        },
+        "dedicatedTransporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "driverLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LastDriverLocation"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "fare": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FareItem"
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "preferredStatusExpiration": {
+          "type": "string"
+        },
+        "preferredTransporters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Company"
+          }
+        },
+        "replacement": {
+          "$ref": "#/definitions/Replacement"
+        },
+        "status": {
+          "type": "string"
+        },
+        "transportationOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransportationOrder"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BASIC"
+          ]
+        },
+        "vehicleTransferOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrder"
+          }
+        }
+      }
+    },
+    "LastDriverLocation": {
+      "type": "object",
+      "title": "LastDriverLocationExt",
+      "properties": {
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "data": {
+          "$ref": "#/definitions/AdditionalData"
+        },
+        "location": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "moving": {
+          "type": "boolean"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "AdditionalData": {
+      "type": "object",
+      "title": "AdditionalData",
+      "properties": {
+        "activity": {
+          "$ref": "#/definitions/Activity"
+        },
+        "battery": {
+          "$ref": "#/definitions/Battery"
+        },
+        "coords": {
+          "$ref": "#/definitions/Coords"
+        },
+        "extras": {
+          "$ref": "#/definitions/Extras"
+        },
+        "is_moving": {
+          "type": "boolean"
+        },
+        "odometer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "Activity": {
+      "type": "object",
+      "title": "Activity",
+      "properties": {
+        "confidence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Battery": {
+      "type": "object",
+      "title": "Battery",
+      "properties": {
+        "charging": {
+          "type": "boolean"
+        },
+        "level": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Coords": {
+      "type": "object",
+      "title": "Coords",
+      "properties": {
+        "accuracy": {
+          "type": "number",
+          "format": "double"
+        },
+        "altitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "heading": {
+          "type": "number",
+          "format": "double"
+        },
+        "speed": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Extras": {
+      "type": "object",
+      "title": "Extras"
+    },
+    "TransportationOrder": {
+      "type": "object",
+      "title": "TransportationOrderExt",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "referenceNumber": {
+          "type": "string"
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "canceled": {
+          "$ref": "#/definitions/Canceled"
+        },
+        "directions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Direction"
+          }
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "status": {
+          "type": "string"
+        },
+        "transporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BASIC"
+          ]
+        },
+        "vehicleTransferOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrderIds"
+          }
+        }
+      }
+    },
+    "Direction": {
+      "type": "object",
+      "title": "Direction",
+      "properties": {
+        "distance": {
+          "$ref": "#/definitions/Distance"
+        },
+        "dropOff": {
+          "$ref": "#/definitions/Location"
+        },
+        "dropOffPickup": {
+          "$ref": "#/definitions/Location"
+        },
+        "pickup": {
+          "$ref": "#/definitions/Location"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Distance": {
+      "type": "object",
+      "title": "Distance",
+      "properties": {
+        "distanceInMeters": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "distanceInMiles": {
+          "type": "number",
+          "format": "double"
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "title": "Location",
+      "properties": {
+        "address": {
+          "type": "string",
+          "minLength": 1
+        },
+        "addressComponents": {
+          "$ref": "#/definitions/AddressComponents"
+        },
+        "auctionCode": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/Contact"
+        },
+        "dealerCode": {
+          "type": "string"
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "eta": {
+          "$ref": "#/definitions/EstimatedTimeToArrival"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "business",
+            "personal"
+          ]
+        },
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Window"
+          }
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "AddressComponents": {
+      "type": "object",
+      "title": "AddressComponents",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "county": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "streetNumber": {
+          "type": "string"
+        },
+        "suite": {
+          "type": "string"
+        }
+      }
+    },
+    "EstimatedTimeToArrival": {
+      "type": "object",
+      "title": "EstimatedTimeToArrival",
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "Start of ETA window of time. ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "end": {
+          "type": "string",
+          "description": "End of ETA window of time. Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "initial": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "accuracy": {
+          "type": "string"
+        },
+        "calculated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "VehicleTransferOrder": {
+      "type": "object",
+      "title": "VehicleTransferOrder",
+      "description": "A Vehicle Transfer Order.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "7a765a49-6b21-4368-937e-8ce4981d8eff"
+          ]
+        },
+        "referenceNumber": {
+          "type": "string",
+          "x-examples": [
+            "2000232-123432"
+          ]
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        },
+        "directions": {
+          "$ref": "#/definitions/DetailedDirections"
+        },
+        "fare": {
+          "$ref": "#/definitions/Fare"
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "notes": {
+          "type": "string",
+          "x-examples": [
+            "Notes about this vehicle transfer."
+          ]
+        },
+        "orderId": {
+          "type": "string",
+          "x-examples": [
+            "ABC123-LMNOP"
+          ]
+        },
+        "payer": {
+          "$ref": "#/definitions/Company"
+        },
+        "reconciliationCode": {
+          "type": "string",
+          "x-examples": [
+            "RBCON2020"
+          ]
+        },
+        "states": {
+          "$ref": "#/definitions/States"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "READY",
+            "AVAILABLE",
+            "CLAIMED",
+            "UNCLAIMED",
+            "APPROVED",
+            "ASSIGNED",
+            "REJECTED",
+            "ACCEPTED",
+            "DRIVER_ARRIVED",
+            "PICKED_UP",
+            "SIGNATURE_ON_PICKUP",
+            "PROVIDED_ETA_DROPOFF",
+            "UNLOADED",
+            "DELIVERED",
+            "CANCELED",
+            "COMPLETE",
+            "ERROR"
+          ],
+          "description": "See the Vehicle Transfer Order Statuses guide for detailed information."
+        },
+        "timeline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "transporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "dedicatedTransporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "canceled": {
+          "$ref": "#/definitions/Canceled"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "canCancel": {
+          "type": "boolean"
+        },
+        "inspections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InspectionSummary"
+          }
+        },
+        "preferredTransporters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Company"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "referenceNumber",
+        "created",
+        "vehicle",
+        "directions",
+        "fare",
+        "orderId",
+        "status"
+      ]
+    },
+    "DetailedDirections": {
+      "type": "object",
+      "title": "DetailedDirections",
+      "properties": {
+        "distance": {
+          "$ref": "#/definitions/Distance"
+        },
+        "dropoff": {
+          "$ref": "#/definitions/Location"
+        },
+        "pickup": {
+          "$ref": "#/definitions/Location"
+        }
+      }
+    },
+    "Fare": {
+      "type": "object",
+      "title": "Fare",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "promotionCode": {
+          "type": "string",
+          "x-examples": [
+            "RBCON19"
+          ]
+        }
+      }
+    },
+    "Item": {
+      "type": "object",
+      "title": "Item",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "States": {
+      "type": "object",
+      "title": "States",
+      "properties": {
+        "accepted": {
+          "$ref": "#/definitions/State"
+        },
+        "claimed": {
+          "$ref": "#/definitions/State"
+        },
+        "delivered": {
+          "$ref": "#/definitions/StateLocation"
+        },
+        "pickedUp": {
+          "$ref": "#/definitions/StateLocation"
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "title": "State",
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        }
+      }
+    },
+    "StateLocation": {
+      "type": "object",
+      "title": "StateLocation",
+      "properties": {
+        "accuracy": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "time": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "title": "Event",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "Datetime in ISO 8601 format.",
+          "format": "ISO 8601 datetime",
+          "x-examples": [
+            "2020-12-05T21:18:47+00:00"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "InspectionSummary": {
+      "type": "object",
+      "title": "InspectionSummary",
+      "properties": {
+        "completed": {
+          "$ref": "#/definitions/Created"
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "id": {
+          "type": "string"
+        },
+        "taskName": {
+          "type": "string"
+        }
+      }
+    },
+    "PageOrderFull": {
+      "type": "object",
+      "title": "PageOrder",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderFull"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "content",
+        "empty",
+        "first",
+        "last",
+        "number",
+        "numberOfElements",
+        "pageable",
+        "size",
+        "sort",
+        "totalElements",
+        "totalPages"
+      ]
+    },
+    "PageVehicleTransferOrder": {
+      "type": "object",
+      "title": "PageVehicleTransferOrder",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrder"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "content",
+        "empty",
+        "first",
+        "last",
+        "number",
+        "numberOfElements",
+        "pageable",
+        "size",
+        "sort",
+        "totalElements",
+        "totalPages"
+      ]
+    },
+    "VehicleTransferOrderPatch": {
+      "type": "object",
+      "title": "VehicleTransferOrderPatch",
+      "properties": {
+        "directions": {
+          "$ref": "#/definitions/DirectionsPatch"
+        },
+        "gatePasses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TempFile"
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/VehiclePatch"
+        }
+      }
+    },
+    "DirectionsPatch": {
+      "type": "object",
+      "title": "DirectionsPatch",
+      "properties": {
+        "dropoff": {
+          "$ref": "#/definitions/LocationPatch"
+        },
+        "pickup": {
+          "$ref": "#/definitions/LocationPatch"
+        }
+      }
+    },
+    "LocationPatch": {
+      "type": "object",
+      "title": "LocationPatch",
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/Contact"
+        },
+        "name": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "VehiclePatch": {
+      "type": "object",
+      "title": "VehiclePatch",
+      "properties": {
+        "color": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "stockNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "VehicleTransferOrderExpanded": {
+      "type": "object",
+      "title": "VehicleTransferOrder",
+      "description": "A Vehicle Transfer Order.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-examples": [
+            "7a765a49-6b21-4368-937e-8ce4981d8eff"
+          ]
+        },
+        "referenceNumber": {
+          "type": "string",
+          "x-examples": [
+            "V-001035812"
+          ]
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        },
+        "directions": {
+          "$ref": "#/definitions/DetailedDirections"
+        },
+        "fare": {
+          "$ref": "#/definitions/Fare"
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "notes": {
+          "type": "string",
+          "x-examples": [
+            "Notes about this vehicle transfer."
+          ]
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "payer": {
+          "$ref": "#/definitions/Company"
+        },
+        "reconciliationCode": {
+          "type": "string",
+          "x-examples": [
+            "RBCON2020"
+          ]
+        },
+        "states": {
+          "$ref": "#/definitions/States"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "READY",
+            "AVAILABLE",
+            "CLAIMED",
+            "UNCLAIMED",
+            "ASSIGNED",
+            "REJECTED",
+            "ACCEPTED",
+            "DRIVER_ARRIVED",
+            "PICKED_UP",
+            "SIGNATURE_ON_PICKUP",
+            "UNLOADED",
+            "DELIVERED",
+            "CANCELED",
+            "COMPLETE",
+            "ERROR"
+          ],
+          "description": "See the Vehicle Transfer Order Statuses guide for detailed information."
+        },
+        "timeline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "transporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "dedicatedTransporter": {
+          "$ref": "#/definitions/Company"
+        },
+        "canceled": {
+          "$ref": "#/definitions/Canceled"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "canCancel": {
+          "type": "boolean"
+        },
+        "inspections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InspectionSummary"
+          }
+        },
+        "preferredTransporters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Company"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "referenceNumber",
+        "created",
+        "vehicle",
+        "directions",
+        "fare",
+        "status"
+      ]
+    },
+    "PageVehicleTransferOrderExpanded": {
+      "type": "object",
+      "title": "PageVehicleTransferOrderExpanded",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrderExpanded"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "content",
+        "empty",
+        "first",
+        "last",
+        "number",
+        "numberOfElements",
+        "pageable",
+        "size",
+        "sort",
+        "totalElements",
+        "totalPages"
+      ]
+    },
+    "Attachment": {
+      "type": "object",
+      "title": "Attachment",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "resourcePath": {
+          "type": "string"
+        }
+      }
+    },
+    "OrderQuoteRequest": {
+      "type": "object",
+      "title": "OrderQuoteRequest",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "BASIC"
+          ],
+          "description": "See Order.type enumeration for possible values."
+        },
+        "vehicleTransferOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleTransferOrderQuoteRequest"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "vehicleTransferOrders"
+      ]
+    },
+    "VehicleTransferOrderQuoteRequest": {
+      "type": "object",
+      "title": "VehicleTransferOrderQuoteRequest",
+      "properties": {
+        "directions": {
+          "$ref": "#/definitions/BasicDirectionsRequest"
+        },
+        "payer": {
+          "$ref": "#/definitions/Company"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        }
+      },
+      "required": [
+        "directions",
+        "vehicle"
+      ]
+    },
+    "BasicDirectionsRequest": {
+      "type": "object",
+      "title": "BasicDirectionsRequest",
+      "properties": {
+        "dropoff": {
+          "$ref": "#/definitions/BasicLocation"
+        },
+        "pickup": {
+          "$ref": "#/definitions/BasicLocation"
+        }
+      }
+    },
+    "BasicLocation": {
+      "type": "object",
+      "title": "BasicLocation",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "OrderQuoteResponse": {
+      "type": "object",
+      "title": "OrderQuoteResponse",
+      "properties": {
+        "quotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quote"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "traceId": {
+          "type": "string"
+        }
+      }
+    },
+    "Quote": {
+      "type": "object",
+      "title": "Quote",
+      "properties": {
+        "distanceInMiles": {
+          "type": "number",
+          "format": "double"
+        },
+        "fare": {
+          "type": "number",
+          "format": "currency"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "WebhookRequest": {
+      "type": "object",
+      "title": "WebhookRequest",
+      "properties": {
+        "authorization": {
+          "type": "string",
+          "description": "Authorization header value",
+          "x-examples": [
+            "Bearer bd1f8a0cbadde636"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "description": "Webhook URL",
+          "x-examples": [
+            "http://myapi.com/webhook"
+          ]
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "Webhook": {
+      "type": "object",
+      "title": "Webhook",
+      "properties": {
+        "authorization": {
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "created": {
+          "$ref": "#/definitions/Created"
+        },
+        "id": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "PageWebhook": {
+      "type": "object",
+      "title": "PageWebhook",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Webhook"
+          }
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageable": {
+          "$ref": "#/definitions/Pageable"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "content",
+        "empty",
+        "first",
+        "last",
+        "number",
+        "numberOfElements",
+        "pageable",
+        "size",
+        "sort",
+        "totalElements",
+        "totalPages"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "description": "See the [Authentication Guide](/docs/shipping/b6b6c2d4906e9-authentication).",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

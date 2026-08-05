@@ -1,0 +1,127 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.runbuggy.com/ (guides), openapi/runbuggy-orders.json
+summary: Cross-cutting runtime semantics for the RunBuggy Shippers API, taken from the
+  published Stoplight guides and the Swagger 2.0 definitions.
+authentication:
+  style: bearer-token-in-authorization-header
+  header: Authorization
+  format: 'Bearer {token}'
+  scheme_declared_as: apiKey in header (Swagger 2.0 securityDefinitions name
+    "Authorization")
+  acquisition: 'POST /login on the Authentication API returns a token; the guide also
+    states "Contact your RunBuggy representative to retrieve a Bearer token", so token
+    issuance is relationship-gated rather than self-service.'
+  docs: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+  note: The Swagger declares apiKey rather than http/bearer, so generated clients will
+    send the raw header value and callers must include the literal "Bearer " prefix
+    themselves. See authentication/runbuggy-authentication.yml.
+idempotency:
+  supported: false
+  header: null
+  detail: No idempotency key header, no replay window, and no idempotent-retry guidance
+    is documented or present in the specification. POST /orders is the highest-consequence
+    operation in the API (it commits a vehicle transport) and carries no safe-retry
+    mechanism. This is the largest agent-readiness gap in the surface.
+  evidence: openapi/runbuggy-orders.json — no parameter matching /idempoten/i on any
+    of the 28 operations
+async_accepted:
+  supported: true
+  status: 202
+  pattern: 'Accepted-then-poll. A 202 means the request was accepted and is still
+    processing. When the operation creates a resource, a `location` response header
+    carries the URI to poll. Poll until the resource `status` becomes "created", or
+    "error" (in which case read `errors`).'
+  operations_returning_202:
+  - createOrderUsingPOST
+  - cancelOrderUsingPOST
+  - quoteOrderUsingPOST
+  - updateVehicleTransferOrderUsingPATCH
+  reference_implementation: https://github.com/runbuggyinc/api-doc-src/blob/master/shippers/src/202-example.js
+  docs: https://docs.runbuggy.com/docs/shipping/ea2a0d46dfc8d-handling-202-s
+  note: This is the single most important convention in the API. A client that treats
+    202 as success will hold an order id that does not yet exist.
+pagination:
+  style: page-number (Spring Data Pageable)
+  request_params:
+  - name: page
+    description: zero-based page number
+  - name: size
+    description: number of results per page
+  - name: sort
+    description: 'field and direction, e.g. created.date,desc'
+  example: /orders?page=0&size=10&sort=created.date,desc
+  response_envelope:
+    items_field: content
+    fields: [content, empty, first, last, number, numberOfElements, pageable, size,
+      sort, totalElements, totalPages]
+  cursor: false
+  docs: https://docs.runbuggy.com/docs/shipping/05ccf93502e54-pagination
+expansion:
+  supported: true
+  style: separate "expanded"/"full" resources rather than a query parameter
+  operations:
+  - getFullOrderWithIdUsingGET
+  - getPaginatedFullOrdersUsingGET
+  - getExpandedUsingGET
+  - findVehicleTransferOrdersExpandedPaginatedUsingGET
+  note: /orders/{id}/full returns OrderFull; /vehicle-transfer-orders/{id}/expanded
+    returns VehicleTransferOrderExpanded with driver location, activity, directions and
+    inspection summary inlined.
+sparse_fields:
+  supported: false
+metadata:
+  supported: partial
+  fields: [notes, additionalData]
+  note: Order carries a free-text `notes` field and an AdditionalData object; there is
+    no general-purpose customer metadata map.
+request_id_tracing:
+  supported: false
+  detail: No request-id or correlation-id header is documented or declared.
+versioning:
+  scheme: none-in-path
+  detail: 'info.version is "1.0" on all three specs, but no version appears in the URL,
+    in a header, or in a media type. The environment is what varies in the path
+    (/staging/api, /staging-v2/api). There is no documented API version policy.'
+  see: lifecycle/runbuggy-lifecycle.yml
+error_envelope:
+  format: proprietary
+  rfc9457: false
+  media_type: application/json
+  shape:
+    code: 'enumerated string, e.g. INVALID_VEHICLE_TRANSFER_ORDER'
+    message: human-readable error message
+    field: the offending request field, e.g. vin
+  returned_as: an array on the polled resource's `errors` property for async failures;
+    inline for 400
+  see: errors/runbuggy-problem-types.yml
+rate_limiting:
+  signaled: false
+  headers: []
+  detail: 'No rate-limit headers, quota documentation or 429 response is declared on
+    any operation. The Hitch release notes for 30 April 2026 state "The underlying
+    platform now enforces per-user request rate limits on the task processing service",
+    so limits exist on the platform but they are neither quantified nor signaled to API
+    callers.'
+  evidence: https://runbuggy.stoplight.io/docs/hitch-releases/bk2m8pvx9qrn4-april-2026-hitch-releases
+delegated_authority:
+  supported: true
+  detail: A company can place orders on behalf of another company it has been authorized
+    for. Resolve the payer company via the Companies API, then set `payer.id` on EVERY
+    vehicle in the Create Order request.
+  docs: https://docs.runbuggy.com/docs/shipping/94fced2e96c5f-placing-an-order-for-another-company
+cross_links:
+  errors: errors/runbuggy-problem-types.yml
+  lifecycle: lifecycle/runbuggy-lifecycle.yml
+  authentication: authentication/runbuggy-authentication.yml
+  webhooks: asyncapi/runbuggy-webhooks.yml
+  sandbox: sandbox/runbuggy-sandbox.yml
+x-evidence:
+  fetched: '2026-08-05'
+  probes:
+  - url: https://docs.runbuggy.com/docs/shipping/05ccf93502e54-pagination
+    http_status: 200
+  - url: https://docs.runbuggy.com/docs/shipping/ea2a0d46dfc8d-handling-202-s
+    http_status: 200
+  - url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+    http_status: 200

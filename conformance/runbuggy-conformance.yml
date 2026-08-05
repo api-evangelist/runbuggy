@@ -1,0 +1,106 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/runbuggy-orders.json, well-known/runbuggy-oauth-authorization-server.json,
+  https://docs.runbuggy.com/ guides, https://runbuggy.com/security/
+summary: RunBuggy's REST surface is a plain Swagger 2.0 CRUD API with a bearer token and
+  a Spring Data pagination envelope — it asserts no cross-cutting standards. The only
+  standards conformance in the estate sits in the MCP layer, which does implement RFC
+  8414 authorization-server metadata, RFC 7591 dynamic client registration and PKCE.
+standards:
+- id: openapi3
+  conforms: false
+  evidence: All three published definitions declare swagger 2.0. No OpenAPI 3.x
+    document is published.
+- id: swagger2
+  conforms: true
+  evidence: openapi/runbuggy-orders.json, openapi/runbuggy-companies.json and
+    openapi/runbuggy-authentication.json all declare swagger 2.0 with paths and
+    definitions; RunBuggy's own README states "Swagger 2 is used for the API Reference".
+- id: oauth2
+  conforms: partial
+  evidence: 'Not on the REST API — its securityDefinitions is `apiKey in header`. The
+    mcp-datascience server DOES run an OAuth 2.1 authorization server:
+    https://apps.runbuggy.com/.well-known/oauth-authorization-server (200), with
+    authorization_code + refresh_token grants.'
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://apps.runbuggy.com/.well-known/oauth-authorization-server returns a
+    conformant metadata document (issuer, authorization_endpoint, token_endpoint,
+    registration_endpoint, revocation_endpoint, response_types_supported).
+- id: rfc7591
+  name: OAuth 2.0 Dynamic Client Registration
+  conforms: true
+  evidence: registration_endpoint is advertised at
+    https://apps.runbuggy.com/runbuggy/mcp-datascience/register
+- id: rfc7636
+  name: PKCE
+  conforms: true
+  evidence: code_challenge_methods_supported = ["S256"]
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: false
+  evidence: The MCP 401 challenge advertises resource_metadata at
+    /.well-known/oauth-protected-resource/runbuggy/mcp-datascience but that URL 302s
+    into the SPA. Advertised and not served.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any host. A `scope=openid` token
+    request is documented for the embeddable order-status iframe, but no OpenID
+    Provider metadata is published, so this is an OIDC-shaped scope on a proprietary
+    endpoint, not OIDC conformance.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: Errors use a proprietary {code, message, field} object, not
+    application/problem+json. See errors/runbuggy-problem-types.yml.
+- id: rfc8594
+  name: Sunset HTTP Header
+  conforms: false
+  evidence: No Sunset or Deprecation header and no deprecation policy is published.
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: absent on every host probed — see well-known/runbuggy-well-known.yml
+- id: pagination
+  conforms: true
+  evidence: 'Consistent page/size/sort request parameters and a Spring Data page
+    envelope (content, totalElements, totalPages, pageable, sort) across all list
+    operations. Documented at
+    https://docs.runbuggy.com/docs/shipping/05ccf93502e54-pagination'
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key on any operation, including POST /orders. See
+    conventions/runbuggy-conventions.yml.
+- id: json:api
+  conforms: false
+  evidence: not used
+- id: webhooks
+  conforms: true
+  evidence: 'A registered-webhook surface with 6 management operations and a documented
+    event model {type, created, object}. Event type published:
+    vehicleTransferOrder.updated. See asyncapi/runbuggy-webhooks.yml.'
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document is published for the webhook surface.
+- id: mcp
+  name: Model Context Protocol
+  conforms: partial
+  evidence: A live Streamable HTTP MCP server responds at
+    https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp with a correct OAuth 401
+    challenge, but the protected-resource metadata it points to is not served, so
+    spec-conformant client discovery fails. See mcp/runbuggy-mcp.yml.
+- id: a2a
+  conforms: false
+  evidence: No Agent Card at /.well-known/agent-card.json or /.well-known/agent.json on
+    any host.
+compliance_programs:
+  certifications: []
+  note: 'RunBuggy''s security page states it aims "to exceed existing frameworks such
+    SOC 2, NIST and CSF". That is an aspiration, not an attestation — no audit report,
+    certificate or external assessment is published. No Compliance pointer is wired in
+    apis.yml, deliberately. See security/runbuggy-trust-center.yml.'
+industry_standards:
+  note: No automotive-logistics interchange standard (e.g. an EDI 204/214 mapping, STAR
+    or NADA/AutoCare schema alignment) is claimed or evident in the vocabulary, despite
+    RunBuggy marketing itself as "built on open technology standards".

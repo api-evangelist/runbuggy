@@ -1,0 +1,75 @@
+generated: '2026-08-05'
+method: probed
+source: live probes of every RunBuggy host on 2026-08-05
+summary: 'The only genuine /.well-known/ document RunBuggy serves is RFC 8414 OAuth
+  2.0 Authorization Server Metadata, and it is served by the MCP layer rather than by
+  the Shippers API. Two distinct issuers were found: a production one on apps.runbuggy.com
+  and a staging one on ng-staging.runbuggy.com. Everything else is absent. IMPORTANT:
+  runbuggy.com (WordPress) and apps.runbuggy.com (SPA) both answer HTTP 200 with an
+  HTML page for EVERY /.well-known/ path including randomly generated control paths —
+  those 200s are soft-404s and are recorded as misses, not hits.'
+soft_404_control:
+  note: Control-path diff run before trusting any 200.
+  probes:
+  - url: https://runbuggy.com/.well-known/zzz-control-19379
+    http_status: 200
+    content_type: text/html; charset=UTF-8
+    verdict: catch-all — every /.well-known/ 200 on this host is a soft-404
+  - url: https://apps.runbuggy.com/.well-known/zzz-control-9182
+    http_status: 200
+    content_type: text/html
+    verdict: SPA catch-all — HTML index for every path
+  - url: https://ng-staging.runbuggy.com/.well-known/zzz-control-9182
+    http_status: 404
+    content_type: text/plain; charset=utf-8
+    verdict: honest 404 — 200s on this host are real
+hits:
+- path: /.well-known/oauth-authorization-server
+  host: apps.runbuggy.com
+  url: https://apps.runbuggy.com/.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: runbuggy-oauth-authorization-server.json
+  issuer: https://apps.runbuggy.com/runbuggy/mcp-datascience
+  note: production RunBuggy Data Science MCP authorization server (RFC 8414). The same
+    document is also served by ng.runbuggy.com.
+- path: /.well-known/oauth-authorization-server
+  host: ng-staging.runbuggy.com
+  url: https://ng-staging.runbuggy.com/.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: runbuggy-staging-oauth-authorization-server.json
+  issuer: https://ng-staging.runbuggy.com/staging/mcp-datascience
+  note: staging MCP authorization server
+misses:
+- path: /.well-known/security.txt
+  hosts_probed: [runbuggy.com, docs.runbuggy.com, apps.runbuggy.com, ng-staging.runbuggy.com,
+    ng.runbuggy.com]
+  result: absent (200 soft-404 HTML on runbuggy.com/apps/docs; 404 on ng hosts)
+- path: /.well-known/openid-configuration
+  hosts_probed: [runbuggy.com, apps.runbuggy.com, ng-staging.runbuggy.com]
+  result: absent (soft-404 HTML or 404)
+- path: /.well-known/oauth-protected-resource
+  hosts_probed: [apps.runbuggy.com, ng-staging.runbuggy.com]
+  result: 'BROKEN — the MCP 401 challenge advertises resource_metadata at
+    https://apps.runbuggy.com/.well-known/oauth-protected-resource/runbuggy/mcp-datascience,
+    but that URL 302-redirects into the SPA rather than returning RFC 9728 metadata.
+    The staging equivalent 404s. A conformant MCP client following the WWW-Authenticate
+    header cannot complete discovery. See mcp/runbuggy-mcp.yml.'
+- path: /.well-known/api-catalog
+  hosts_probed: [runbuggy.com, apps.runbuggy.com, ng-staging.runbuggy.com]
+  result: absent
+- path: /.well-known/ai-plugin.json
+  hosts_probed: [runbuggy.com, apps.runbuggy.com]
+  result: absent
+- path: /.well-known/agent-card.json
+  hosts_probed: [runbuggy.com, docs.runbuggy.com, apps.runbuggy.com, ng-staging.runbuggy.com,
+    ng.runbuggy.com]
+  result: absent — no A2A Agent Card. The 200s on runbuggy.com and apps.runbuggy.com
+    are HTML soft-404s and were rejected.
+- path: /.well-known/agent.json
+  hosts_probed: [runbuggy.com, apps.runbuggy.com, ng-staging.runbuggy.com]
+  result: absent (legacy pre-0.3 path also checked)
+- path: /llms.txt
+  hosts_probed: [runbuggy.com, docs.runbuggy.com, apps.runbuggy.com, ng-staging.runbuggy.com]
+  result: absent

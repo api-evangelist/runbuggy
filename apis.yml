@@ -1,23 +1,179 @@
 aid: runbuggy
 name: RunBuggy
-description: 'RunBuggy is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'RunBuggy is a Phoenix, Arizona based technology company operating an
+  open, automotive-focused vehicle transportation marketplace and TMS that connects
+  car shippers — dealers, auctions, OEMs, rental and fleet operators — with car haulers
+  and transporters. Its products are the RunBuggy Marketplace (transportation-as-a-service
+  for finding, moving and tracking a vehicle), RunBuggy HITCH (a cloud transportation
+  management system that connects to an existing dealer or auction management system
+  and transporter network), RunBuggy One (personal vehicle shipping) and RunBot (a
+  generative-AI assistant applied to order resolution and delivery-exception prediction).
+  RunBuggy publishes a public Shippers API — Swagger 2.0 definitions for Orders, Vehicle
+  Transfer Orders, Gate Passes, Webhooks, Companies and Authentication — at docs.runbuggy.com,
+  and operates an OAuth-protected Model Context Protocol server for its data-science
+  surface.'
+image: https://runbuggy.com/wp-content/uploads/2019/05/logo.png
 url: https://raw.githubusercontent.com/api-evangelist/runbuggy/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-05'
 modified: '2026-08-05'
 tags:
 - Company
-apis: []
+- Automotive
+- Logistics
+- Transportation
+- Vehicle Shipping
+- Marketplace
+- Supply Chain
+- Fleet
+- TMS
+- Freight
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: runbuggy:orders
+  name: RunBuggy Orders API
+  description: 'The core of the RunBuggy Shippers API. Create, quote, retrieve, patch,
+    replace and cancel vehicle transportation Orders; work with the per-vehicle Vehicle
+    Transfer Orders each Order fans out into; attach and retrieve Gate Passes; and
+    register Webhooks that receive vehicleTransferOrder.updated events. 26 operations
+    across three tags — Orders, Vehicle Transfer Orders and Webhooks — described in
+    Swagger 2.0.'
+  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  baseURL: https://ng-staging.runbuggy.com/staging/api
+  tags:
+  - Orders
+  - Vehicle Transfer Orders
+  - Webhooks
+  - Vehicle Shipping
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-orders.json
+  - type: Overlay
+    url: overlays/runbuggy-orders-overlay.yaml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+- aid: runbuggy:companies
+  name: RunBuggy Companies API
+  description: Retrieve the companies that have authorized your company to place Orders
+    on their behalf, either as a full list or looked up by username. Used together
+    with the Orders API to set the payer on a Vehicle Transfer Order.
+  humanURL: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+  baseURL: https://apps.runbuggy.com/staging-v2/api
+  tags:
+  - Companies
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-companies.json
+  - type: Overlay
+    url: overlays/runbuggy-companies-overlay.yaml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+- aid: runbuggy:authentication
+  name: RunBuggy Authentication API
+  description: Single POST /login operation that exchanges credentials for the Bearer
+    token every other RunBuggy Shippers API operation requires in its Authorization
+    header.
+  humanURL: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+  baseURL: https://ng-staging.runbuggy.com/staging/api/auth
+  tags:
+  - Authentication
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-authentication.json
+  - type: Overlay
+    url: overlays/runbuggy-authentication-overlay.yaml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+- aid: runbuggy:mcp-datascience
+  name: RunBuggy Data Science MCP Server
+  description: An OAuth-protected Model Context Protocol server RunBuggy operates on
+    its application host. Discovered by probe — it is not referenced from the public
+    developer documentation. tools/list returns 401 invalid_token, so the tool surface
+    requires an authenticated introspection.
+  humanURL: https://runbuggy.com/artificial-intelligence-runbuggy-runbot/
+  baseURL: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
+  tags:
+  - MCP
+  - AI
+  - Data Science
+  properties:
+  - type: MCPServer
+    url: mcp/runbuggy-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/runbuggy-tool-crosswalk.yml
 common:
 - type: Website
-  url: https://forgeglobal.com/runbuggy_stock/
+  url: https://runbuggy.com/
+- type: DeveloperPortal
+  url: https://docs.runbuggy.com/
+- type: Documentation
+  url: https://docs.runbuggy.com/
+- type: APIReference
+  url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+- type: GettingStarted
+  url: https://docs.runbuggy.com/docs/shipping/e66c4d2e84e08-ship-vehicles
+- type: Authentication
+  url: authentication/runbuggy-authentication.yml
+- type: Support
+  url: https://support.runbuggy.com/hc/en-us
+- type: Blog
+  url: https://runbuggy.com/runbuggy-blog/
+- type: BlogRSS
+  url: https://runbuggy.com/feed/
+- type: GitHubOrganization
+  url: https://github.com/runbuggyinc
+- type: SignUp
+  url: https://apps.runbuggy.com/runbuggy/spa-v2/#/workflows/onboarding/SignupProcess/
+- type: Login
+  url: https://apps.runbuggy.com/runbuggy/spa-v2/#/login
+- type: TermsOfService
+  url: https://runbuggy.com/terms/
+- type: PrivacyPolicy
+  url: https://runbuggy.com/privacy/
+- type: StatusPage
+  url: https://status.runbuggy.com/
+- type: Security
+  url: security/runbuggy-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/runbuggy-trust-center.yml
+- type: DomainSecurity
+  url: security/runbuggy-domain-security.yml
+- type: WellKnown
+  url: well-known/runbuggy-well-known.yml
+- type: Lifecycle
+  url: lifecycle/runbuggy-lifecycle.yml
+- type: ChangeLog
+  url: changelog/runbuggy-changelog.yml
+- type: Conventions
+  url: conventions/runbuggy-conventions.yml
+- type: ErrorCatalog
+  url: errors/runbuggy-problem-types.yml
+- type: Conformance
+  url: conformance/runbuggy-conformance.yml
+- type: Webhooks
+  url: asyncapi/runbuggy-webhooks.yml
+- type: Sandbox
+  url: sandbox/runbuggy-sandbox.yml
+- type: Components
+  url: components/runbuggy-components.yml
+- type: DataModel
+  url: data-model/runbuggy-data-model.yml
+- type: OAuthScopes
+  url: scopes/runbuggy-scopes.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/runbuggy-llms.txt
+x-enrichment:
+  date: '2026-08-05'
+  status: enriched
+  artifacts_added: 32
+  pass: local-v1

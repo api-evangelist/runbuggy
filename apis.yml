@@ -36,68 +36,12 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: runbuggy:orders
-  name: RunBuggy Orders API
-  description: 'The core of the RunBuggy Shippers API. Create, quote, retrieve, patch,
-    replace and cancel vehicle transportation Orders; work with the per-vehicle Vehicle
-    Transfer Orders each Order fans out into; attach and retrieve Gate Passes; and
-    register Webhooks that receive vehicleTransferOrder.updated events. 26 operations
-    across three tags — Orders, Vehicle Transfer Orders and Webhooks — described in
-    Swagger 2.0.'
-  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
-  baseURL: https://ng-staging.runbuggy.com/staging/api
-  tags:
-  - Orders
-  - Vehicle Transfer Orders
-  - Webhooks
-  - Vehicle Shipping
-  properties:
-  - type: OpenAPI
-    url: openapi/runbuggy-orders.json
-  - type: Overlay
-    url: overlays/runbuggy-orders-overlay.yaml
-  - type: Documentation
-    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
-- aid: runbuggy:companies
-  name: RunBuggy Companies API
-  description: Retrieve the companies that have authorized your company to place Orders
-    on their behalf, either as a full list or looked up by username. Used together
-    with the Orders API to set the payer on a Vehicle Transfer Order.
-  humanURL: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
-  baseURL: https://apps.runbuggy.com/staging-v2/api
-  tags:
-  - Companies
-  - Authorization
-  properties:
-  - type: OpenAPI
-    url: openapi/runbuggy-companies.json
-  - type: Overlay
-    url: overlays/runbuggy-companies-overlay.yaml
-  - type: Documentation
-    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
-- aid: runbuggy:authentication
-  name: RunBuggy Authentication API
-  description: Single POST /login operation that exchanges credentials for the Bearer
-    token every other RunBuggy Shippers API operation requires in its Authorization
-    header.
-  humanURL: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
-  baseURL: https://ng-staging.runbuggy.com/staging/api/auth
-  tags:
-  - Authentication
-  - Token
-  properties:
-  - type: OpenAPI
-    url: openapi/runbuggy-authentication.json
-  - type: Overlay
-    url: overlays/runbuggy-authentication-overlay.yaml
-  - type: Documentation
-    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
 - aid: runbuggy:mcp-datascience
   name: RunBuggy Data Science MCP Server
-  description: An OAuth-protected Model Context Protocol server RunBuggy operates on
-    its application host. Discovered by probe — it is not referenced from the public
-    developer documentation. tools/list returns 401 invalid_token, so the tool surface
-    requires an authenticated introspection.
+  description: >-
+    An OAuth-protected Model Context Protocol server RunBuggy operates on its application host. Discovered
+    by probe — it is not referenced from the public developer documentation. tools/list returns 401 invalid_token,
+    so the tool surface requires an authenticated introspection.
   humanURL: https://runbuggy.com/artificial-intelligence-runbuggy-runbot/
   baseURL: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
   tags:
@@ -109,7 +53,89 @@ apis:
     url: mcp/runbuggy-mcp.yml
   - type: ToolCrosswalk
     url: mcp/runbuggy-tool-crosswalk.yml
+- aid: runbuggy:runbuggy-companies-api
+  name: RunBuggy Companies API
+  description: Companies operations.
+  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  baseURL: https://ng-staging.runbuggy.com/staging/api
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-companies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+- aid: runbuggy:runbuggy-orders-api
+  name: RunBuggy Orders API
+  description: The Order operations.
+  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  baseURL: https://ng-staging.runbuggy.com/staging/api
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+- aid: runbuggy:runbuggy-token-api
+  name: RunBuggy Token API
+  description: The Token API from RunBuggy — 1 operation(s) for token.
+  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  baseURL: https://ng-staging.runbuggy.com/staging/api
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-token-api-openapi.yml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+- aid: runbuggy:runbuggy-vehicle-transfer-orders-api
+  name: RunBuggy Vehicle Transfer Orders API
+  description: The Vehicle Transfer Order operations.
+  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  baseURL: https://ng-staging.runbuggy.com/staging/api
+  tags:
+  - Vehicle Transfer Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-vehicle-transfer-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
+- aid: runbuggy:runbuggy-webhooks-api
+  name: RunBuggy Webhooks API
+  description: Webhook operations.
+  humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  baseURL: https://ng-staging.runbuggy.com/staging/api
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/runbuggy-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/78a3e6d30650c-companies
+  - type: Documentation
+    url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
 common:
+- type: Overlay
+  url: overlays/runbuggy-authentication-overlay.yaml
 - type: Website
   url: https://runbuggy.com/
 - type: DeveloperPortal

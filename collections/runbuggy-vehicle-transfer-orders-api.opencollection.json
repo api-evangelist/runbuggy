@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Orders Vehicle Transfer Orders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicle Transfer Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find vehicle transfer orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated Vehicle Transfer Orders."
+        },
+        {
+          "info": {
+            "name": "Retrieve a vehicle transfer order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve specified Vehicle Transfer Order."
+        },
+        {
+          "info": {
+            "name": "Update a vehicle transfer order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update specified Vehicle Transfer Order."
+        },
+        {
+          "info": {
+            "name": "Get expanded vehicle transfer order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/:id/expanded",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get expanded vehicle transfer order"
+        },
+        {
+          "info": {
+            "name": "Find vehicle transfer orders expanded",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/expanded",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve paginated expanded Vehicle Transfer Orders."
+        },
+        {
+          "info": {
+            "name": "Create a gate pass",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/gate-passes",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a gate pass"
+        },
+        {
+          "info": {
+            "name": "Get gate passes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/:id/gate-passes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get gate passes"
+        },
+        {
+          "info": {
+            "name": "Add a gate pass",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/:id/gate-passes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a gate pass"
+        },
+        {
+          "info": {
+            "name": "Retrieve a gate pass",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/vehicle-transfer-orders/:id/gate-passes/:passId",
+            "params": [
+              {
+                "name": "passId",
+                "value": "",
+                "type": "path",
+                "description": "passId"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a gate pass"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

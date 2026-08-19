@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Token API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve Bearer token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

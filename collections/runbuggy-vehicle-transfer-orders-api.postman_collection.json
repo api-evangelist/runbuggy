@@ -1,0 +1,2943 @@
+{
+  "item": [
+    {
+      "id": "cfdc28aa-2748-430b-9917-fafe517a6c9a",
+      "name": "Vehicle Transfer Orders",
+      "description": {
+        "content": "The Vehicle Transfer Order operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d2dc4e14-768b-4997-aac1-dfa4f770fee4",
+          "name": "Find vehicle transfer orders",
+          "request": {
+            "name": "Find vehicle transfer orders",
+            "description": {
+              "content": "Retrieve a paginated Vehicle Transfer Orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af6c059a-4553-45dd-a24b-1a12b20fe19d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"string\",\n      \"referenceNumber\": \"string\",\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"vehicle\": {\n        \"vin\": \"string\",\n        \"color\": \"string\",\n        \"isOperational\": false,\n        \"isOverSized\": false,\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"notes\": \"string\",\n        \"odometer\": 6756,\n        \"stockNumber\": \"string\",\n        \"truckSpecifications\": {\n          \"rearAxle\": \"string\"\n        },\n        \"type\": \"string\",\n        \"vehicleMarket\": \"HEAVY\",\n        \"vehicleMeasurements\": {\n          \"curbWeight\": 1505.5993865296048,\n          \"grossVehicleWeightRating\": 6817.5918645232305,\n          \"height\": 4311.417162527829,\n          \"length\": 5960.02284446363,\n          \"width\": 1717.5938685840608\n        },\n        \"year\": 9244\n      },\n      \"directions\": {\n        \"distance\": {\n          \"distanceInMeters\": 7322,\n          \"distanceInMiles\": 3849.3170339871217,\n          \"durationInSeconds\": 7448\n        },\n        \"dropoff\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"pickup\": {\n          \"address\": \"strin\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"fare\": {\n        \"amount\": 1189.759516084431,\n        \"items\": [\n          {\n            \"amount\": 2283.4159785118036,\n            \"name\": \"string\"\n          },\n          {\n            \"amount\": 8816.22008063148,\n            \"name\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ],\n        \"promotionCode\": \"string\"\n      },\n      \"orderId\": \"string\",\n      \"status\": \"SIGNATURE_ON_PICKUP\",\n      \"geolocation\": {\n        \"coordinates\": [\n          5314.761855906778,\n          9765.425230450028\n        ],\n        \"type\": \"string\"\n      },\n      \"notes\": \"string\",\n      \"payer\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"reconciliationCode\": \"string\",\n      \"states\": {\n        \"accepted\": {\n          \"time\": \"string\"\n        },\n        \"claimed\": {\n          \"time\": \"string\"\n        },\n        \"delivered\": {\n          \"accuracy\": 2529,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        },\n        \"pickedUp\": {\n          \"accuracy\": 8419,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        }\n      },\n      \"timeline\": [\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"transporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"dedicatedTransporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"canceled\": {\n        \"byUser\": \"string\",\n        \"date\": \"string\",\n        \"reason\": \"string\"\n      },\n      \"errors\": [\n        {\n          \"code\": \"INVALID_ADDRESS\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        },\n        {\n          \"code\": \"INVALID_VEHICLE\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        }\n      ],\n      \"canCancel\": true,\n      \"inspections\": [\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        },\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        }\n      ],\n      \"preferredTransporters\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"referenceNumber\": \"string\",\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"vehicle\": {\n        \"vin\": \"string\",\n        \"color\": \"string\",\n        \"isOperational\": true,\n        \"isOverSized\": false,\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"notes\": \"string\",\n        \"odometer\": 4466,\n        \"stockNumber\": \"string\",\n        \"truckSpecifications\": {\n          \"rearAxle\": \"string\"\n        },\n        \"type\": \"string\",\n        \"vehicleMarket\": \"HEAVY\",\n        \"vehicleMeasurements\": {\n          \"curbWeight\": 1443.0568796596665,\n          \"grossVehicleWeightRating\": 5596.787137213961,\n          \"height\": 717.7360367426145,\n          \"length\": 2260.9097980093375,\n          \"width\": 2900.068500043027\n        },\n        \"year\": 7121\n      },\n      \"directions\": {\n        \"distance\": {\n          \"distanceInMeters\": 9629,\n          \"distanceInMiles\": 1176.730491075545,\n          \"durationInSeconds\": 9334\n        },\n        \"dropoff\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"personal\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"pickup\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"fare\": {\n        \"amount\": 6502.479834008611,\n        \"items\": [\n          {\n            \"amount\": 7329.197551958506,\n            \"name\": \"string\"\n          },\n          {\n            \"amount\": 2074.1768440206497,\n            \"name\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ],\n        \"promotionCode\": \"string\"\n      },\n      \"orderId\": \"string\",\n      \"status\": \"SIGNATURE_ON_PICKUP\",\n      \"geolocation\": {\n        \"coordinates\": [\n          6303.709624632256,\n          197.58945347334577\n        ],\n        \"type\": \"string\"\n      },\n      \"notes\": \"string\",\n      \"payer\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"AUCTION\"\n      },\n      \"reconciliationCode\": \"string\",\n      \"states\": {\n        \"accepted\": {\n          \"time\": \"string\"\n        },\n        \"claimed\": {\n          \"time\": \"string\"\n        },\n        \"delivered\": {\n          \"accuracy\": 7187,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        },\n        \"pickedUp\": {\n          \"accuracy\": 6795,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        }\n      },\n      \"timeline\": [\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"transporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"dedicatedTransporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"canceled\": {\n        \"byUser\": \"string\",\n        \"date\": \"string\",\n        \"reason\": \"string\"\n      },\n      \"errors\": [\n        {\n          \"code\": \"INVALID_VEHICLE\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        },\n        {\n          \"code\": \"INVALID_VEHICLE_TRANSFER_ORDER\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        }\n      ],\n      \"canCancel\": false,\n      \"inspections\": [\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        },\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        }\n      ],\n      \"preferredTransporters\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        }\n      ]\n    }\n  ],\n  \"empty\": true,\n  \"first\": false,\n  \"last\": true,\n  \"number\": 6291,\n  \"numberOfElements\": 6446,\n  \"pageable\": {\n    \"offset\": 2390,\n    \"pageNumber\": 9408,\n    \"pageSize\": 8635,\n    \"paged\": true,\n    \"sort\": {\n      \"empty\": false,\n      \"sorted\": true,\n      \"unsorted\": false\n    },\n    \"unpaged\": true\n  },\n  \"size\": 8981,\n  \"sort\": {\n    \"empty\": false,\n    \"sorted\": false,\n    \"unsorted\": false\n  },\n  \"totalElements\": 6252,\n  \"totalPages\": 3995\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee57b519-6c29-4eab-93e0-ce4282a37943",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4877405c-7b8e-4b98-802b-b1d0dd5dfb01",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edf87f9f-4b00-4896-bf70-1f16b8b46cdb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "609f1015-bcb6-47ae-a4e6-f5b7bdad7619",
+          "name": "Retrieve a vehicle transfer order",
+          "request": {
+            "name": "Retrieve a vehicle transfer order",
+            "description": {
+              "content": "Retrieve specified Vehicle Transfer Order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                ":id"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a80a9c8-e879-4d6e-a46b-824935b2eac8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"created\": {\n    \"byCompany\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"AUCTION\"\n    },\n    \"byUser\": \"string\",\n    \"byUserFullName\": \"string\",\n    \"date\": \"string\"\n  },\n  \"vehicle\": {\n    \"vin\": \"string\",\n    \"color\": \"string\",\n    \"isOperational\": true,\n    \"isOverSized\": false,\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"notes\": \"string\",\n    \"odometer\": 5396,\n    \"stockNumber\": \"string\",\n    \"truckSpecifications\": {\n      \"rearAxle\": \"string\"\n    },\n    \"type\": \"string\",\n    \"vehicleMarket\": \"HEAVY\",\n    \"vehicleMeasurements\": {\n      \"curbWeight\": 6818.025663075778,\n      \"grossVehicleWeightRating\": 551.7437231137856,\n      \"height\": 5023.5297241407825,\n      \"length\": 8117.595557194714,\n      \"width\": 230.45348154315028\n    },\n    \"year\": 8834\n  },\n  \"directions\": {\n    \"distance\": {\n      \"distanceInMeters\": 7804,\n      \"distanceInMiles\": 4088.820815454276,\n      \"durationInSeconds\": 3061\n    },\n    \"dropoff\": {\n      \"address\": \"string\",\n      \"addressComponents\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"county\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"street\": \"string\",\n        \"streetNumber\": \"string\",\n        \"suite\": \"string\"\n      },\n      \"auctionCode\": \"string\",\n      \"contact\": {\n        \"name\": \"string\",\n        \"phone\": \"string\"\n      },\n      \"dealerCode\": \"string\",\n      \"geolocation\": {\n        \"coordinates\": [\n          3262.1938698148665,\n          4675.055199132542\n        ],\n        \"type\": \"string\"\n      },\n      \"eta\": {\n        \"start\": \"string\",\n        \"end\": \"string\",\n        \"initial\": \"string\",\n        \"accuracy\": \"string\",\n        \"calculated\": \"1998-03-17T21:15:36.611Z\",\n        \"status\": \"string\"\n      },\n      \"name\": \"string\",\n      \"notes\": \"string\",\n      \"type\": \"business\",\n      \"windows\": [\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 3456\n        },\n        {\n          \"confirmed\": true,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 2728\n        }\n      ]\n    },\n    \"pickup\": {\n      \"address\": \"string\",\n      \"addressComponents\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"county\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"street\": \"string\",\n        \"streetNumber\": \"string\",\n        \"suite\": \"string\"\n      },\n      \"auctionCode\": \"string\",\n      \"contact\": {\n        \"name\": \"string\",\n        \"phone\": \"string\"\n      },\n      \"dealerCode\": \"string\",\n      \"geolocation\": {\n        \"coordinates\": [\n          285.7764001134444,\n          5180.1859571463\n        ],\n        \"type\": \"string\"\n      },\n      \"eta\": {\n        \"start\": \"string\",\n        \"end\": \"string\",\n        \"initial\": \"string\",\n        \"accuracy\": \"string\",\n        \"calculated\": \"1950-04-08T14:48:14.449Z\",\n        \"status\": \"string\"\n      },\n      \"name\": \"string\",\n      \"notes\": \"string\",\n      \"type\": \"business\",\n      \"windows\": [\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 3201\n        },\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 960\n        }\n      ]\n    }\n  },\n  \"fare\": {\n    \"amount\": 3342.8045004567675,\n    \"items\": [\n      {\n        \"amount\": 2442.737988594226,\n        \"name\": \"string\"\n      },\n      {\n        \"amount\": 6578.4666892480145,\n        \"name\": \"string\"\n      }\n    ],\n    \"name\": \"string\",\n    \"options\": [\n      \"string\",\n      \"string\"\n    ],\n    \"promotionCode\": \"string\"\n  },\n  \"orderId\": \"string\",\n  \"status\": \"REJECTED\",\n  \"geolocation\": {\n    \"coordinates\": [\n      7555.210513685445,\n      7789.096062246233\n    ],\n    \"type\": \"string\"\n  },\n  \"notes\": \"string\",\n  \"payer\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"reconciliationCode\": \"string\",\n  \"states\": {\n    \"accepted\": {\n      \"time\": \"string\"\n    },\n    \"claimed\": {\n      \"time\": \"string\"\n    },\n    \"delivered\": {\n      \"accuracy\": 5688,\n      \"geolocation\": {\n        \"coordinates\": [\n          2002.9694821878675,\n          4107.038416821297\n        ],\n        \"type\": \"string\"\n      },\n      \"time\": \"string\"\n    },\n    \"pickedUp\": {\n      \"accuracy\": 7788,\n      \"geolocation\": {\n        \"coordinates\": [\n          1516.407943017235,\n          2333.9234259502573\n        ],\n        \"type\": \"string\"\n      },\n      \"time\": \"string\"\n    }\n  },\n  \"timeline\": [\n    {\n      \"dateTime\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"dateTime\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"transporter\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"dedicatedTransporter\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"canceled\": {\n    \"byUser\": \"string\",\n    \"date\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"INVALID_VEHICLE_TRANSFER_ORDER\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"code\": \"INVALID_VEHICLE_TRANSFER_ORDER\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    }\n  ],\n  \"canCancel\": false,\n  \"inspections\": [\n    {\n      \"completed\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"id\": \"string\",\n      \"taskName\": \"string\"\n    },\n    {\n      \"completed\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"id\": \"string\",\n      \"taskName\": \"string\"\n    }\n  ],\n  \"preferredTransporters\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"AUCTION\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"DEALER\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28023f30-37a2-483a-bd8b-5a2d18f7b414",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe98b9c1-7722-49f7-b5a4-c999b325233b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85e84a03-d40f-4225-a714-b1bfa6a3d34c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ee437b2-7b68-4a7a-8b0b-895f80ae138f",
+          "name": "Update a vehicle transfer order",
+          "request": {
+            "name": "Update a vehicle transfer order",
+            "description": {
+              "content": "Update specified Vehicle Transfer Order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                ":id"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"directions\": {\n    \"dropoff\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    },\n    \"pickup\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    }\n  },\n  \"gatePasses\": [\n    {\n      \"resourcePath\": \"<string>\"\n    },\n    {\n      \"resourcePath\": \"<string>\"\n    }\n  ],\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"notes\": \"<string>\",\n  \"vehicle\": {\n    \"color\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"stockNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7623db14-1e3e-4bd6-8195-c357bd8083b3",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"directions\": {\n    \"dropoff\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    },\n    \"pickup\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    }\n  },\n  \"gatePasses\": [\n    {\n      \"resourcePath\": \"<string>\"\n    },\n    {\n      \"resourcePath\": \"<string>\"\n    }\n  ],\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"notes\": \"<string>\",\n  \"vehicle\": {\n    \"color\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"stockNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"created\": {\n    \"byCompany\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"DEALER\"\n    },\n    \"byUser\": \"string\",\n    \"byUserFullName\": \"string\",\n    \"date\": \"string\"\n  },\n  \"vehicle\": {\n    \"vin\": \"string\",\n    \"color\": \"string\",\n    \"isOperational\": false,\n    \"isOverSized\": false,\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"notes\": \"string\",\n    \"odometer\": 2553,\n    \"stockNumber\": \"string\",\n    \"truckSpecifications\": {\n      \"rearAxle\": \"string\"\n    },\n    \"type\": \"string\",\n    \"vehicleMarket\": \"HEAVY\",\n    \"vehicleMeasurements\": {\n      \"curbWeight\": 1083.627420576434,\n      \"grossVehicleWeightRating\": 1642.395898075053,\n      \"height\": 9142.310559982512,\n      \"length\": 4211.902279867209,\n      \"width\": 8298.3677770612\n    },\n    \"year\": 466\n  },\n  \"directions\": {\n    \"distance\": {\n      \"distanceInMeters\": 9415,\n      \"distanceInMiles\": 6936.739971457154,\n      \"durationInSeconds\": 6954\n    },\n    \"dropoff\": {\n      \"address\": \"string\",\n      \"addressComponents\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"county\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"street\": \"string\",\n        \"streetNumber\": \"string\",\n        \"suite\": \"string\"\n      },\n      \"auctionCode\": \"string\",\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"dealerCode\": \"string\",\n      \"geolocation\": {\n        \"coordinates\": [\n          2701.019221661258,\n          2141.6279907545522\n        ],\n        \"type\": \"string\"\n      },\n      \"eta\": {\n        \"start\": \"string\",\n        \"end\": \"string\",\n        \"initial\": \"string\",\n        \"accuracy\": \"string\",\n        \"calculated\": \"1992-10-24T23:50:06.350Z\",\n        \"status\": \"string\"\n      },\n      \"name\": \"string\",\n      \"notes\": \"string\",\n      \"type\": \"business\",\n      \"windows\": [\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 8888\n        },\n        {\n          \"confirmed\": true,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 860\n        }\n      ]\n    },\n    \"pickup\": {\n      \"address\": \"string\",\n      \"addressComponents\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"county\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"street\": \"string\",\n        \"streetNumber\": \"string\",\n        \"suite\": \"string\"\n      },\n      \"auctionCode\": \"string\",\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"dealerCode\": \"string\",\n      \"geolocation\": {\n        \"coordinates\": [\n          2313.0960029726166,\n          9109.852479868132\n        ],\n        \"type\": \"string\"\n      },\n      \"eta\": {\n        \"start\": \"string\",\n        \"end\": \"string\",\n        \"initial\": \"string\",\n        \"accuracy\": \"string\",\n        \"calculated\": \"1956-08-07T05:17:02.376Z\",\n        \"status\": \"string\"\n      },\n      \"name\": \"string\",\n      \"notes\": \"string\",\n      \"type\": \"business\",\n      \"windows\": [\n        {\n          \"confirmed\": true,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 2233\n        },\n        {\n          \"confirmed\": true,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 2615\n        }\n      ]\n    }\n  },\n  \"fare\": {\n    \"amount\": 3672.1060337680365,\n    \"items\": [\n      {\n        \"amount\": 8526.815850719891,\n        \"name\": \"string\"\n      },\n      {\n        \"amount\": 7540.876241316835,\n        \"name\": \"string\"\n      }\n    ],\n    \"name\": \"string\",\n    \"options\": [\n      \"string\",\n      \"string\"\n    ],\n    \"promotionCode\": \"string\"\n  },\n  \"orderId\": \"string\",\n  \"status\": \"APPROVED\",\n  \"geolocation\": {\n    \"coordinates\": [\n      9063.97614931736,\n      9068.575892793177\n    ],\n    \"type\": \"string\"\n  },\n  \"notes\": \"string\",\n  \"payer\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"reconciliationCode\": \"string\",\n  \"states\": {\n    \"accepted\": {\n      \"time\": \"string\"\n    },\n    \"claimed\": {\n      \"time\": \"string\"\n    },\n    \"delivered\": {\n      \"accuracy\": 139,\n      \"geolocation\": {\n        \"coordinates\": [\n          2461.6176831921453,\n          8046.136957263015\n        ],\n        \"type\": \"string\"\n      },\n      \"time\": \"string\"\n    },\n    \"pickedUp\": {\n      \"accuracy\": 4253,\n      \"geolocation\": {\n        \"coordinates\": [\n          3900.799158059928,\n          8418.258100028204\n        ],\n        \"type\": \"string\"\n      },\n      \"time\": \"string\"\n    }\n  },\n  \"timeline\": [\n    {\n      \"dateTime\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"dateTime\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"transporter\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"DEALER\"\n  },\n  \"dedicatedTransporter\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"canceled\": {\n    \"byUser\": \"string\",\n    \"date\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"INVALID_ADDRESS\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"code\": \"INVALID_VEHICLE_TRANSFER_ORDER\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    }\n  ],\n  \"canCancel\": false,\n  \"inspections\": [\n    {\n      \"completed\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"id\": \"string\",\n      \"taskName\": \"string\"\n    },\n    {\n      \"completed\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"id\": \"string\",\n      \"taskName\": \"string\"\n    }\n  ],\n  \"preferredTransporters\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"AUCTION\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"DEALER\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b43bc49-5486-4a14-9745-9912e37b1afc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"directions\": {\n    \"dropoff\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    },\n    \"pickup\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    }\n  },\n  \"gatePasses\": [\n    {\n      \"resourcePath\": \"<string>\"\n    },\n    {\n      \"resourcePath\": \"<string>\"\n    }\n  ],\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"notes\": \"<string>\",\n  \"vehicle\": {\n    \"color\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"stockNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "369ed143-b361-4ade-bba9-4401996c8348",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"directions\": {\n    \"dropoff\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    },\n    \"pickup\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    }\n  },\n  \"gatePasses\": [\n    {\n      \"resourcePath\": \"<string>\"\n    },\n    {\n      \"resourcePath\": \"<string>\"\n    }\n  ],\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"notes\": \"<string>\",\n  \"vehicle\": {\n    \"color\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"stockNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16ff7e63-342a-4b1f-bd0b-193f971c8cc0",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"directions\": {\n    \"dropoff\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    },\n    \"pickup\": {\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"name\": \"<string>\",\n      \"notes\": \"<string>\"\n    }\n  },\n  \"gatePasses\": [\n    {\n      \"resourcePath\": \"<string>\"\n    },\n    {\n      \"resourcePath\": \"<string>\"\n    }\n  ],\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"notes\": \"<string>\",\n  \"vehicle\": {\n    \"color\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"stockNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5d1997f-bc08-4869-ad1b-2322d922ec71",
+          "name": "Get expanded vehicle transfer order",
+          "request": {
+            "name": "Get expanded vehicle transfer order",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                ":id",
+                "expanded"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d6d9cfdb-54db-4fab-a61b-370c58461ede",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"created\": {\n    \"byCompany\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"DEALER\"\n    },\n    \"byUser\": \"string\",\n    \"byUserFullName\": \"string\",\n    \"date\": \"string\"\n  },\n  \"vehicle\": {\n    \"vin\": \"string\",\n    \"color\": \"string\",\n    \"isOperational\": true,\n    \"isOverSized\": false,\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"notes\": \"string\",\n    \"odometer\": 4883,\n    \"stockNumber\": \"string\",\n    \"truckSpecifications\": {\n      \"rearAxle\": \"string\"\n    },\n    \"type\": \"string\",\n    \"vehicleMarket\": \"HEAVY\",\n    \"vehicleMeasurements\": {\n      \"curbWeight\": 1481.7989852094715,\n      \"grossVehicleWeightRating\": 4728.732349346655,\n      \"height\": 142.6387732758527,\n      \"length\": 834.0969926195618,\n      \"width\": 8786.594481756609\n    },\n    \"year\": 7873\n  },\n  \"directions\": {\n    \"distance\": {\n      \"distanceInMeters\": 6065,\n      \"distanceInMiles\": 8340.945777728075,\n      \"durationInSeconds\": 3641\n    },\n    \"dropoff\": {\n      \"address\": \"string\",\n      \"addressComponents\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"county\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"street\": \"string\",\n        \"streetNumber\": \"string\",\n        \"suite\": \"string\"\n      },\n      \"auctionCode\": \"string\",\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"dealerCode\": \"string\",\n      \"geolocation\": {\n        \"coordinates\": [\n          2550.059303705371,\n          3542.869225808809\n        ],\n        \"type\": \"string\"\n      },\n      \"eta\": {\n        \"start\": \"string\",\n        \"end\": \"string\",\n        \"initial\": \"string\",\n        \"accuracy\": \"string\",\n        \"calculated\": \"2022-01-01T01:30:31.811Z\",\n        \"status\": \"string\"\n      },\n      \"name\": \"string\",\n      \"notes\": \"string\",\n      \"type\": \"business\",\n      \"windows\": [\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 5780\n        },\n        {\n          \"confirmed\": true,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 8291\n        }\n      ]\n    },\n    \"pickup\": {\n      \"address\": \"string\",\n      \"addressComponents\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"county\": \"string\",\n        \"postalCode\": \"string\",\n        \"state\": \"string\",\n        \"street\": \"string\",\n        \"streetNumber\": \"string\",\n        \"suite\": \"string\"\n      },\n      \"auctionCode\": \"string\",\n      \"contact\": {\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"dealerCode\": \"string\",\n      \"geolocation\": {\n        \"coordinates\": [\n          7523.1072101250575,\n          7.1074979546681405\n        ],\n        \"type\": \"string\"\n      },\n      \"eta\": {\n        \"start\": \"string\",\n        \"end\": \"string\",\n        \"initial\": \"string\",\n        \"accuracy\": \"string\",\n        \"calculated\": \"1970-09-23T05:36:28.732Z\",\n        \"status\": \"string\"\n      },\n      \"name\": \"string\",\n      \"notes\": \"string\",\n      \"type\": \"personal\",\n      \"windows\": [\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 6205\n        },\n        {\n          \"confirmed\": false,\n          \"start\": \"string\",\n          \"end\": \"string\",\n          \"priority\": 5731\n        }\n      ]\n    }\n  },\n  \"fare\": {\n    \"amount\": 8447.690405588326,\n    \"items\": [\n      {\n        \"amount\": 979.4351983173566,\n        \"name\": \"string\"\n      },\n      {\n        \"amount\": 6101.434893950135,\n        \"name\": \"string\"\n      }\n    ],\n    \"name\": \"string\",\n    \"options\": [\n      \"string\",\n      \"string\"\n    ],\n    \"promotionCode\": \"string\"\n  },\n  \"status\": \"UNLOADED\",\n  \"geolocation\": {\n    \"coordinates\": [\n      1022.8770704916823,\n      8261.91972339269\n    ],\n    \"type\": \"string\"\n  },\n  \"notes\": \"string\",\n  \"order\": {\n    \"id\": \"string\",\n    \"referenceNumber\": \"string\",\n    \"vehicleTransferOrders\": [\n      {\n        \"id\": \"string\"\n      },\n      {\n        \"id\": \"string\"\n      }\n    ],\n    \"created\": {\n      \"byCompany\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"byUser\": \"string\",\n      \"byUserFullName\": \"string\",\n      \"date\": \"string\"\n    },\n    \"status\": \"string\",\n    \"type\": \"SWAP\",\n    \"owner\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"AUCTION\"\n    },\n    \"payer\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"DEALER\"\n    },\n    \"canceled\": {\n      \"byUser\": \"string\",\n      \"date\": \"string\",\n      \"reason\": \"string\"\n    },\n    \"labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"notes\": \"string\",\n    \"completedDate\": \"1960-05-20T23:12:13.709Z\",\n    \"errors\": [\n      {\n        \"code\": \"INVALID_ADDRESS\",\n        \"message\": \"string\",\n        \"field\": \"string\"\n      },\n      {\n        \"code\": \"INVALID_VEHICLE\",\n        \"message\": \"string\",\n        \"field\": \"string\"\n      }\n    ],\n    \"fare\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": 6860.529745601895\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": 1091.8136523083854\n      }\n    ],\n    \"dedicatedTransporter\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"DEALER\"\n    },\n    \"preferredStatusExpiration\": \"string\",\n    \"preferredTransporters\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      }\n    ],\n    \"replacement\": {\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"message\": \"string\",\n      \"orderId\": \"string\",\n      \"status\": \"ERROR\"\n    }\n  },\n  \"payer\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"reconciliationCode\": \"string\",\n  \"states\": {\n    \"accepted\": {\n      \"time\": \"string\"\n    },\n    \"claimed\": {\n      \"time\": \"string\"\n    },\n    \"delivered\": {\n      \"accuracy\": 9947,\n      \"geolocation\": {\n        \"coordinates\": [\n          6499.8153871295835,\n          3807.9347912674557\n        ],\n        \"type\": \"string\"\n      },\n      \"time\": \"string\"\n    },\n    \"pickedUp\": {\n      \"accuracy\": 8020,\n      \"geolocation\": {\n        \"coordinates\": [\n          2009.3347545453178,\n          2526.2356084283733\n        ],\n        \"type\": \"string\"\n      },\n      \"time\": \"string\"\n    }\n  },\n  \"timeline\": [\n    {\n      \"dateTime\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"dateTime\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"transporter\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"dedicatedTransporter\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"AUCTION\"\n  },\n  \"canceled\": {\n    \"byUser\": \"string\",\n    \"date\": \"string\",\n    \"reason\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"INVALID_ADDRESS\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"code\": \"INVALID_ADDRESS\",\n      \"message\": \"string\",\n      \"field\": \"string\"\n    }\n  ],\n  \"canCancel\": false,\n  \"inspections\": [\n    {\n      \"completed\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"id\": \"string\",\n      \"taskName\": \"string\"\n    },\n    {\n      \"completed\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"id\": \"string\",\n      \"taskName\": \"string\"\n    }\n  ],\n  \"preferredTransporters\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"AUCTION\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"AUCTION\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9ba029f-a95e-4b4a-8f33-cf7b3cfdd315",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b88eb7a0-f80d-441f-940f-1067950850aa",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88d5a70a-5384-43f7-a6ef-d79d603ee859",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d9d36b3-8204-4592-8989-e788d02df9fe",
+          "name": "Find vehicle transfer orders expanded",
+          "request": {
+            "name": "Find vehicle transfer orders expanded",
+            "description": {
+              "content": "Retrieve paginated expanded Vehicle Transfer Orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                "expanded"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "741accd4-c521-445c-ace5-f50f1b4a87e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"string\",\n      \"referenceNumber\": \"string\",\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"vehicle\": {\n        \"vin\": \"string\",\n        \"color\": \"string\",\n        \"isOperational\": true,\n        \"isOverSized\": false,\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"notes\": \"string\",\n        \"odometer\": 6612,\n        \"stockNumber\": \"string\",\n        \"truckSpecifications\": {\n          \"rearAxle\": \"string\"\n        },\n        \"type\": \"string\",\n        \"vehicleMarket\": \"MEDIUM\",\n        \"vehicleMeasurements\": {\n          \"curbWeight\": 2651.4777556415615,\n          \"grossVehicleWeightRating\": 806.7022092789811,\n          \"height\": 3919.5434272024445,\n          \"length\": 2832.617447066246,\n          \"width\": 8152.858874504748\n        },\n        \"year\": 7486\n      },\n      \"directions\": {\n        \"distance\": {\n          \"distanceInMeters\": 2581,\n          \"distanceInMiles\": 3729.1717359818276,\n          \"durationInSeconds\": 4717\n        },\n        \"dropoff\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"pickup\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"fare\": {\n        \"amount\": 8851.023472947576,\n        \"items\": [\n          {\n            \"amount\": 3664.446081979271,\n            \"name\": \"string\"\n          },\n          {\n            \"amount\": 5676.883250341657,\n            \"name\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ],\n        \"promotionCode\": \"string\"\n      },\n      \"status\": \"CLAIMED\",\n      \"geolocation\": {\n        \"coordinates\": [\n          6255.604328586633,\n          4751.491920793882\n        ],\n        \"type\": \"string\"\n      },\n      \"notes\": \"string\",\n      \"order\": {\n        \"id\": \"string\",\n        \"referenceNumber\": \"string\",\n        \"vehicleTransferOrders\": [\n          {\n            \"id\": \"string\"\n          },\n          {\n            \"id\": \"string\"\n          }\n        ],\n        \"created\": {\n          \"byCompany\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"byUser\": \"string\",\n          \"byUserFullName\": \"string\",\n          \"date\": \"string\"\n        },\n        \"status\": \"string\",\n        \"type\": \"BASIC\",\n        \"owner\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"payer\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"canceled\": {\n          \"byUser\": \"string\",\n          \"date\": \"string\",\n          \"reason\": \"string\"\n        },\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"completedDate\": \"1989-09-28T02:52:46.682Z\",\n        \"errors\": [\n          {\n            \"code\": \"INVALID_ADDRESS\",\n            \"message\": \"string\",\n            \"field\": \"string\"\n          },\n          {\n            \"code\": \"INVALID_ADDRESS\",\n            \"message\": \"string\",\n            \"field\": \"string\"\n          }\n        ],\n        \"fare\": [\n          {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"value\": 4425.6628031751925\n          },\n          {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"value\": 7087.860428483311\n          }\n        ],\n        \"dedicatedTransporter\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"preferredStatusExpiration\": \"string\",\n        \"preferredTransporters\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"type\": \"DEALER\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"type\": \"DEALER\"\n          }\n        ],\n        \"replacement\": {\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUserFullName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"message\": \"string\",\n          \"orderId\": \"string\",\n          \"status\": \"ERROR\"\n        }\n      },\n      \"payer\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"reconciliationCode\": \"string\",\n      \"states\": {\n        \"accepted\": {\n          \"time\": \"string\"\n        },\n        \"claimed\": {\n          \"time\": \"string\"\n        },\n        \"delivered\": {\n          \"accuracy\": 7301,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        },\n        \"pickedUp\": {\n          \"accuracy\": 8097,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        }\n      },\n      \"timeline\": [\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"transporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"dedicatedTransporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"canceled\": {\n        \"byUser\": \"string\",\n        \"date\": \"string\",\n        \"reason\": \"string\"\n      },\n      \"errors\": [\n        {\n          \"code\": \"INVALID_VEHICLE\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        },\n        {\n          \"code\": \"INVALID_ADDRESS\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        }\n      ],\n      \"canCancel\": true,\n      \"inspections\": [\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        },\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        }\n      ],\n      \"preferredTransporters\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"referenceNumber\": \"string\",\n      \"created\": {\n        \"byCompany\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"byUser\": \"string\",\n        \"byUserFullName\": \"string\",\n        \"date\": \"string\"\n      },\n      \"vehicle\": {\n        \"vin\": \"string\",\n        \"color\": \"string\",\n        \"isOperational\": true,\n        \"isOverSized\": true,\n        \"make\": \"string\",\n        \"model\": \"string\",\n        \"notes\": \"string\",\n        \"odometer\": 2599,\n        \"stockNumber\": \"string\",\n        \"truckSpecifications\": {\n          \"rearAxle\": \"string\"\n        },\n        \"type\": \"string\",\n        \"vehicleMarket\": \"HEAVY\",\n        \"vehicleMeasurements\": {\n          \"curbWeight\": 5081.412803514487,\n          \"grossVehicleWeightRating\": 503.79095320835063,\n          \"height\": 3643.7309001268645,\n          \"length\": 4534.118819685151,\n          \"width\": 7297.977687280425\n        },\n        \"year\": 1192\n      },\n      \"directions\": {\n        \"distance\": {\n          \"distanceInMeters\": 1259,\n          \"distanceInMiles\": 9371.221066938166,\n          \"durationInSeconds\": 8585\n        },\n        \"dropoff\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"pickup\": {\n          \"address\": \"string\",\n          \"addressComponents\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suite\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"auctionCode\": \"string\",\n          \"contact\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dealerCode\": \"string\",\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eta\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initial\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accuracy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"calculated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"notes\": \"string\",\n          \"type\": \"business\",\n          \"windows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"fare\": {\n        \"amount\": 2617.884820392451,\n        \"items\": [\n          {\n            \"amount\": 9057.401275641983,\n            \"name\": \"string\"\n          },\n          {\n            \"amount\": 2527.630124368295,\n            \"name\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ],\n        \"promotionCode\": \"string\"\n      },\n      \"status\": \"READY\",\n      \"geolocation\": {\n        \"coordinates\": [\n          4713.379407817974,\n          5773.051048452587\n        ],\n        \"type\": \"string\"\n      },\n      \"notes\": \"string\",\n      \"order\": {\n        \"id\": \"string\",\n        \"referenceNumber\": \"string\",\n        \"vehicleTransferOrders\": [\n          {\n            \"id\": \"string\"\n          },\n          {\n            \"id\": \"string\"\n          }\n        ],\n        \"created\": {\n          \"byCompany\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"byUser\": \"string\",\n          \"byUserFullName\": \"string\",\n          \"date\": \"string\"\n        },\n        \"status\": \"string\",\n        \"type\": \"BASIC\",\n        \"owner\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"payer\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        \"canceled\": {\n          \"byUser\": \"string\",\n          \"date\": \"string\",\n          \"reason\": \"string\"\n        },\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"completedDate\": \"2005-02-15T21:04:09.428Z\",\n        \"errors\": [\n          {\n            \"code\": \"INVALID_VEHICLE_TRANSFER_ORDER\",\n            \"message\": \"string\",\n            \"field\": \"string\"\n          },\n          {\n            \"code\": \"INVALID_VEHICLE\",\n            \"message\": \"string\",\n            \"field\": \"string\"\n          }\n        ],\n        \"fare\": [\n          {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"value\": 5062.272040826327\n          },\n          {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"value\": 3974.559946410141\n          }\n        ],\n        \"dedicatedTransporter\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"DEALER\"\n        },\n        \"preferredStatusExpiration\": \"string\",\n        \"preferredTransporters\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"type\": \"DEALER\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"type\": \"DEALER\"\n          }\n        ],\n        \"replacement\": {\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUserFullName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"message\": \"string\",\n          \"orderId\": \"string\",\n          \"status\": \"PENDING\"\n        }\n      },\n      \"payer\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"reconciliationCode\": \"string\",\n      \"states\": {\n        \"accepted\": {\n          \"time\": \"string\"\n        },\n        \"claimed\": {\n          \"time\": \"string\"\n        },\n        \"delivered\": {\n          \"accuracy\": 3456,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        },\n        \"pickedUp\": {\n          \"accuracy\": 442,\n          \"geolocation\": {\n            \"coordinates\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"time\": \"string\"\n        }\n      },\n      \"timeline\": [\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"dateTime\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"transporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"dedicatedTransporter\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"DEALER\"\n      },\n      \"canceled\": {\n        \"byUser\": \"string\",\n        \"date\": \"string\",\n        \"reason\": \"string\"\n      },\n      \"errors\": [\n        {\n          \"code\": \"INVALID_ADDRESS\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        },\n        {\n          \"code\": \"INVALID_ADDRESS\",\n          \"message\": \"string\",\n          \"field\": \"string\"\n        }\n      ],\n      \"canCancel\": false,\n      \"inspections\": [\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        },\n        {\n          \"completed\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"created\": {\n            \"byCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"byUser\": \"string\",\n            \"byUserFullName\": \"string\",\n            \"date\": \"string\"\n          },\n          \"id\": \"string\",\n          \"taskName\": \"string\"\n        }\n      ],\n      \"preferredTransporters\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"AUCTION\"\n        }\n      ]\n    }\n  ],\n  \"empty\": false,\n  \"first\": false,\n  \"last\": true,\n  \"number\": 5491,\n  \"numberOfElements\": 3180,\n  \"pageable\": {\n    \"offset\": 4814,\n    \"pageNumber\": 9626,\n    \"pageSize\": 760,\n    \"paged\": false,\n    \"sort\": {\n      \"empty\": false,\n      \"sorted\": true,\n      \"unsorted\": false\n    },\n    \"unpaged\": true\n  },\n  \"size\": 582,\n  \"sort\": {\n    \"empty\": true,\n    \"sorted\": true,\n    \"unsorted\": false\n  },\n  \"totalElements\": 3624,\n  \"totalPages\": 4673\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e58ceed-9622-4f1d-bec6-956429304b64",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dff9f539-f27a-42cc-bd8e-a4860920f1a7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "448e336a-1026-42cc-afd2-8a4f3242ded8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "expanded"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d07f00bc-d58e-43de-8dc7-76431697b6e2",
+          "name": "Create a gate pass",
+          "request": {
+            "name": "Create a gate pass",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                "gate-passes"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "{}",
+                  "type": "text",
+                  "description": "file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4dbc73da-4b83-42ba-ae8b-60efc950caeb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resourcePath\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5014376-62a4-4a0b-b3bb-f87044969005",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2857077c-c50d-4f66-92c2-4e91b5d726a2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03cc73a5-c9a9-4ae7-9f91-16ef0b4beae1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8cbc4f3-2ef7-4768-9587-eb0a8af9eee5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5970dc6-44b0-4194-8dec-247edb78b6f7",
+          "name": "Get gate passes",
+          "request": {
+            "name": "Get gate passes",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                ":id",
+                "gate-passes"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd90f4b7-2894-4a02-8e85-b19e3cb3a14f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"created\": {\n      \"byCompany\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"AUCTION\"\n      },\n      \"byUser\": \"string\",\n      \"byUserFullName\": \"string\",\n      \"date\": \"string\"\n    },\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"resourcePath\": \"string\"\n  },\n  {\n    \"created\": {\n      \"byCompany\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"AUCTION\"\n      },\n      \"byUser\": \"string\",\n      \"byUserFullName\": \"string\",\n      \"date\": \"string\"\n    },\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"resourcePath\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1de9e977-1a33-452b-95ae-91ecbb323fc2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8917e4a-dce3-4e4e-9656-0d3544bad346",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5c094b7-d1be-4d01-835b-920d13341738",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed78c99c-272b-45a4-83da-2268acf1489d",
+          "name": "Add a gate pass",
+          "request": {
+            "name": "Add a gate pass",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                ":id",
+                "gate-passes"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "{}",
+                  "type": "text",
+                  "description": "file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d9b3a7c0-c5ab-4de4-b8f8-258a16464d85",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eefabfbd-cd24-4f04-b8cf-3a29011d4357",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d066b8c6-9f54-4c78-b171-2dd6b1ca81c3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "142a5159-ea47-43f0-a255-6b4147dd9f01",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c04d1cee-6784-4276-a956-78ca90c08a91",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "{}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1361eddc-9c5b-4168-bcc4-0a1c64b91386",
+          "name": "Retrieve a gate pass",
+          "request": {
+            "name": "Retrieve a gate pass",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "staging",
+                "api",
+                "vehicle-transfer-orders",
+                ":id",
+                "gate-passes",
+                ":passId"
+              ],
+              "host": [
+                "ng-staging",
+                "runbuggy",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "passId",
+                  "description": "(Required) passId"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b7b0199b-9e61-41af-b733-22eeb0d717bb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes",
+                    ":passId"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "passId",
+                      "description": "(Required) passId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9ec55e60-f48c-4f75-9a41-5119cb4786a2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes",
+                    ":passId"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "passId",
+                      "description": "(Required) passId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "548ebfef-fea5-4043-984c-947f3b74ef11",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes",
+                    ":passId"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "passId",
+                      "description": "(Required) passId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b77d094b-4054-4918-8ace-17ee2a975c09",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "staging",
+                    "api",
+                    "vehicle-transfer-orders",
+                    ":id",
+                    "gate-passes",
+                    ":passId"
+                  ],
+                  "host": [
+                    "ng-staging",
+                    "runbuggy",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "passId",
+                      "description": "(Required) passId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ng-staging.runbuggy.com/staging/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d5b6867-9929-45f2-bf68-ee27d7d40941",
+    "name": "Orders Vehicle Transfer Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### [Create Orders](/docs/shipping/6fcc8c040ec03-create-an-order) to transfer vehicles.\n\nContact Support:\n Name: Support\n Email: support@runbuggy.com",
+      "type": "text/plain"
+    }
+  }
+}

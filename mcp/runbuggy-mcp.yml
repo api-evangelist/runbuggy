@@ -3,28 +3,25 @@ method: probed
 source: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
 status: live
 gated: true
-summary: 'RunBuggy runs a hosted, remote Model Context Protocol server called
-  "mcp-datascience" in both production and staging. It was found by probe, not by
-  documentation: nothing on runbuggy.com or docs.runbuggy.com references it. The server
-  speaks Streamable HTTP, is served by uvicorn, and is protected by OAuth 2.1 with
-  dynamic client registration and PKCE. An anonymous tools/list returns 401
-  invalid_token, so the tool surface — names, descriptions and inputSchemas — is not
-  publicly readable and is NOT recorded here. No tool list is asserted.'
+summary: 'RunBuggy runs a hosted, remote Model Context Protocol server called "mcp-datascience" in both
+  production and staging. It was found by probe, not by documentation: nothing on runbuggy.com or docs.runbuggy.com
+  references it. The server speaks Streamable HTTP, is served by uvicorn, and is protected by OAuth 2.1
+  with dynamic client registration and PKCE. An anonymous tools/list returns 401 invalid_token, so the
+  tool surface — names, descriptions and inputSchemas — is not publicly readable and is NOT recorded here.
+  No tool list is asserted.'
 servers:
 - environment: production
   url: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
   transport: streamable-http
   http_status: 401
   server_header: uvicorn
-  www_authenticate: Bearer error="invalid_token", error_description="Authentication
-    required", resource_metadata="https://apps.runbuggy.com/.well-known/oauth-protected-resource/runbuggy/mcp-datascience"
+  www_authenticate: Bearer error="invalid_token", error_description="Authentication required", resource_metadata="https://apps.runbuggy.com/.well-known/oauth-protected-resource/runbuggy/mcp-datascience"
 - environment: staging
   url: https://ng-staging.runbuggy.com/staging/mcp-datascience/mcp
   transport: streamable-http
   http_status: 401
   server_header: uvicorn
-  www_authenticate: Bearer error="invalid_token", error_description="Authentication
-    required", resource_metadata="https://ng-staging.runbuggy.com/.well-known/oauth-protected-resource/staging/mcp-datascience"
+  www_authenticate: Bearer error="invalid_token", error_description="Authentication required", resource_metadata="https://ng-staging.runbuggy.com/.well-known/oauth-protected-resource/staging/mcp-datascience"
 authorization:
   model: OAuth 2.1 authorization code + PKCE, with RFC 7591 dynamic client registration
   metadata_document: well-known/runbuggy-oauth-authorization-server.json
@@ -34,37 +31,39 @@ authorization:
   token_endpoint: https://apps.runbuggy.com/runbuggy/mcp-datascience/token
   registration_endpoint: https://apps.runbuggy.com/runbuggy/mcp-datascience/register
   revocation_endpoint: https://apps.runbuggy.com/runbuggy/mcp-datascience/revoke
-  response_types_supported: [code]
-  grant_types_supported: [authorization_code, refresh_token]
-  code_challenge_methods_supported: [S256]
-  token_endpoint_auth_methods_supported: [client_secret_post, client_secret_basic]
+  response_types_supported:
+  - code
+  grant_types_supported:
+  - authorization_code
+  - refresh_token
+  code_challenge_methods_supported:
+  - S256
+  token_endpoint_auth_methods_supported:
+  - client_secret_post
+  - client_secret_basic
   scopes_supported: null
-  scopes_note: The authorization server metadata omits scopes_supported, so an MCP
-    client cannot know what to request. See scopes/runbuggy-scopes.yml.
+  scopes_note: The authorization server metadata omits scopes_supported, so an MCP client cannot know
+    what to request. See scopes/runbuggy-scopes.yml.
 tools: []
-tools_note: NOT ENUMERATED. tools/list is auth-gated (401 invalid_token) and RunBuggy
-  publishes no llms.txt, no MCP registry entry and no documentation of this server,
-  so there is no second source for the tool names. Deriving a candidate tool list from
-  the Shippers OpenAPI would misrepresent a data-science server as an orders server —
-  the two surfaces are not the same product. Left empty deliberately.
+tools_note: NOT ENUMERATED. tools/list is auth-gated (401 invalid_token) and RunBuggy publishes no llms.txt,
+  no MCP registry entry and no documentation of this server, so there is no second source for the tool
+  names. Deriving a candidate tool list from the Shippers OpenAPI would misrepresent a data-science server
+  as an orders server — the two surfaces are not the same product. Left empty deliberately.
 findings:
 - id: oauth-protected-resource-broken
   severity: blocking-for-agents
-  detail: The 401 challenge points a client at
-    https://apps.runbuggy.com/.well-known/oauth-protected-resource/runbuggy/mcp-datascience
-    for RFC 9728 protected-resource metadata, but that path 302-redirects into the
-    apps.runbuggy.com single-page app instead of returning JSON. The staging equivalent
-    returns 404. A conformant MCP client that follows WWW-Authenticate cannot complete
-    discovery without hard-coding the authorization server.
+  detail: The 401 challenge points a client at https://apps.runbuggy.com/.well-known/oauth-protected-resource/runbuggy/mcp-datascience
+    for RFC 9728 protected-resource metadata, but that path 302-redirects into the apps.runbuggy.com single-page
+    app instead of returning JSON. The staging equivalent returns 404. A conformant MCP client that follows
+    WWW-Authenticate cannot complete discovery without hard-coding the authorization server.
 - id: undocumented
   severity: discoverability
-  detail: The server is not linked from runbuggy.com, docs.runbuggy.com, the RunBot
-    AI page, or any public MCP registry. Its existence is only observable by probing
-    /.well-known/oauth-authorization-server.
+  detail: The server is not linked from runbuggy.com, docs.runbuggy.com, the RunBot AI page, or any public
+    MCP registry. Its existence is only observable by probing /.well-known/oauth-authorization-server.
 - id: no-scopes-published
   severity: agent-readiness
-  detail: scopes_supported is absent from the authorization server metadata and no
-    scope reference is documented.
+  detail: scopes_supported is absent from the authorization server metadata and no scope reference is
+    documented.
 x-evidence:
   fetched: '2026-08-05'
   probes:
@@ -89,3 +88,10 @@ x-evidence:
     note: advertised by the 401 challenge but redirects into the SPA
   - url: https://ng-staging.runbuggy.com/.well-known/oauth-protected-resource/staging/mcp-datascience
     http_status: 404
+deployment:
+  mode: remote
+  endpoint: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

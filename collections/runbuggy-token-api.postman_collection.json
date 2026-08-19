@@ -1,0 +1,158 @@
+{
+  "item": [
+    {
+      "id": "8cfa93aa-8984-44e3-8bec-e9f019228f48",
+      "name": "Token",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c51072c-97a5-4e53-9147-e41500948e86",
+          "name": "Retrieve token",
+          "request": {
+            "name": "Retrieve token",
+            "description": {
+              "content": "Retrieve Bearer token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "858334ce-e3b6-468d-b6f1-d9dbb514ea27",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin@mycompany.com\",\n  \"password\": \"supersecret\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"username\": \"admin@mycompany.com\",\n  \"roles\": [\n    \"ROLE_TRANSPORTER\"\n  ],\n  \"token_type\": \"Bearer\",\n  \"access_token\": \"5f410h7qp48naudaonq5toop35rqc391\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6994fd30-96be-446f-bd1c-024894ea2e2f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin@mycompany.com\",\n  \"password\": \"supersecret\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ng-staging.runbuggy.com/staging/api/auth",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4555ce2c-a97c-4c6b-8aee-6a38522e812b",
+    "name": "Authentication Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# [Authentication Guide](https://runbuggy.docs.stoplight.io/guides/authentication-guide)\n\nContact Support:\n Name: Runbuggy\n Email: support@runbuggy.com",
+      "type": "text/plain"
+    }
+  }
+}

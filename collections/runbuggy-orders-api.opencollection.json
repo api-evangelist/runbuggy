@@ -1,0 +1,301 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Orders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve paginated Orders."
+        },
+        {
+          "info": {
+            "name": "Create an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an Order to transfer vehicles."
+        },
+        {
+          "info": {
+            "name": "Retrieve an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve Order."
+        },
+        {
+          "info": {
+            "name": "Update order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Patch Order"
+        },
+        {
+          "info": {
+            "name": "Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancel specified Order. If vehicles have shipped you may no longer cancel Order. 202 status code indicates the Cancelation request has been accepted and is processing. Check the Order resource for the status to change to \"CANCELED\"."
+        },
+        {
+          "info": {
+            "name": "Replace an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/:id/replace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancels the original and creates a new one. To track the status, see the Order.replacement property of the order being replaced."
+        },
+        {
+          "info": {
+            "name": "Retrieve an expanded order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/:id/full",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve an Order expanded with full Vehicle Transfer Orders."
+        },
+        {
+          "info": {
+            "name": "Search expanded orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/full",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query Orders using RSQL."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search expanded orders using RSQL. For example: orders/full?query=created.date>2020-10-15T00:00:00Z;created.date<2020-10-21T00:00:00Z"
+        },
+        {
+          "info": {
+            "name": "List order's vehicle transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/:id/vehicle-transfer-orders",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List an Order's the Vehicle Transfer Orders."
+        },
+        {
+          "info": {
+            "name": "Quote an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ng-staging.runbuggy.com/staging/api/orders/quote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Quote an Order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

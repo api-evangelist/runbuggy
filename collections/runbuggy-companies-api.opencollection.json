@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Companies API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve authorized companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.runbuggy.com/staging-v2/api/companies/authorized/companies",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve authorized companies."
+        },
+        {
+          "info": {
+            "name": "Retrieve authorized companies by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.runbuggy.com/staging-v2/api/companies/authorized/companies/findByUserName",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "username"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve authorized companies by username."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

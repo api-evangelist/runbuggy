@@ -1,0 +1,29 @@
+{
+  "provider": "runbuggy",
+  "sources": [
+    "runbuggy-companies-api-openapi.yml",
+    "runbuggy-orders-api-openapi.yml",
+    "runbuggy-token-api-openapi.yml",
+    "runbuggy-vehicle-transfer-orders-api-openapi.yml",
+    "runbuggy-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "runbuggy-companies-api-openapi.yml",
+    "runbuggy-orders-api-openapi.yml",
+    "runbuggy-token-api-openapi.yml",
+    "runbuggy-vehicle-transfer-orders-api-openapi.yml",
+    "runbuggy-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "runbuggy-companies-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "runbuggy-orders-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "runbuggy-token-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "runbuggy-vehicle-transfer-orders-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "runbuggy-webhooks-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

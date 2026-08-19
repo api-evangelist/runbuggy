@@ -1,0 +1,1614 @@
+openapi: 3.2.0
+info:
+  title: Orders API
+  description: '### [Create Orders](/docs/shipping/6fcc8c040ec03-create-an-order) to transfer vehicles.'
+  termsOfService: https://runbuggy.com/terms/
+  contact:
+    name: Support
+    email: support@runbuggy.com
+  license:
+    name: Copyright © RunBuggy 2023
+    url: https://runbuggy.com/terms/
+  version: '1.0'
+servers:
+- url: https://ng-staging.runbuggy.com/staging/api
+tags:
+- name: Orders
+  description: The Order operations.
+paths:
+  /orders:
+    post:
+      tags:
+      - Orders
+      summary: Create an order
+      description: Create an Order to transfer vehicles.
+      operationId: createOrderUsingPOST
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '202':
+          description: The request is being processed. See [Handling 202's](/docs/shipping/ea2a0d46dfc8d-handling-202-s).
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+        description: orderRequest
+        required: true
+    get:
+      tags:
+      - Orders
+      summary: Find orders
+      description: Retrieve paginated Orders.
+      operationId: findOrderPaginatedUsingGET
+      parameters:
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOrder'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+  /orders/{id}:
+    get:
+      tags:
+      - Orders
+      summary: Retrieve an order
+      description: Retrieve Order.
+      operationId: getOrderUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+    patch:
+      tags:
+      - Orders
+      summary: Update order
+      description: Patch Order
+      operationId: patchOrderUsingPATCH
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderPatchRequest'
+        description: request
+        required: true
+  /orders/{id}/cancel:
+    post:
+      tags:
+      - Orders
+      summary: Cancel an order
+      description: Cancel specified Order. If vehicles have shipped you may no longer cancel Order. 202 status code indicates the Cancelation request has been accepted and is processing. Check the Order resource for the status to change to "CANCELED".
+      operationId: cancelOrderUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Request has been accepted and is being processed.
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancellationReason'
+        description: cancellationReason
+        required: true
+  /orders/{id}/replace:
+    post:
+      tags:
+      - Orders
+      summary: Replace an order
+      description: Cancels the original and creates a new one. To track the status, see the Order.replacement property of the order being replaced.
+      operationId: replaceOrderUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+        description: replaceRequest
+        required: true
+  /orders/{id}/full:
+    get:
+      tags:
+      - Orders
+      summary: Retrieve an expanded order
+      description: Retrieve an Order expanded with full Vehicle Transfer Orders.
+      operationId: getFullOrderWithIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderFull'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+  /orders/full:
+    get:
+      tags:
+      - Orders
+      summary: Search expanded orders
+      description: 'Search expanded orders using RSQL. For example: orders/full?query=created.date>2020-10-15T00:00:00Z;created.date<2020-10-21T00:00:00Z'
+      operationId: getPaginatedFullOrdersUsingGET
+      parameters:
+      - name: query
+        in: query
+        description: Query Orders using RSQL.
+        required: false
+        schema:
+          type: string
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOrderFull'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+  /orders/{id}/vehicle-transfer-orders:
+    get:
+      tags:
+      - Orders
+      summary: List order's vehicle transfers
+      description: List an Order's the Vehicle Transfer Orders.
+      operationId: getOrderVehicleTransferOrdersUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleTransferOrder'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+  /orders/quote:
+    post:
+      tags:
+      - Orders
+      summary: Quote an order
+      description: Quote an Order.
+      operationId: quoteOrderUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderQuoteResponse'
+        '202':
+          description: The request is being processed. See [Handling 202's](/docs/shipping/ea2a0d46dfc8d-handling-202-s).
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+      security:
+      - Authorization: []
+      servers:
+      - url: https://ng-staging.runbuggy.com/staging/api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderQuoteRequest'
+        description: orderQuoteRequest
+        required: true
+components:
+  schemas:
+    BasicDirectionsRequest:
+      type: object
+      title: BasicDirectionsRequest
+      properties:
+        dropoff:
+          $ref: '#/components/schemas/BasicLocation'
+        pickup:
+          $ref: '#/components/schemas/BasicLocation'
+    LastDriverLocation:
+      type: object
+      title: LastDriverLocationExt
+      properties:
+        company:
+          $ref: '#/components/schemas/Company'
+        data:
+          $ref: '#/components/schemas/AdditionalData'
+        location:
+          $ref: '#/components/schemas/Geolocation'
+        moving:
+          type: boolean
+        time:
+          type: string
+          format: date-time
+        username:
+          type: string
+    Coords:
+      type: object
+      title: Coords
+      properties:
+        accuracy:
+          type: number
+          format: double
+        altitude:
+          type: number
+          format: double
+        heading:
+          type: number
+          format: double
+        speed:
+          type: number
+          format: double
+    VehicleTransferOrderRequest:
+      type: object
+      title: VehicleTransferOrderRequest
+      properties:
+        directions:
+          $ref: '#/components/schemas/DetailedDirectionsRequest'
+        gatePasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/TempFile'
+        notes:
+          type: string
+        payer:
+          $ref: '#/components/schemas/Company'
+        reconciliationCode:
+          type: string
+          x-examples:
+          - PARKING_LOT
+        vehicle:
+          $ref: '#/components/schemas/Vehicle'
+      required:
+      - directions
+      - vehicle
+    VehicleTransferOrderRequestLocation:
+      type: object
+      title: VehicleTransferOrderRequestLocation
+      properties:
+        address:
+          type: string
+          minLength: 1
+        auctionCode:
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        dealerCode:
+          type: string
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        name:
+          type: string
+        notes:
+          type: string
+        type:
+          type: string
+          enum:
+          - business
+          - personal
+        windows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Window'
+      required:
+      - address
+    Canceled:
+      type: object
+      title: Canceled
+      properties:
+        byUser:
+          type: string
+        date:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        reason:
+          type: string
+    VehicleTransferOrder:
+      type: object
+      title: VehicleTransferOrder
+      description: A Vehicle Transfer Order.
+      properties:
+        id:
+          type: string
+          x-examples:
+          - 7a765a49-6b21-4368-937e-8ce4981d8eff
+        referenceNumber:
+          type: string
+          x-examples:
+          - 2000232-123432
+        created:
+          $ref: '#/components/schemas/Created'
+        vehicle:
+          $ref: '#/components/schemas/Vehicle'
+        directions:
+          $ref: '#/components/schemas/DetailedDirections'
+        fare:
+          $ref: '#/components/schemas/Fare'
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        notes:
+          type: string
+          x-examples:
+          - Notes about this vehicle transfer.
+        orderId:
+          type: string
+          x-examples:
+          - ABC123-LMNOP
+        payer:
+          $ref: '#/components/schemas/Company'
+        reconciliationCode:
+          type: string
+          x-examples:
+          - RBCON2020
+        states:
+          $ref: '#/components/schemas/States'
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - READY
+          - AVAILABLE
+          - CLAIMED
+          - UNCLAIMED
+          - APPROVED
+          - ASSIGNED
+          - REJECTED
+          - ACCEPTED
+          - DRIVER_ARRIVED
+          - PICKED_UP
+          - SIGNATURE_ON_PICKUP
+          - PROVIDED_ETA_DROPOFF
+          - UNLOADED
+          - DELIVERED
+          - CANCELED
+          - COMPLETE
+          - ERROR
+          description: See the Vehicle Transfer Order Statuses guide for detailed information.
+        timeline:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        transporter:
+          $ref: '#/components/schemas/Company'
+        dedicatedTransporter:
+          $ref: '#/components/schemas/Company'
+        canceled:
+          $ref: '#/components/schemas/Canceled'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        labels:
+          type: array
+          items:
+            type: object
+        canCancel:
+          type: boolean
+        inspections:
+          type: array
+          items:
+            $ref: '#/components/schemas/InspectionSummary'
+        preferredTransporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+      required:
+      - id
+      - referenceNumber
+      - created
+      - vehicle
+      - directions
+      - fare
+      - orderId
+      - status
+    TruckSpecifications:
+      type: object
+      title: TruckSpecifications
+      properties:
+        rearAxle:
+          type: string
+    CompanyRequest:
+      type: object
+      title: Company
+      properties:
+        id:
+          type: string
+          x-examples:
+          - c0ef80ce-2579-4682-af4f-c1d29457848a
+        name:
+          type: string
+          x-examples:
+          - Auto Land
+        type:
+          type: string
+          enum:
+          - DEALER
+          - AUCTION
+          x-examples:
+          - DEALER
+      required:
+      - id
+    CompanyRequestRequiredName:
+      type: object
+      title: Company
+      properties:
+        id:
+          type: string
+          x-examples:
+          - c0ef80ce-2579-4682-af4f-c1d29457848a
+        name:
+          type: string
+          x-examples:
+          - Auto Land
+        type:
+          type: string
+          enum:
+          - DEALER
+          - AUCTION
+          x-examples:
+          - DEALER
+      required:
+      - id
+      - name
+    Company:
+      type: object
+      title: Company
+      properties:
+        id:
+          type: string
+          x-examples:
+          - c0ef80ce-2579-4682-af4f-c1d29457848a
+        name:
+          type: string
+          x-examples:
+          - Auto Land
+        type:
+          type: string
+          enum:
+          - DEALER
+          - AUCTION
+          x-examples:
+          - DEALER
+    Replacement:
+      type: object
+      title: Replacement
+      properties:
+        created:
+          $ref: '#/components/schemas/Created'
+        message:
+          type: string
+        orderId:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - SUCCESS
+          - ERROR
+    States:
+      type: object
+      title: States
+      properties:
+        accepted:
+          $ref: '#/components/schemas/State'
+        claimed:
+          $ref: '#/components/schemas/State'
+        delivered:
+          $ref: '#/components/schemas/StateLocation'
+        pickedUp:
+          $ref: '#/components/schemas/StateLocation'
+    Activity:
+      type: object
+      title: Activity
+      properties:
+        confidence:
+          type: integer
+          format: int32
+        type:
+          type: string
+    DetailedDirections:
+      type: object
+      title: DetailedDirections
+      properties:
+        distance:
+          $ref: '#/components/schemas/Distance'
+        dropoff:
+          $ref: '#/components/schemas/Location'
+        pickup:
+          $ref: '#/components/schemas/Location'
+    Distance:
+      type: object
+      title: Distance
+      properties:
+        distanceInMeters:
+          type: integer
+          format: int64
+        distanceInMiles:
+          type: number
+          format: double
+        durationInSeconds:
+          type: integer
+          format: int64
+    BasicLocation:
+      type: object
+      title: BasicLocation
+      properties:
+        address:
+          type: string
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        type:
+          type: string
+    Pageable:
+      type: object
+      title: Pageable
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+    Contact:
+      type: object
+      title: Contact
+      properties:
+        name:
+          type: string
+          x-examples:
+          - Ed Jones
+        phone:
+          type: string
+          x-examples:
+          - '4804804480'
+    OrderResponse:
+      type: object
+      title: OrderResponse
+      properties:
+        id:
+          type: string
+          x-examples:
+          - 7e837a6c-1746-4da4-89e6-c87fae7df84d
+        created:
+          $ref: '#/components/schemas/Created'
+        notes:
+          type: string
+        referenceNumber:
+          type: string
+          x-examples:
+          - '200001'
+        status:
+          type: string
+        type:
+          type: string
+          enum:
+          - BASIC
+          - SWAP
+          x-examples:
+          - BASIC
+        vehicleTransferOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrderStatus'
+      required:
+      - id
+      - created
+      - status
+      - type
+      - vehicleTransferOrders
+    Fare:
+      type: object
+      title: Fare
+      properties:
+        amount:
+          type: number
+          format: double
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        name:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+        promotionCode:
+          type: string
+          x-examples:
+          - RBCON19
+    Location:
+      type: object
+      title: Location
+      properties:
+        address:
+          type: string
+          minLength: 1
+        addressComponents:
+          $ref: '#/components/schemas/AddressComponents'
+        auctionCode:
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        dealerCode:
+          type: string
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        eta:
+          $ref: '#/components/schemas/EstimatedTimeToArrival'
+        name:
+          type: string
+        notes:
+          type: string
+        type:
+          type: string
+          enum:
+          - business
+          - personal
+        windows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Window'
+      required:
+      - address
+    Item:
+      type: object
+      title: Item
+      properties:
+        amount:
+          type: number
+          format: double
+        name:
+          type: string
+    TempFile:
+      type: object
+      title: TempFile
+      properties:
+        resourcePath:
+          type: string
+    VehicleTransferOrderQuoteRequest:
+      type: object
+      title: VehicleTransferOrderQuoteRequest
+      properties:
+        directions:
+          $ref: '#/components/schemas/BasicDirectionsRequest'
+        payer:
+          $ref: '#/components/schemas/Company'
+        vehicle:
+          $ref: '#/components/schemas/Vehicle'
+      required:
+      - directions
+      - vehicle
+    InspectionSummary:
+      type: object
+      title: InspectionSummary
+      properties:
+        completed:
+          $ref: '#/components/schemas/Created'
+        created:
+          $ref: '#/components/schemas/Created'
+        id:
+          type: string
+        taskName:
+          type: string
+    Geolocation:
+      type: object
+      title: Geolocation
+      properties:
+        coordinates:
+          type: array
+          items:
+            type: number
+            format: double
+        type:
+          type: string
+    OrderRequest:
+      type: object
+      title: OrderRequest
+      properties:
+        notes:
+          type: string
+          x-examples:
+          - Our big May 1st order.
+        type:
+          type: string
+          enum:
+          - BASIC
+          description: See Order.type enumeration for possible values.
+          x-examples:
+          - BASIC
+        vehicleTransferOrders:
+          type: array
+          description: Vehicles transfer orders.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrderRequest'
+        owner:
+          $ref: '#/components/schemas/CompanyRequest'
+        payer:
+          $ref: '#/components/schemas/CompanyRequestRequiredName'
+        fare:
+          $ref: '#/components/schemas/FareOptionsRequest'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - type
+      - vehicleTransferOrders
+      - fare
+    CancellationReason:
+      type: object
+      title: CancellationReason
+      properties:
+        message:
+          type: string
+          description: Optional message.
+          x-examples:
+          - Made a mistake placing order.
+        type:
+          type: string
+          enum:
+          - OTHER
+          description: Enum string. Set to "OTHER" to provide a message.
+      required:
+      - type
+    Event:
+      type: object
+      title: Event
+      properties:
+        dateTime:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        name:
+          type: string
+    OrderFull:
+      type: object
+      title: OrderFull
+      properties:
+        id:
+          type: string
+        referenceNumber:
+          type: string
+        completedDate:
+          type: string
+          format: date-time
+        created:
+          $ref: '#/components/schemas/Created'
+        owner:
+          $ref: '#/components/schemas/Company'
+        payer:
+          $ref: '#/components/schemas/Company'
+        canceled:
+          $ref: '#/components/schemas/Canceled'
+        dedicatedTransporter:
+          $ref: '#/components/schemas/Company'
+        driverLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LastDriverLocation'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        fare:
+          type: array
+          items:
+            $ref: '#/components/schemas/FareItem'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        notes:
+          type: string
+        preferredStatusExpiration:
+          type: string
+        preferredTransporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        replacement:
+          $ref: '#/components/schemas/Replacement'
+        status:
+          type: string
+        transportationOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransportationOrder'
+        type:
+          type: string
+          enum:
+          - BASIC
+        vehicleTransferOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrder'
+    State:
+      type: object
+      title: State
+      properties:
+        time:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+    FareItem:
+      type: object
+      title: FareItem
+      description: Order Fare Item
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        value:
+          type: number
+          format: double
+    Extras:
+      type: object
+      title: Extras
+    AdditionalData:
+      type: object
+      title: AdditionalData
+      properties:
+        activity:
+          $ref: '#/components/schemas/Activity'
+        battery:
+          $ref: '#/components/schemas/Battery'
+        coords:
+          $ref: '#/components/schemas/Coords'
+        extras:
+          $ref: '#/components/schemas/Extras'
+        is_moving:
+          type: boolean
+        odometer:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+        uuid:
+          type: string
+    FareOptionsRequest:
+      type: object
+      title: FareOptionsRequest
+      properties:
+        name:
+          type: string
+          description: The name of the Fare option. The fare options are returned from the Quote operation.
+          x-examples:
+          - Gold
+        options:
+          type: array
+          description: Fare options. We currently support "Enclosed" (case sensitive)
+          items:
+            type: string
+      required:
+      - name
+    Battery:
+      type: object
+      title: Battery
+      properties:
+        charging:
+          type: boolean
+        level:
+          type: number
+          format: double
+    Created:
+      type: object
+      title: Created
+      properties:
+        byCompany:
+          $ref: '#/components/schemas/Company'
+        byUser:
+          type: string
+          description: User ID
+          x-examples:
+          - 7ae99113-09fd-4838-917a-a7d9636c2f8c
+        byUserFullName:
+          type: string
+        date:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+    OrderQuoteRequest:
+      type: object
+      title: OrderQuoteRequest
+      properties:
+        type:
+          type: string
+          enum:
+          - BASIC
+          description: See Order.type enumeration for possible values.
+        vehicleTransferOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrderQuoteRequest'
+      required:
+      - type
+      - vehicleTransferOrders
+    OrderQuoteResponse:
+      type: object
+      title: OrderQuoteResponse
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quote'
+        status:
+          type: string
+        traceId:
+          type: string
+    EstimatedTimeToArrival:
+      type: object
+      title: EstimatedTimeToArrival
+      properties:
+        start:
+          type: string
+          description: Start of ETA window of time. ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        end:
+          type: string
+          description: End of ETA window of time. Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        initial:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        accuracy:
+          type: string
+        calculated:
+          type: string
+          format: date-time
+        status:
+          type: string
+    Order:
+      type: object
+      title: Order
+      properties:
+        id:
+          type: string
+          x-examples:
+          - 151ff45d-9fcc-4df6-b221-cd7fcb1d7614
+        referenceNumber:
+          type: string
+          x-examples:
+          - S-000035994
+        vehicleTransferOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrderIds'
+        created:
+          $ref: '#/components/schemas/Created'
+        owner:
+          $ref: '#/components/schemas/Company'
+        payer:
+          $ref: '#/components/schemas/Company'
+        canceled:
+          $ref: '#/components/schemas/Canceled'
+        labels:
+          type: array
+          items:
+            type: string
+        notes:
+          type: string
+          x-examples:
+          - Big May 1st delivery.
+        status:
+          type: string
+        type:
+          type: string
+          enum:
+          - BASIC
+          - SWAP
+        completedDate:
+          type: string
+          format: date-time
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        fare:
+          type: array
+          items:
+            $ref: '#/components/schemas/FareItem'
+        dedicatedTransporter:
+          $ref: '#/components/schemas/Company'
+        preferredStatusExpiration:
+          type: string
+        preferredTransporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        replacement:
+          $ref: '#/components/schemas/Replacement'
+      required:
+      - id
+      - referenceNumber
+      - vehicleTransferOrders
+      - created
+      - status
+      - type
+    Window:
+      type: object
+      title: Window
+      properties:
+        confirmed:
+          type: boolean
+        start:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        end:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        priority:
+          type: integer
+          format: int32
+    OrderPatchRequest:
+      type: object
+      title: OrderPatchRequest
+      properties:
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        notes:
+          type: string
+    VehicleMeasurements:
+      type: object
+      title: VehicleMeasurements
+      properties:
+        curbWeight:
+          type: number
+          format: double
+        grossVehicleWeightRating:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+        length:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+    VehicleTransferOrderStatus:
+      type: object
+      title: VehicleTransferOrderStatus
+      properties:
+        error:
+          type: string
+          x-examples:
+          - Error 123
+        id:
+          type: string
+          x-examples:
+          - 7e837a6c-1746-4da4-89e6-c87fae7df84d
+      required:
+      - id
+    TransportationOrder:
+      type: object
+      title: TransportationOrderExt
+      properties:
+        id:
+          type: string
+        referenceNumber:
+          type: string
+        created:
+          $ref: '#/components/schemas/Created'
+        canceled:
+          $ref: '#/components/schemas/Canceled'
+        directions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Direction'
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        status:
+          type: string
+        transporter:
+          $ref: '#/components/schemas/Company'
+        type:
+          type: string
+          enum:
+          - BASIC
+        vehicleTransferOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrderIds'
+    Sort:
+      type: object
+      title: Sort
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    DetailedDirectionsRequest:
+      type: object
+      title: DetailedDirectionsRequest
+      properties:
+        dropoff:
+          $ref: '#/components/schemas/VehicleTransferOrderRequestLocation'
+        pickup:
+          $ref: '#/components/schemas/VehicleTransferOrderRequestLocation'
+      required:
+      - dropoff
+      - pickup
+    PageOrderFull:
+      type: object
+      title: PageOrder
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderFull'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      required:
+      - content
+      - empty
+      - first
+      - last
+      - number
+      - numberOfElements
+      - pageable
+      - size
+      - sort
+      - totalElements
+      - totalPages
+    VehicleTransferOrderIds:
+      type: object
+      title: VehicleTransferOrderIds
+      properties:
+        id:
+          type: string
+          x-examples:
+          - f7a7a77e-1afb-47b9-8d19-92591590ed33
+      required:
+      - id
+    Error:
+      type: object
+      title: Error
+      description: A common Error object.
+      properties:
+        code:
+          type: string
+          enum:
+          - INVALID_VEHICLE_TRANSFER_ORDER
+          - INVALID_ADDRESS
+          - INVALID_VEHICLE
+          x-examples:
+          - INVALID_VEHICLE_TRANSFER_ORDER
+        message:
+          type: string
+          description: The error message.
+          x-examples:
+          - A vehicle requested has an invalid VIN.
+        field:
+          type: string
+          x-examples:
+          - vin
+      required:
+      - code
+    Quote:
+      type: object
+      title: Quote
+      properties:
+        distanceInMiles:
+          type: number
+          format: double
+        fare:
+          type: number
+          format: currency
+        name:
+          type: string
+    Vehicle:
+      type: object
+      title: Vehicle
+      description: When creating an order, there are 2 options for providing the Vehicle information. [See here](/docs/shipping/ace1edcc412ad-vehicle-request-requirements)
+      properties:
+        color:
+          type: string
+          x-examples:
+          - Blue
+        isOperational:
+          type: boolean
+          x-examples:
+          - true
+        isOverSized:
+          type: boolean
+          x-examples:
+          - false
+        make:
+          type: string
+          x-examples:
+          - BMW
+        model:
+          type: string
+          x-examples:
+          - M3
+        notes:
+          type: string
+          x-examples:
+          - She's a beauty.
+        odometer:
+          type: integer
+          format: int32
+        stockNumber:
+          type: string
+          x-examples:
+          - '1234'
+        truckSpecifications:
+          $ref: '#/components/schemas/TruckSpecifications'
+        type:
+          type: string
+        vehicleMarket:
+          type: string
+          enum:
+          - LIGHT
+          - MEDIUM
+          - HEAVY
+        vehicleMeasurements:
+          $ref: '#/components/schemas/VehicleMeasurements'
+        vin:
+          type: string
+          x-examples:
+          - 2C3KA53G68H269241
+        year:
+          type: integer
+          format: int32
+      required:
+      - vin
+    Direction:
+      type: object
+      title: Direction
+      properties:
+        distance:
+          $ref: '#/components/schemas/Distance'
+        dropOff:
+          $ref: '#/components/schemas/Location'
+        dropOffPickup:
+          $ref: '#/components/schemas/Location'
+        pickup:
+          $ref: '#/components/schemas/Location'
+        sequence:
+          type: integer
+          format: int32
+    PageOrder:
+      type: object
+      title: PageOrder
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      required:
+      - content
+      - empty
+      - first
+      - last
+      - number
+      - numberOfElements
+      - pageable
+      - size
+      - sort
+      - totalElements
+      - totalPages
+    AddressComponents:
+      type: object
+      title: AddressComponents
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        county:
+          type: string
+        postalCode:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+        streetNumber:
+          type: string
+        suite:
+          type: string
+    StateLocation:
+      type: object
+      title: StateLocation
+      properties:
+        accuracy:
+          type: integer
+          format: int32
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        time:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      description: See the [Authentication Guide](/docs/shipping/b6b6c2d4906e9-authentication).
+      name: Authorization
+      in: header

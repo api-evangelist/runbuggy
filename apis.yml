@@ -46,6 +46,10 @@ apis:
   baseURL: https://apps.runbuggy.com/runbuggy/mcp-datascience/mcp
   tags:
   - MCP
+  - Artificial Intelligence
+  - Data Science
+  tags_raw:
+  - MCP
   - AI
   - Data Science
   properties:
@@ -75,6 +79,8 @@ apis:
   humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
   baseURL: https://ng-staging.runbuggy.com/staging/api
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -123,6 +129,8 @@ apis:
   humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
   baseURL: https://ng-staging.runbuggy.com/staging/api
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI

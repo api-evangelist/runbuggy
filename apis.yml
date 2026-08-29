@@ -12,6 +12,18 @@ description: 'RunBuggy is a Phoenix, Arizona based technology company operating 
   Transfer Orders, Gate Passes, Webhooks, Companies and Authentication — at docs.runbuggy.com,
   and operates an OAuth-protected Model Context Protocol server for its data-science
   surface.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://runbuggy.com/wp-content/uploads/2019/05/logo.png
 url: https://raw.githubusercontent.com/api-evangelist/runbuggy/refs/heads/main/apis.yml
 x-type: company

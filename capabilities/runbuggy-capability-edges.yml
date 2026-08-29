@@ -1,0 +1,27 @@
+slug: runbuggy
+provider: RunBuggy
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Automotive & Mobility
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Orders
+  spec_file: runbuggy-orders-api-openapi.yml
+  capability_id: BC-520
+  capability_id_l1: BC-520
+  capability_name: Supply Chain Management
+  confidence: 0.7
+  evidence: POST /orders createOrderUsingPOST 'Create an order' ... 'Create Orders to transfer vehicles'
+    ... POST /orders/quote 'Quote an order'
+  reason: Operations capture, quote, amend and cancel vehicle transportation orders on a freight marketplace/TMS
+    — supply chain transport order execution. L1 Supply Chain Management is safe; the evidence straddles
+    order capture (520.40) and transport execution (520.50), so no L2 asserted. Not an OEM distribution
+    capability since RunBuggy is a third-party hauling marketplace.

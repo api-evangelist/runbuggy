@@ -154,6 +154,9 @@ apis:
   - type: Documentation
     url: https://docs.runbuggy.com/docs/shipping/b6b6c2d4906e9-authentication
 common:
+- type: CapabilityMap
+  url: capabilities/runbuggy-capability-edges.yml
+  name: RunBuggy Business Capability Map
 - type: Overlay
   url: overlays/runbuggy-authentication-overlay.yaml
 - type: Website

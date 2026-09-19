@@ -124,6 +124,8 @@ apis:
   humanURL: https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders
   baseURL: https://ng-staging.runbuggy.com/staging/api
   tags:
+  - Tokens
+  tags_raw:
   - Token
   properties:
   - type: OpenAPI

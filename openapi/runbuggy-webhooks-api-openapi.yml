@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Orders Webhooks API
-  description: '### [Create Orders](/docs/shipping/6fcc8c040ec03-create-an-order) to transfer vehicles.'
+  description: '### Create Orders to transfer vehicles.'
   termsOfService: https://runbuggy.com/terms/
   contact:
     name: Support
@@ -249,6 +249,25 @@ components:
       - sort
       - totalElements
       - totalPages
+    Pageable:
+      type: object
+      title: Pageable
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
     Sort:
       type: object
       title: Sort
@@ -330,25 +349,6 @@ components:
           format: date-time
         url:
           type: string
-    Pageable:
-      type: object
-      title: Pageable
-      properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
   securitySchemes:
     Authorization:
       type: apiKey

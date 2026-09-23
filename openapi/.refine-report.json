@@ -1,16 +1,14 @@
 {
   "provider": "runbuggy",
   "sources": [
-    "runbuggy-companies-api-openapi.yml",
-    "runbuggy-orders-api-openapi.yml",
-    "runbuggy-token-api-openapi.yml",
-    "runbuggy-vehicle-transfer-orders-api-openapi.yml",
-    "runbuggy-webhooks-api-openapi.yml"
+    "_original/runbuggy-authentication.json",
+    "_original/runbuggy-companies.json",
+    "_original/runbuggy-orders.json"
   ],
   "outputs": [
+    "runbuggy-token-api-openapi.yml",
     "runbuggy-companies-api-openapi.yml",
     "runbuggy-orders-api-openapi.yml",
-    "runbuggy-token-api-openapi.yml",
     "runbuggy-vehicle-transfer-orders-api-openapi.yml",
     "runbuggy-webhooks-api-openapi.yml"
   ],
@@ -18,12 +16,17 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "runbuggy-companies-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "runbuggy-orders-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "runbuggy-token-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "runbuggy-vehicle-transfer-orders-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "runbuggy-webhooks-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "runbuggy-authentication.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "runbuggy-companies.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "runbuggy-orders.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "runbuggy-companies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "runbuggy-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "runbuggy-token-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "runbuggy-vehicle-transfer-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "runbuggy-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Authentication Token API
   version: '1.0'
-  description: '# [Authentication Guide](https://runbuggy.docs.stoplight.io/guides/authentication-guide)'
+  description: '# Authentication Guide'
   contact:
     name: Runbuggy
     email: support@runbuggy.com

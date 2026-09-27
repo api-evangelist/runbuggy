@@ -37,20 +37,6 @@ paths:
               $ref: '#/components/schemas/login-request'
 components:
   schemas:
-    login-request:
-      type: object
-      title: Login Request
-      description: Login request
-      properties:
-        username:
-          type: string
-          example: admin@mycompany.com
-        password:
-          type: string
-          example: supersecret
-      required:
-      - username
-      - password
     login-response:
       type: object
       title: Login Response
@@ -77,6 +63,20 @@ components:
       - roles
       - token_type
       - access_token
+    login-request:
+      type: object
+      title: Login Request
+      description: Login request
+      properties:
+        username:
+          type: string
+          example: admin@mycompany.com
+        password:
+          type: string
+          example: supersecret
+      required:
+      - username
+      - password
 x-stoplight:
   docs:
     showModels: false

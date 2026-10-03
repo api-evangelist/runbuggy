@@ -204,6 +204,106 @@ paths:
       - url: https://ng-staging.runbuggy.com/staging/api
 components:
   schemas:
+    Webhook:
+      type: object
+      title: Webhook
+      properties:
+        authorization:
+          type: string
+        company:
+          $ref: '#/components/schemas/Company'
+        created:
+          $ref: '#/components/schemas/Created'
+        id:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        url:
+          type: string
+    Pageable:
+      type: object
+      title: Pageable
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+    Created:
+      type: object
+      title: Created
+      properties:
+        byCompany:
+          $ref: '#/components/schemas/Company'
+        byUser:
+          type: string
+          description: User ID
+          x-examples:
+          - 7ae99113-09fd-4838-917a-a7d9636c2f8c
+        byUserFullName:
+          type: string
+        date:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+    WebhookRequest:
+      type: object
+      title: WebhookRequest
+      properties:
+        authorization:
+          type: string
+          description: Authorization header value
+          x-examples:
+          - Bearer bd1f8a0cbadde636
+        url:
+          type: string
+          description: Webhook URL
+          x-examples:
+          - http://myapi.com/webhook
+      required:
+      - url
+    Sort:
+      type: object
+      title: Sort
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    Company:
+      type: object
+      title: Company
+      properties:
+        id:
+          type: string
+          x-examples:
+          - c0ef80ce-2579-4682-af4f-c1d29457848a
+        name:
+          type: string
+          x-examples:
+          - Auto Land
+        type:
+          type: string
+          enum:
+          - DEALER
+          - AUCTION
+          x-examples:
+          - DEALER
     PageWebhook:
       type: object
       title: PageWebhook
@@ -249,106 +349,6 @@ components:
       - sort
       - totalElements
       - totalPages
-    Sort:
-      type: object
-      title: Sort
-      properties:
-        empty:
-          type: boolean
-        sorted:
-          type: boolean
-        unsorted:
-          type: boolean
-    Webhook:
-      type: object
-      title: Webhook
-      properties:
-        authorization:
-          type: string
-        company:
-          $ref: '#/components/schemas/Company'
-        created:
-          $ref: '#/components/schemas/Created'
-        id:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        url:
-          type: string
-    Pageable:
-      type: object
-      title: Pageable
-      properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
-    WebhookRequest:
-      type: object
-      title: WebhookRequest
-      properties:
-        authorization:
-          type: string
-          description: Authorization header value
-          x-examples:
-          - Bearer bd1f8a0cbadde636
-        url:
-          type: string
-          description: Webhook URL
-          x-examples:
-          - http://myapi.com/webhook
-      required:
-      - url
-    Company:
-      type: object
-      title: Company
-      properties:
-        id:
-          type: string
-          x-examples:
-          - c0ef80ce-2579-4682-af4f-c1d29457848a
-        name:
-          type: string
-          x-examples:
-          - Auto Land
-        type:
-          type: string
-          enum:
-          - DEALER
-          - AUCTION
-          x-examples:
-          - DEALER
-    Created:
-      type: object
-      title: Created
-      properties:
-        byCompany:
-          $ref: '#/components/schemas/Company'
-        byUser:
-          type: string
-          description: User ID
-          x-examples:
-          - 7ae99113-09fd-4838-917a-a7d9636c2f8c
-        byUserFullName:
-          type: string
-        date:
-          type: string
-          description: Datetime in ISO 8601 format.
-          format: ISO 8601 datetime
-          x-examples:
-          - '2020-12-05T21:18:47+00:00'
   securitySchemes:
     Authorization:
       type: apiKey

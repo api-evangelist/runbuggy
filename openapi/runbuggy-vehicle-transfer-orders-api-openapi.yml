@@ -353,117 +353,6 @@ paths:
       - url: https://ng-staging.runbuggy.com/staging/api
 components:
   schemas:
-    VehicleTransferOrderExpanded:
-      type: object
-      title: VehicleTransferOrder
-      description: A Vehicle Transfer Order.
-      properties:
-        id:
-          type: string
-          x-examples:
-          - 7a765a49-6b21-4368-937e-8ce4981d8eff
-        referenceNumber:
-          type: string
-          x-examples:
-          - V-001035812
-        created:
-          $ref: '#/components/schemas/Created'
-        vehicle:
-          $ref: '#/components/schemas/Vehicle'
-        directions:
-          $ref: '#/components/schemas/DetailedDirections'
-        fare:
-          $ref: '#/components/schemas/Fare'
-        geolocation:
-          $ref: '#/components/schemas/Geolocation'
-        notes:
-          type: string
-          x-examples:
-          - Notes about this vehicle transfer.
-        order:
-          $ref: '#/components/schemas/Order'
-        payer:
-          $ref: '#/components/schemas/Company'
-        reconciliationCode:
-          type: string
-          x-examples:
-          - RBCON2020
-        states:
-          $ref: '#/components/schemas/States'
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - READY
-          - AVAILABLE
-          - CLAIMED
-          - UNCLAIMED
-          - ASSIGNED
-          - REJECTED
-          - ACCEPTED
-          - DRIVER_ARRIVED
-          - PICKED_UP
-          - SIGNATURE_ON_PICKUP
-          - UNLOADED
-          - DELIVERED
-          - CANCELED
-          - COMPLETE
-          - ERROR
-          description: See the Vehicle Transfer Order Statuses guide for detailed information.
-        timeline:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        transporter:
-          $ref: '#/components/schemas/Company'
-        dedicatedTransporter:
-          $ref: '#/components/schemas/Company'
-        canceled:
-          $ref: '#/components/schemas/Canceled'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        labels:
-          type: array
-          items:
-            type: object
-        canCancel:
-          type: boolean
-        inspections:
-          type: array
-          items:
-            $ref: '#/components/schemas/InspectionSummary'
-        preferredTransporters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company'
-      required:
-      - id
-      - referenceNumber
-      - created
-      - vehicle
-      - directions
-      - fare
-      - status
-    TempFile:
-      type: object
-      title: TempFile
-      properties:
-        resourcePath:
-          type: string
-    InspectionSummary:
-      type: object
-      title: InspectionSummary
-      properties:
-        completed:
-          $ref: '#/components/schemas/Created'
-        created:
-          $ref: '#/components/schemas/Created'
-        id:
-          type: string
-        taskName:
-          type: string
     Error:
       type: object
       title: Error
@@ -488,57 +377,46 @@ components:
           - vin
       required:
       - code
-    Contact:
+    TempFile:
       type: object
-      title: Contact
+      title: TempFile
       properties:
-        name:
+        resourcePath:
           type: string
-          x-examples:
-          - Ed Jones
-        phone:
-          type: string
-          x-examples:
-          - '4804804480'
-    Pageable:
+    AddressComponents:
       type: object
-      title: Pageable
+      title: AddressComponents
       properties:
-        offset:
-          type: integer
-          format: int64
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        paged:
-          type: boolean
-        sort:
-          $ref: '#/components/schemas/Sort'
-        unpaged:
-          type: boolean
-    VehicleTransferOrderIds:
+        city:
+          type: string
+        country:
+          type: string
+        county:
+          type: string
+        postalCode:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+        streetNumber:
+          type: string
+        suite:
+          type: string
+    TruckSpecifications:
       type: object
-      title: VehicleTransferOrderIds
+      title: TruckSpecifications
       properties:
-        id:
+        rearAxle:
           type: string
-          x-examples:
-          - f7a7a77e-1afb-47b9-8d19-92591590ed33
-      required:
-      - id
-    VehiclePatch:
+    DirectionsPatch:
       type: object
-      title: VehiclePatch
+      title: DirectionsPatch
       properties:
-        color:
-          type: string
-        notes:
-          type: string
-        stockNumber:
-          type: string
+        dropoff:
+          $ref: '#/components/schemas/LocationPatch'
+        pickup:
+          $ref: '#/components/schemas/LocationPatch'
     States:
       type: object
       title: States
@@ -551,6 +429,27 @@ components:
           $ref: '#/components/schemas/StateLocation'
         pickedUp:
           $ref: '#/components/schemas/StateLocation'
+    Fare:
+      type: object
+      title: Fare
+      properties:
+        amount:
+          type: number
+          format: double
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        name:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+        promotionCode:
+          type: string
+          x-examples:
+          - RBCON19
     VehicleTransferOrder:
       type: object
       title: VehicleTransferOrder
@@ -649,55 +548,388 @@ components:
       - fare
       - orderId
       - status
-    Company:
+    DetailedDirections:
       type: object
-      title: Company
+      title: DetailedDirections
       properties:
-        id:
-          type: string
-          x-examples:
-          - c0ef80ce-2579-4682-af4f-c1d29457848a
+        distance:
+          $ref: '#/components/schemas/Distance'
+        dropoff:
+          $ref: '#/components/schemas/Location'
+        pickup:
+          $ref: '#/components/schemas/Location'
+    Distance:
+      type: object
+      title: Distance
+      properties:
+        distanceInMeters:
+          type: integer
+          format: int64
+        distanceInMiles:
+          type: number
+          format: double
+        durationInSeconds:
+          type: integer
+          format: int64
+    FareItem:
+      type: object
+      title: FareItem
+      description: Order Fare Item
+      properties:
         name:
           type: string
-          x-examples:
-          - Auto Land
-        type:
-          type: string
-          enum:
-          - DEALER
-          - AUCTION
-          x-examples:
-          - DEALER
-    Attachment:
-      type: object
-      title: Attachment
-      properties:
-        created:
-          $ref: '#/components/schemas/Created'
         description:
           type: string
-        id:
-          type: string
-        name:
-          type: string
-        resourcePath:
-          type: string
-    State:
+        value:
+          type: number
+          format: double
+    Created:
       type: object
-      title: State
+      title: Created
       properties:
-        time:
+        byCompany:
+          $ref: '#/components/schemas/Company'
+        byUser:
+          type: string
+          description: User ID
+          x-examples:
+          - 7ae99113-09fd-4838-917a-a7d9636c2f8c
+        byUserFullName:
+          type: string
+        date:
           type: string
           description: Datetime in ISO 8601 format.
           format: ISO 8601 datetime
           x-examples:
           - '2020-12-05T21:18:47+00:00'
-    TruckSpecifications:
+    LocationPatch:
       type: object
-      title: TruckSpecifications
+      title: LocationPatch
       properties:
-        rearAxle:
+        contact:
+          $ref: '#/components/schemas/Contact'
+        name:
           type: string
+        notes:
+          type: string
+    Vehicle:
+      type: object
+      title: Vehicle
+      description: When creating an order, there are 2 options for providing the Vehicle information. [See here](/docs/shipping/ace1edcc412ad-vehicle-request-requirements)
+      properties:
+        color:
+          type: string
+          x-examples:
+          - Blue
+        isOperational:
+          type: boolean
+          x-examples:
+          - true
+        isOverSized:
+          type: boolean
+          x-examples:
+          - false
+        make:
+          type: string
+          x-examples:
+          - BMW
+        model:
+          type: string
+          x-examples:
+          - M3
+        notes:
+          type: string
+          x-examples:
+          - She's a beauty.
+        odometer:
+          type: integer
+          format: int32
+        stockNumber:
+          type: string
+          x-examples:
+          - '1234'
+        truckSpecifications:
+          $ref: '#/components/schemas/TruckSpecifications'
+        type:
+          type: string
+        vehicleMarket:
+          type: string
+          enum:
+          - LIGHT
+          - MEDIUM
+          - HEAVY
+        vehicleMeasurements:
+          $ref: '#/components/schemas/VehicleMeasurements'
+        vin:
+          type: string
+          x-examples:
+          - 2C3KA53G68H269241
+        year:
+          type: integer
+          format: int32
+      required:
+      - vin
+    PageVehicleTransferOrderExpanded:
+      type: object
+      title: PageVehicleTransferOrderExpanded
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrderExpanded'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      required:
+      - content
+      - empty
+      - first
+      - last
+      - number
+      - numberOfElements
+      - pageable
+      - size
+      - sort
+      - totalElements
+      - totalPages
+    VehiclePatch:
+      type: object
+      title: VehiclePatch
+      properties:
+        color:
+          type: string
+        notes:
+          type: string
+        stockNumber:
+          type: string
+    EstimatedTimeToArrival:
+      type: object
+      title: EstimatedTimeToArrival
+      properties:
+        start:
+          type: string
+          description: Start of ETA window of time. ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        end:
+          type: string
+          description: End of ETA window of time. Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        initial:
+          type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
+        accuracy:
+          type: string
+        calculated:
+          type: string
+          format: date-time
+        status:
+          type: string
+    PageVehicleTransferOrder:
+      type: object
+      title: PageVehicleTransferOrder
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleTransferOrder'
+        empty:
+          type: boolean
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        size:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      required:
+      - content
+      - empty
+      - first
+      - last
+      - number
+      - numberOfElements
+      - pageable
+      - size
+      - sort
+      - totalElements
+      - totalPages
+    InspectionSummary:
+      type: object
+      title: InspectionSummary
+      properties:
+        completed:
+          $ref: '#/components/schemas/Created'
+        created:
+          $ref: '#/components/schemas/Created'
+        id:
+          type: string
+        taskName:
+          type: string
+    VehicleTransferOrderIds:
+      type: object
+      title: VehicleTransferOrderIds
+      properties:
+        id:
+          type: string
+          x-examples:
+          - f7a7a77e-1afb-47b9-8d19-92591590ed33
+      required:
+      - id
+    Item:
+      type: object
+      title: Item
+      properties:
+        amount:
+          type: number
+          format: double
+        name:
+          type: string
+    VehicleMeasurements:
+      type: object
+      title: VehicleMeasurements
+      properties:
+        curbWeight:
+          type: number
+          format: double
+        grossVehicleWeightRating:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+        length:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+    Geolocation:
+      type: object
+      title: Geolocation
+      properties:
+        coordinates:
+          type: array
+          items:
+            type: number
+            format: double
+        type:
+          type: string
+    Pageable:
+      type: object
+      title: Pageable
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/Sort'
+        unpaged:
+          type: boolean
+    VehicleTransferOrderPatch:
+      type: object
+      title: VehicleTransferOrderPatch
+      properties:
+        directions:
+          $ref: '#/components/schemas/DirectionsPatch'
+        gatePasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/TempFile'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        notes:
+          type: string
+        vehicle:
+          $ref: '#/components/schemas/VehiclePatch'
+    Location:
+      type: object
+      title: Location
+      properties:
+        address:
+          type: string
+          minLength: 1
+        addressComponents:
+          $ref: '#/components/schemas/AddressComponents'
+        auctionCode:
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        dealerCode:
+          type: string
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        eta:
+          $ref: '#/components/schemas/EstimatedTimeToArrival'
+        name:
+          type: string
+        notes:
+          type: string
+        type:
+          type: string
+          enum:
+          - business
+          - personal
+        windows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Window'
+      required:
+      - address
     Order:
       type: object
       title: Order
@@ -765,73 +997,32 @@ components:
       - created
       - status
       - type
-    Vehicle:
+    Canceled:
       type: object
-      title: Vehicle
-      description: When creating an order, there are 2 options for providing the Vehicle information. [See here](/docs/shipping/ace1edcc412ad-vehicle-request-requirements)
+      title: Canceled
       properties:
-        color:
+        byUser:
           type: string
-          x-examples:
-          - Blue
-        isOperational:
-          type: boolean
-          x-examples:
-          - true
-        isOverSized:
-          type: boolean
-          x-examples:
-          - false
-        make:
+        date:
           type: string
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
           x-examples:
-          - BMW
-        model:
+          - '2020-12-05T21:18:47+00:00'
+        reason:
           type: string
-          x-examples:
-          - M3
-        notes:
-          type: string
-          x-examples:
-          - She's a beauty.
-        odometer:
-          type: integer
-          format: int32
-        stockNumber:
-          type: string
-          x-examples:
-          - '1234'
-        truckSpecifications:
-          $ref: '#/components/schemas/TruckSpecifications'
-        type:
-          type: string
-        vehicleMarket:
-          type: string
-          enum:
-          - LIGHT
-          - MEDIUM
-          - HEAVY
-        vehicleMeasurements:
-          $ref: '#/components/schemas/VehicleMeasurements'
-        vin:
-          type: string
-          x-examples:
-          - 2C3KA53G68H269241
-        year:
-          type: integer
-          format: int32
-      required:
-      - vin
-    DetailedDirections:
+    Contact:
       type: object
-      title: DetailedDirections
+      title: Contact
       properties:
-        distance:
-          $ref: '#/components/schemas/Distance'
-        dropoff:
-          $ref: '#/components/schemas/Location'
-        pickup:
-          $ref: '#/components/schemas/Location'
+        name:
+          type: string
+          x-examples:
+          - Ed Jones
+        phone:
+          type: string
+          x-examples:
+          - '4804804480'
     StateLocation:
       type: object
       title: StateLocation
@@ -847,166 +1038,46 @@ components:
           format: ISO 8601 datetime
           x-examples:
           - '2020-12-05T21:18:47+00:00'
-    PageVehicleTransferOrder:
+    State:
       type: object
-      title: PageVehicleTransferOrder
+      title: State
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleTransferOrder'
-        empty:
-          type: boolean
-        first:
-          type: boolean
-        last:
-          type: boolean
-        number:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        size:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      required:
-      - content
-      - empty
-      - first
-      - last
-      - number
-      - numberOfElements
-      - pageable
-      - size
-      - sort
-      - totalElements
-      - totalPages
-    DirectionsPatch:
-      type: object
-      title: DirectionsPatch
-      properties:
-        dropoff:
-          $ref: '#/components/schemas/LocationPatch'
-        pickup:
-          $ref: '#/components/schemas/LocationPatch'
-    Canceled:
-      type: object
-      title: Canceled
-      properties:
-        byUser:
-          type: string
-        date:
+        time:
           type: string
           description: Datetime in ISO 8601 format.
           format: ISO 8601 datetime
           x-examples:
           - '2020-12-05T21:18:47+00:00'
-        reason:
-          type: string
-    Created:
+    Attachment:
       type: object
-      title: Created
+      title: Attachment
       properties:
-        byCompany:
-          $ref: '#/components/schemas/Company'
-        byUser:
+        created:
+          $ref: '#/components/schemas/Created'
+        description:
           type: string
-          description: User ID
-          x-examples:
-          - 7ae99113-09fd-4838-917a-a7d9636c2f8c
-        byUserFullName:
+        id:
           type: string
-        date:
-          type: string
-          description: Datetime in ISO 8601 format.
-          format: ISO 8601 datetime
-          x-examples:
-          - '2020-12-05T21:18:47+00:00'
-    Distance:
-      type: object
-      title: Distance
-      properties:
-        distanceInMeters:
-          type: integer
-          format: int64
-        distanceInMiles:
-          type: number
-          format: double
-        durationInSeconds:
-          type: integer
-          format: int64
-    AddressComponents:
-      type: object
-      title: AddressComponents
-      properties:
-        city:
-          type: string
-        country:
-          type: string
-        county:
-          type: string
-        postalCode:
-          type: string
-        state:
-          type: string
-        street:
-          type: string
-        streetNumber:
-          type: string
-        suite:
-          type: string
-    Event:
-      type: object
-      title: Event
-      properties:
-        dateTime:
-          type: string
-          description: Datetime in ISO 8601 format.
-          format: ISO 8601 datetime
-          x-examples:
-          - '2020-12-05T21:18:47+00:00'
         name:
           type: string
-    EstimatedTimeToArrival:
+        resourcePath:
+          type: string
+    Replacement:
       type: object
-      title: EstimatedTimeToArrival
+      title: Replacement
       properties:
-        start:
+        created:
+          $ref: '#/components/schemas/Created'
+        message:
           type: string
-          description: Start of ETA window of time. ISO 8601 format.
-          format: ISO 8601 datetime
-          x-examples:
-          - '2020-12-05T21:18:47+00:00'
-        end:
+        orderId:
           type: string
-          description: End of ETA window of time. Datetime in ISO 8601 format.
-          format: ISO 8601 datetime
-          x-examples:
-          - '2020-12-05T21:18:47+00:00'
-        initial:
-          type: string
-          description: Datetime in ISO 8601 format.
-          format: ISO 8601 datetime
-          x-examples:
-          - '2020-12-05T21:18:47+00:00'
-        accuracy:
-          type: string
-        calculated:
-          type: string
-          format: date-time
         status:
           type: string
+          enum:
+          - PENDING
+          - SUCCESS
+          - ERROR
     Sort:
       type: object
       title: Sort
@@ -1017,6 +1088,99 @@ components:
           type: boolean
         unsorted:
           type: boolean
+    VehicleTransferOrderExpanded:
+      type: object
+      title: VehicleTransferOrder
+      description: A Vehicle Transfer Order.
+      properties:
+        id:
+          type: string
+          x-examples:
+          - 7a765a49-6b21-4368-937e-8ce4981d8eff
+        referenceNumber:
+          type: string
+          x-examples:
+          - V-001035812
+        created:
+          $ref: '#/components/schemas/Created'
+        vehicle:
+          $ref: '#/components/schemas/Vehicle'
+        directions:
+          $ref: '#/components/schemas/DetailedDirections'
+        fare:
+          $ref: '#/components/schemas/Fare'
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        notes:
+          type: string
+          x-examples:
+          - Notes about this vehicle transfer.
+        order:
+          $ref: '#/components/schemas/Order'
+        payer:
+          $ref: '#/components/schemas/Company'
+        reconciliationCode:
+          type: string
+          x-examples:
+          - RBCON2020
+        states:
+          $ref: '#/components/schemas/States'
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - READY
+          - AVAILABLE
+          - CLAIMED
+          - UNCLAIMED
+          - ASSIGNED
+          - REJECTED
+          - ACCEPTED
+          - DRIVER_ARRIVED
+          - PICKED_UP
+          - SIGNATURE_ON_PICKUP
+          - UNLOADED
+          - DELIVERED
+          - CANCELED
+          - COMPLETE
+          - ERROR
+          description: See the Vehicle Transfer Order Statuses guide for detailed information.
+        timeline:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        transporter:
+          $ref: '#/components/schemas/Company'
+        dedicatedTransporter:
+          $ref: '#/components/schemas/Company'
+        canceled:
+          $ref: '#/components/schemas/Canceled'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        labels:
+          type: array
+          items:
+            type: object
+        canCancel:
+          type: boolean
+        inspections:
+          type: array
+          items:
+            $ref: '#/components/schemas/InspectionSummary'
+        preferredTransporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+      required:
+      - id
+      - referenceNumber
+      - created
+      - vehicle
+      - directions
+      - fare
+      - status
     Window:
       type: object
       title: Window
@@ -1038,201 +1202,37 @@ components:
         priority:
           type: integer
           format: int32
-    Fare:
+    Company:
       type: object
-      title: Fare
+      title: Company
       properties:
-        amount:
-          type: number
-          format: double
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        name:
-          type: string
-        options:
-          type: array
-          items:
-            type: string
-        promotionCode:
+        id:
           type: string
           x-examples:
-          - RBCON19
-    Item:
-      type: object
-      title: Item
-      properties:
-        amount:
-          type: number
-          format: double
+          - c0ef80ce-2579-4682-af4f-c1d29457848a
         name:
           type: string
-    FareItem:
-      type: object
-      title: FareItem
-      description: Order Fare Item
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        value:
-          type: number
-          format: double
-    Location:
-      type: object
-      title: Location
-      properties:
-        address:
-          type: string
-          minLength: 1
-        addressComponents:
-          $ref: '#/components/schemas/AddressComponents'
-        auctionCode:
-          type: string
-        contact:
-          $ref: '#/components/schemas/Contact'
-        dealerCode:
-          type: string
-        geolocation:
-          $ref: '#/components/schemas/Geolocation'
-        eta:
-          $ref: '#/components/schemas/EstimatedTimeToArrival'
-        name:
-          type: string
-        notes:
-          type: string
+          x-examples:
+          - Auto Land
         type:
           type: string
           enum:
-          - business
-          - personal
-        windows:
-          type: array
-          items:
-            $ref: '#/components/schemas/Window'
-      required:
-      - address
-    VehicleTransferOrderPatch:
+          - DEALER
+          - AUCTION
+          x-examples:
+          - DEALER
+    Event:
       type: object
-      title: VehicleTransferOrderPatch
+      title: Event
       properties:
-        directions:
-          $ref: '#/components/schemas/DirectionsPatch'
-        gatePasses:
-          type: array
-          items:
-            $ref: '#/components/schemas/TempFile'
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-        notes:
+        dateTime:
           type: string
-        vehicle:
-          $ref: '#/components/schemas/VehiclePatch'
-    PageVehicleTransferOrderExpanded:
-      type: object
-      title: PageVehicleTransferOrderExpanded
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleTransferOrderExpanded'
-        empty:
-          type: boolean
-        first:
-          type: boolean
-        last:
-          type: boolean
-        number:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        size:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/Sort'
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      required:
-      - content
-      - empty
-      - first
-      - last
-      - number
-      - numberOfElements
-      - pageable
-      - size
-      - sort
-      - totalElements
-      - totalPages
-    LocationPatch:
-      type: object
-      title: LocationPatch
-      properties:
-        contact:
-          $ref: '#/components/schemas/Contact'
+          description: Datetime in ISO 8601 format.
+          format: ISO 8601 datetime
+          x-examples:
+          - '2020-12-05T21:18:47+00:00'
         name:
           type: string
-        notes:
-          type: string
-    Geolocation:
-      type: object
-      title: Geolocation
-      properties:
-        coordinates:
-          type: array
-          items:
-            type: number
-            format: double
-        type:
-          type: string
-    VehicleMeasurements:
-      type: object
-      title: VehicleMeasurements
-      properties:
-        curbWeight:
-          type: number
-          format: double
-        grossVehicleWeightRating:
-          type: number
-          format: double
-        height:
-          type: number
-          format: double
-        length:
-          type: number
-          format: double
-        width:
-          type: number
-          format: double
-    Replacement:
-      type: object
-      title: Replacement
-      properties:
-        created:
-          $ref: '#/components/schemas/Created'
-        message:
-          type: string
-        orderId:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - SUCCESS
-          - ERROR
   securitySchemes:
     Authorization:
       type: apiKey

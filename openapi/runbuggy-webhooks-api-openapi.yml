@@ -204,23 +204,6 @@ paths:
       - url: https://ng-staging.runbuggy.com/staging/api
 components:
   schemas:
-    Webhook:
-      type: object
-      title: Webhook
-      properties:
-        authorization:
-          type: string
-        company:
-          $ref: '#/components/schemas/Company'
-        created:
-          $ref: '#/components/schemas/Created'
-        id:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        url:
-          type: string
     Pageable:
       type: object
       title: Pageable
@@ -240,6 +223,23 @@ components:
           $ref: '#/components/schemas/Sort'
         unpaged:
           type: boolean
+    Webhook:
+      type: object
+      title: Webhook
+      properties:
+        authorization:
+          type: string
+        company:
+          $ref: '#/components/schemas/Company'
+        created:
+          $ref: '#/components/schemas/Created'
+        id:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        url:
+          type: string
     Created:
       type: object
       title: Created
@@ -275,16 +275,6 @@ components:
           - http://myapi.com/webhook
       required:
       - url
-    Sort:
-      type: object
-      title: Sort
-      properties:
-        empty:
-          type: boolean
-        sorted:
-          type: boolean
-        unsorted:
-          type: boolean
     Company:
       type: object
       title: Company
@@ -304,6 +294,16 @@ components:
           - AUCTION
           x-examples:
           - DEALER
+    Sort:
+      type: object
+      title: Sort
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
     PageWebhook:
       type: object
       title: PageWebhook

@@ -64,5 +64,139 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-RunBuggy is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/runbuggy_stock/
+RunBuggy is a Phoenix, Arizona based technology company operating an open, automotive-focused vehicle transportation marketplace and TMS that connects car shippers — dealers, auctions, OEMs, rental and fleet operators — with car haulers and transporters. Its products are the RunBuggy Marketplace (transportation-as-a-service for finding, moving and tracking a vehicle), RunBuggy HITCH (a cloud transportation management system that connects to an existing dealer or auction management system and transporter network), RunBuggy One (personal vehicle shipping) and RunBot (a generative-AI assistant applied to order resolution and delivery-exception prediction). RunBuggy publishes a public Shippers API — Swagger 2.0 definitions for Orders, Vehicle Transfer Orders, Gate Passes, Webhooks, Companies and Authentication — at docs.runbuggy.com, and operates an OAuth-protected Model Context Protocol server for its data-science surface.
+
+**Areas:** Company · Automotive · Logistics · Transportation · Vehicle Shipping · Marketplace · Supply Chain · Fleet Management · TMS · Freight
+
+## RunBuggy on APIs.io
+
+Everything profiled for RunBuggy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/runbuggy/](https://apis.io/providers/runbuggy/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [RunBuggy Data Science MCP Server](https://apis.io/apis/runbuggy/mcp-datascience/) — An OAuth-protected Model Context Protocol server RunBuggy operates on its application host. Discovered by probe — it is not referenced from the public…
+- [RunBuggy Companies API](https://apis.io/apis/runbuggy/runbuggy-companies-api/) — Companies operations.
+- [RunBuggy Orders API](https://apis.io/apis/runbuggy/runbuggy-orders-api/) — The Order operations.
+- [RunBuggy Token API](https://apis.io/apis/runbuggy/runbuggy-token-api/) — The Token API from RunBuggy — 1 operation(s) for token.
+- [RunBuggy Vehicle Transfer Orders API](https://apis.io/apis/runbuggy/runbuggy-vehicle-transfer-orders-api/) — The Vehicle Transfer Order operations.
+- [RunBuggy Webhooks API](https://apis.io/apis/runbuggy/runbuggy-webhooks-api/) — Webhook operations.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Runbuggy Webhooks](https://apis.io/asyncapis/runbuggy/runbuggy-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [runbuggy-mcp.yml](https://apis.io/servers/runbuggy/runbuggy-mcp-yml/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Companies API](https://apis.io/collections/runbuggy/open-runbuggy-companies-api/)
+- [Orders API](https://apis.io/collections/runbuggy/open-runbuggy-orders-api/)
+- [Authentication Token API](https://apis.io/collections/runbuggy/open-runbuggy-token-api/)
+- [Orders Vehicle Transfer Orders API](https://apis.io/collections/runbuggy/open-runbuggy-vehicle-transfer-orders-api/)
+- [Orders Webhooks API](https://apis.io/collections/runbuggy/open-runbuggy-webhooks-api/)
+
+#### Overlays (3)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Runbuggy Authentication Overlay](https://apis.io/overlays/runbuggy/runbuggy-authentication-overlay/)
+- [Runbuggy Companies Overlay](https://apis.io/overlays/runbuggy/runbuggy-companies-overlay/)
+- [Runbuggy Orders Overlay](https://apis.io/overlays/runbuggy/runbuggy-orders-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Runbuggy Authentication](https://apis.io/security/runbuggy/runbuggy-authentication/)
+- [Runbuggy Domain Security](https://apis.io/security/runbuggy/runbuggy-domain-security/)
+- [Runbuggy Trust Center](https://apis.io/security/runbuggy/runbuggy-trust-center/)
+- [Runbuggy Vulnerability Disclosure](https://apis.io/security/runbuggy/runbuggy-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Runbuggy Scopes](https://apis.io/scopes/runbuggy/runbuggy-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://runbuggy.com/)
+- [Documentation](https://docs.runbuggy.com/)
+- [Getting started](https://docs.runbuggy.com/docs/shipping/e66c4d2e84e08-ship-vehicles)
+- [API reference](https://docs.runbuggy.com/docs/shipping/1b7acf7f4d493-orders)
+- [Sign up](https://apps.runbuggy.com/runbuggy/spa-v2/#/workflows/onboarding/SignupProcess/)
+- [Support](https://support.runbuggy.com/hc/en-us)
+- [Blog](https://runbuggy.com/runbuggy-blog/)
+- [Terms of service](https://runbuggy.com/terms/)
+- [Privacy policy](https://runbuggy.com/privacy/)
+- [GitHub](https://github.com/runbuggyinc)
+- [Status](https://status.runbuggy.com/)
+
+## API Evangelist rating
+
+**Kin Score 46.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 53.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 63.7 |
+| Access clarity | 14.5 |
+
+**Agent readiness 33.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 31.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/runbuggy/](https://apis.io/providers/runbuggy/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for RunBuggy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/runbuggy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
